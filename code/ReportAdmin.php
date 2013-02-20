@@ -165,9 +165,9 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider {
 				'title' => _t('ReportAdmin.ReportTitle', 'Title'),
 			));
 
-			$columns->setFieldFormatting(array(
-				'title' => '<a href=\"$Link\" class=\"cms-panel-link\">$value</a>'
-			));
+		        $columns->setFieldFormatting(array(
+		            'title' => '<a href=\"$Link\" class=\"cms-panel-link\">$value ($Count)</a>'
+		        ));			
 			$gridField->addExtraClass('all-reports-gridfield');
 			$fields->push($gridField);
 		}
