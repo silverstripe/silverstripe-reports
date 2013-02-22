@@ -14,6 +14,10 @@
 				return false;
 			}
 		});
-	
+		
+		$('.ReportAdmin').css({
+			'overflow-y': 'scroll',
+			'padding-top': 0
+		});
 	});
 })(jQuery);
