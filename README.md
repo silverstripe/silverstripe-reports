@@ -1,5 +1,7 @@
 # Reports
 
+[![Build Status](https://secure.travis-ci.org/silverstripe-labs/silverstripe-reports.png?branch=master)](http://travis-ci.org/silverstripe-labs/silverstripe-reports)
+
 ## Introduction
 
 This module contains the API's for building Reports that are displayed in the
