@@ -25,7 +25,7 @@
  * ===========================
  * 
  * Right now, all subclasses of SS_Report will be shown in the ReportAdmin. In SS3 there is only
- * one place where reports can go, so this class is greatly simplifed from from its version in SS2.
+ * one place where reports can go, so this class is greatly simplifed from its version in SS2.
  * 
  * @package reports
  */
