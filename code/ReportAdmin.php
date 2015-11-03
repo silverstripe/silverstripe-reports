@@ -47,7 +47,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider {
 		$this->reportObject = (isset($allReports[$this->reportClass])) ? $allReports[$this->reportClass] : null;
 
 		// Set custom options for TinyMCE specific to ReportAdmin
-		HtmlEditorConfig::get('cms')->setOption('ContentCSS', project() . '/css/editor.css');
+		HtmlEditorConfig::get('cms')->setOption('content_css', project() . '/css/editor.css');
 		HtmlEditorConfig::get('cms')->setOption('Lang', i18n::get_tinymce_lang());
 
 		// Always block the HtmlEditorField.js otherwise it will be sent with an ajax request

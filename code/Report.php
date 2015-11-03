@@ -25,7 +25,7 @@
  * ===========================
  * 
  * Right now, all subclasses of SS_Report will be shown in the ReportAdmin. In SS3 there is only
- * one place where reports can go, so this class is greatly simplifed from from its version in SS2.
+ * one place where reports can go, so this class is greatly simplifed from its version in SS2.
  * 
  * @package reports
  */
@@ -284,8 +284,9 @@ class SS_Report extends ViewableData {
 			new GridFieldSortableHeader(),
 			new GridFieldDataColumns(),
 			new GridFieldPaginator(),
-			new GridFieldPrintButton(),
-			new GridFieldExportButton()
+			new GridFieldButtonRow('after'),
+			new GridFieldPrintButton('buttons-after-left'),
+			new GridFieldExportButton('buttons-after-left')
 		);
 		$gridField = new GridField('Report',$this->title(), $items, $gridFieldConfig);
 		$columns = $gridField->getConfig()->getComponentByType('GridFieldDataColumns');
