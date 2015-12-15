@@ -308,8 +308,15 @@ class SS_Report extends ViewableData {
 		if(!$member && $member !== FALSE) {
 			$member = Member::currentUser();
 		}
-		
-		return true;
+
+		$extended = $this->extendedCan('canView', $member);
+		if($extended !== null) return $extended;
+
+		if($member && Permission::checkMember($member, array('CMS_ACCESS_LeftAndMain', 'CMS_ACCESS_ReportAdmin'))) {
+			return true;
+		}
+
+		return false;
 	}
 	
 
