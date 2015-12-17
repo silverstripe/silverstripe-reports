@@ -56,6 +56,26 @@ class ReportTest extends SapphireTest {
 			$reportNames,
 			'ReportTest_FakeTest_Abstract is NOT in reports list as it is abstract');
 	}
+
+	public function testPermissions() {
+		$report = new ReportTest_FakeTest2();
+
+		// Visitor cannot view
+		Session::clear("loggedInAs");
+		$this->assertFalse($report->canView());
+
+		// Logged in user that cannot view reports
+		$this->logInWithPermission('SITETREE_REORGANISE');
+		$this->assertFalse($report->canView());
+
+		// Logged in with report permissions
+		$this->logInWithPermission('CMS_ACCESS_ReportAdmin');
+		$this->assertTrue($report->canView());
+
+		// Admin can view
+		$this->logInWithPermission('ADMIN');
+		$this->assertTrue($report->canView());
+	}
 }
 
 /**

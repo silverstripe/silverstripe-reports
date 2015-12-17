@@ -310,13 +310,36 @@ class SS_Report extends ViewableData {
 		}
 
 		$extended = $this->extendedCan('canView', $member);
-		if($extended !== null) return $extended;
+		if($extended !== null) {
+			return $extended;
+		}
 
 		if($member && Permission::checkMember($member, array('CMS_ACCESS_LeftAndMain', 'CMS_ACCESS_ReportAdmin'))) {
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Helper to assist with permission extension
+	 *
+	 * {@see DataObject::extendedCan()}
+	 *
+	 * @param string $methodName Method on the same object, e.g. {@link canEdit()}
+	 * @param Member|int $member
+	 * @return boolean|null
+	 */
+	public function extendedCan($methodName, $member) {
+		$results = $this->extend($methodName, $member);
+		if($results && is_array($results)) {
+			// Remove NULLs
+			$results = array_filter($results, function($v) {return !is_null($v);});
+			// If there are any non-NULL responses, then return the lowest one of them.
+			// If any explicitly deny the permission, then we don't get access
+			if($results) return min($results);
+		}
+		return null;
 	}
 	
 
