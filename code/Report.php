@@ -66,9 +66,15 @@ class SS_Report extends ViewableData {
 	public static $excluded_reports = array(
 		'SS_Report',
 		'SS_ReportWrapper',
-		'SideReportWrapper'
+		'SideReportWrapper',
+		'SideReport_RecentlyEdited', // @deprecated 3.2..4.0
+		'SideReport_EmptyPages', // @deprecated 3.2..4.0
+		'SideReport_BrokenVirtualPages', // @deprecated 3.2..4.0
+		'SideReport_BrokenRedirectorPages', // @deprecated 3.2..4.0
+		'SideReport_BrokenLinks', // @deprecated 3.2..4.0
+		'SideReport_BrokenFiles' // @deprecated 3.2..4.0
 	);
-	
+
 	/**
 	 * Return the title of this report.
 	 * 
@@ -105,7 +111,7 @@ class SS_Report extends ViewableData {
 	 */
 	public function sourceQuery($params) {
 		if($this->hasMethod('sourceRecords')) {
-			return $this->sourceRecords()->dataQuery();
+			return $this->sourceRecords($params, null, null)->dataQuery();
 		} else {
 			user_error("Please override sourceQuery()/sourceRecords() and columns() or, if necessary, override getReportField()", E_USER_ERROR);
 		}
