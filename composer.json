@@ -7,12 +7,12 @@
 	"keywords": ["silverstripe", "cms", "reports"],
 	"authors": [
 		{
-		"name": "SilverStripe",
-		"homepage": "http://silverstripe.com"
+			"name": "SilverStripe",
+			"homepage": "http://silverstripe.com"
 		},
 		{
-		"name": "The SilverStripe Community",
-		"homepage": "http://silverstripe.org"
+			"name": "The SilverStripe Community",
+			"homepage": "http://silverstripe.org"
 		}
 	],
 	"require": {
