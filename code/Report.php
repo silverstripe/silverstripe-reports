@@ -219,10 +219,6 @@ class SS_Report extends ViewableData {
 	 */
 	public function getCMSFields() {
 		$fields = new FieldList();
-
-		if($title = $this->title()) {
-			$fields->push(new LiteralField('ReportTitle', "<h3>{$title}</h3>"));
-		}
 		
 		if($description = $this->description()) {
 			$fields->push(new LiteralField('ReportDescription', "<p>" . $description . "</p>"));
@@ -270,7 +266,6 @@ class SS_Report extends ViewableData {
 		$items = $this->sourceRecords($params, null, null);
 
 		$gridFieldConfig = GridFieldConfig::create()->addComponents(
-			new GridFieldToolbarHeader(),
 			new GridFieldSortableHeader(),
 			new GridFieldDataColumns(),
 			new GridFieldPaginator(),
@@ -278,7 +273,7 @@ class SS_Report extends ViewableData {
 			new GridFieldPrintButton('buttons-after-left'),
 			new GridFieldExportButton('buttons-after-left')
 		);
-		$gridField = new GridField('Report',$this->title(), $items, $gridFieldConfig);
+		$gridField = new GridField('Report',null, $items, $gridFieldConfig);
 		$columns = $gridField->getConfig()->getComponentByType('GridFieldDataColumns');
 		$displayFields = array();
 		$fieldCasting = array();
