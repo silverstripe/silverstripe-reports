@@ -144,10 +144,10 @@ class SS_Report extends ViewableData {
 
 	public function getLink($action = null) {
 		return Controller::join_links(
-			'admin/reports/',
-			"$this->class",
-			'/', // trailing slash needed if $action is null!
-			"$action"
+			Config::inst()->get('AdminRootController', 'url_base'),
+			Config::inst()->get('ReportAdmin', 'url_segment'),
+			get_class($this),
+			$action
 		);
 	}
 
