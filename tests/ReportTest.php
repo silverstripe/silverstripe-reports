@@ -6,6 +6,8 @@
  */
 class ReportTest extends SapphireTest {
 
+	protected $usesDatabase = true;
+
 	public function testGetReports() {
 		$reports = SS_Report::get_reports();
 		$this->assertNotNull($reports, "Reports returned");
