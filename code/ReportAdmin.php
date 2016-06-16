@@ -1,6 +1,9 @@
 <?php
 
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\SS_List;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\PermissionProvider;
 
 /**
  * Reports section of the CMS.
@@ -52,8 +55,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
         $this->reportObject = (isset($allReports[$this->reportClass])) ? $allReports[$this->reportClass] : null;
 
         // Set custom options for TinyMCE specific to ReportAdmin
-        HtmlEditorConfig::get('cms')->setOption('content_css', project() . '/css/editor.css');
-        HtmlEditorConfig::get('cms')->setOption('Lang', i18n::get_tinymce_lang());
+        HTMLEditorConfig::get('cms')->setOption('content_css', project() . '/css/editor.css');
+        HTMLEditorConfig::get('cms')->setOption('Lang', i18n::get_tinymce_lang());
 
         // Always block the HtmlEditorField.js otherwise it will be sent with an ajax request
         Requirements::block(FRAMEWORK_DIR . '/javascript/HtmlEditorField.js');
@@ -147,7 +150,9 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     /**
      * Returns the link to the report admin section, or the specific report that is currently displayed
-     * @return String
+     *
+     * @param string $action
+     * @return string
      */
     public function Link($action = null)
     {

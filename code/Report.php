@@ -2,6 +2,8 @@
 
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\SS_List;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\Permission;
 
 /**
  * Base "abstract" class creating reports on your data.
@@ -514,6 +516,7 @@ abstract class SS_ReportWrapper extends SS_Report
 
     public function group()
     {
+        /** @skipUpgrade */
 		return $this->baseReport->hasMethod('group') ? $this->baseReport->group() : 'Group';
 	}
 
