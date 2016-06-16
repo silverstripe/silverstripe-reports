@@ -1,24 +1,27 @@
 <?php
+
+use SilverStripe\ORM\ArrayList;
+
 /**
  * Reports section of the CMS.
- * 
+ *
  * All reports that should show in the ReportAdmin section
  * of the CMS need to subclass {@link SS_Report}, and implement
  * the appropriate methods and variables that are required.
- * 
+ *
  * @see SS_Report
- * 
+ *
  * @package reports
  */
 class ReportAdmin extends LeftAndMain implements PermissionProvider
 {
-    
+
     private static $url_segment = 'reports';
-    
+
     private static $url_rule = '/$ReportClass/$Action';
-    
+
     private static $menu_title = 'Reports';
-    
+
     private static $template_path = null; // defaults to (project)/templates/email
 
     private static $tree_class = 'SS_Report';
@@ -28,7 +31,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     );
 
     /**
-     * Variable that describes which report we are currently viewing based on 
+     * Variable that describes which report we are currently viewing based on
      * the URL (gets set in init method).
      *
      * @var string
@@ -36,7 +39,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     protected $reportClass;
 
     protected $reportObject;
-    
+
     public function init()
     {
         parent::init();
@@ -126,7 +129,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     public function Breadcrumbs($unlinked = false)
     {
         $items = parent::Breadcrumbs($unlinked);
-        
+
         // The root element should explicitly point to the root node.
         // Uses session state for current record otherwise.
         $items[0]->Link = singleton('ReportAdmin')->Link();
