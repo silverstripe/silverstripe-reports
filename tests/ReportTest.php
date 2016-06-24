@@ -6,6 +6,7 @@
  */
 class ReportTest extends SapphireTest
 {
+    protected $usesDatabase = true;    
 
     public function testGetReports()
     {
