@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\ORM\ArrayList;
+
 /**
  * @package reports
  * @subpackage tests
@@ -147,7 +149,7 @@ class ReportTest_FakeTest2 extends SS_Report implements TestOnly
  */
 abstract class ReportTest_FakeTest_Abstract extends SS_Report implements TestOnly
 {
-	
+
     public function title()
     {
 		return 'Report title Abstract';

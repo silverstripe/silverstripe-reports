@@ -1,32 +1,36 @@
 <?php
+
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\SS_List;
+
 /**
  * Base "abstract" class creating reports on your data.
- * 
+ *
  * Creating reports
  * ================
- * 
+ *
  * Creating a new report is a matter overloading a few key methods
- * 
+ *
  *  {@link title()}: Return the title - i18n is your responsibility
  *  {@link description()}: Return the description - i18n is your responsibility
  *  {@link sourceQuery()}: Return a SS_List of the search results
  *  {@link columns()}: Return information about the columns in this report.
  *  {@link parameterFields()}: Return a FieldList of the fields that can be used to filter this
  *  report.
- * 
+ *
  * If you wish to modify the report in more extreme ways, you could overload these methods instead.
- * 
+ *
  * {@link getReportField()}: Return a FormField in the place where your report's TableListField
  * usually appears.
- * {@link getCMSFields()}: Return the FieldList representing the complete right-hand area of the 
+ * {@link getCMSFields()}: Return the FieldList representing the complete right-hand area of the
  * report, including the title, description, parameter fields, and results.
- * 
+ *
  * Showing reports to the user
  * ===========================
- * 
+ *
  * Right now, all subclasses of SS_Report will be shown in the ReportAdmin. In SS3 there is only
  * one place where reports can go, so this class is greatly simplifed from its version in SS2.
- * 
+ *
  * @package reports
  */
 class SS_Report extends ViewableData
@@ -47,7 +51,7 @@ class SS_Report extends ViewableData
 	 * @var string
 	 */
 	protected $description = '';
-	
+
 	/**
 	 * The class of object being managed by this report.
 	 * Set by overriding in your subclass.
@@ -75,41 +79,41 @@ class SS_Report extends ViewableData
 		'SideReport_BrokenLinks', // @deprecated 3.2..4.0
 		'SideReport_BrokenFiles' // @deprecated 3.2..4.0
 	);
-	
+
 	/**
 	 * Return the title of this report.
-	 * 
+	 *
 	 * You have two ways of specifying the description:
-	 *  - overriding description(), which lets you support i18n 
+	 *  - overriding description(), which lets you support i18n
 	 *  - defining the $description property
 	 */
     public function title()
     {
 		return $this->title;
 	}
-	
+
 	/**
 	 * Allows access to title as a property
-	 * 
+	 *
 	 * @return string
 	 */
     public function getTitle()
     {
 		return $this->title();
 	}
-	
+
 	/**
 	 * Return the description of this report.
-	 * 
+	 *
 	 * You have two ways of specifying the description:
-	 *  - overriding description(), which lets you support i18n 
+	 *  - overriding description(), which lets you support i18n
 	 *  - defining the $description property
 	 */
     public function description()
     {
 		return $this->description;
 	}
-	
+
 	/**
 	 * Return the {@link SQLQuery} that provides your report data.
 	 */
@@ -121,7 +125,7 @@ class SS_Report extends ViewableData
 			user_error("Please override sourceQuery()/sourceRecords() and columns() or, if necessary, override getReportField()", E_USER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * Return a SS_List records for this report.
 	 */
@@ -261,11 +265,11 @@ class SS_Report extends ViewableData
 		if($title = $this->title()) {
 			$fields->push(new LiteralField('ReportTitle', "<h3>{$title}</h3>"));
 		}
-		
+
 		if($description = $this->description()) {
 			$fields->push(new LiteralField('ReportDescription', "<p>" . $description . "</p>"));
 		}
-			
+
 		// Add search fields is available
 		if($this->hasMethod('parameterFields') && $parameterFields = $this->parameterFields()) {
 			foreach($parameterFields as $field) {
@@ -278,14 +282,14 @@ class SS_Report extends ViewableData
 			// Add a search button
 			$fields->push(new FormAction('updatereport', _t('GridField.Filter')));
 		}
-		
+
 		$fields->push($this->getReportField());
 
 		$this->extend('updateCMSFields', $fields);
-		
+
 		return $fields;
 	}
-	
+
     public function getCMSActions()
     {
 		// getCMSActions() can be extended with updateCMSActions() on a extension
@@ -293,11 +297,11 @@ class SS_Report extends ViewableData
 		$this->extend('updateCMSActions', $actions);
 		return $actions;
 	}
-	
+
 	/**
 	 * Return a field, such as a {@link GridField} that is
 	 * used to show and manipulate data relating to this report.
-	 * 
+	 *
 	 * Generally, you should override {@link columns()} and {@link records()} to make your report,
 	 * but if they aren't sufficiently flexible, then you can override this method.
 	 *
@@ -329,7 +333,7 @@ class SS_Report extends ViewableData
             if (is_string($info)) {
                 $info = array('title' => $info);
             }
-			
+
             if (isset($info['formatting'])) {
                 $fieldFormatting[$source] = $info['formatting'];
             }
@@ -353,7 +357,7 @@ class SS_Report extends ViewableData
 
 		return $gridField;
 	}
-	
+
 	/**
 	 * @param Member $member
 	 * @return boolean
@@ -363,7 +367,7 @@ class SS_Report extends ViewableData
         if (!$member && $member !== false) {
 			$member = Member::currentUser();
 		}
-		
+
 		$extended = $this->extendedCan('canView', $member);
 		if($extended !== null) {
 			return $extended;
@@ -372,7 +376,7 @@ class SS_Report extends ViewableData
 		if($member && Permission::checkMember($member, array('CMS_ACCESS_LeftAndMain', 'CMS_ACCESS_ReportAdmin'))) {
 		return true;
 	}
-	
+
 		return false;
 	}
 
@@ -396,7 +400,7 @@ class SS_Report extends ViewableData
 		}
 		return null;
 	}
-	
+
 
 	/**
 	 * Return the name of this report, which
@@ -414,17 +418,17 @@ class SS_Report extends ViewableData
 
 /**
  * SS_ReportWrapper is a base class for creating report wappers.
- * 
+ *
  * Wrappers encapsulate an existing report to alter their behaviour - they are implementations of
  * the standard GoF decorator pattern.
- * 
+ *
  * This base class ensure that, by default, wrappers behave in the same way as the report that is
  * being wrapped.  You should override any methods that need to behave differently in your subclass
  * of SS_ReportWrapper.
- * 
+ *
  * It also makes calls to 2 empty methods that you can override {@link beforeQuery()} and
  * {@link afterQuery()}
- * 
+ *
  * @package reports
  */
 abstract class SS_ReportWrapper extends SS_Report
@@ -507,12 +511,12 @@ abstract class SS_ReportWrapper extends SS_Report
     {
 		return $this->baseReport->title();
 	}
-	
+
     public function group()
     {
 		return $this->baseReport->hasMethod('group') ? $this->baseReport->group() : 'Group';
 	}
-	
+
     public function sort()
     {
 		return $this->baseReport->hasMethod('sort') ? $this->baseReport->sort() : 0;
@@ -526,5 +530,5 @@ abstract class SS_ReportWrapper extends SS_Report
     public function canView($member = null)
     {
 		return $this->baseReport->canView($member);
-	}	
+	}
 }
