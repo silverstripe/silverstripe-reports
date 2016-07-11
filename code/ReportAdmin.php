@@ -204,7 +204,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
             ));
 
             $columns->setFieldFormatting(array(
-                    'title' => '<a href=\"$Link\" class=\"cms-panel-link\">$value ($Count)</a>'
+                    'title' => '<a href=\"$Link\" class=\"grid-field__link-block\">$value ($Count)</a>'
                 ));
             $gridField->addExtraClass('all-reports-gridfield');
             $fields->push($gridField);
