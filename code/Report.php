@@ -312,12 +312,14 @@ class SS_Report extends ViewableData
 		$items = $this->sourceRecords($params, null, null);
 
 		$gridFieldConfig = GridFieldConfig::create()->addComponents(
+
+			new GridFieldButtonRow('before'),
+			new GridFieldPrintButton('buttons-before-left'),
+			new GridFieldExportButton('buttons-before-left'),
+			new GridFieldToolbarHeader(),
 			new GridFieldSortableHeader(),
 			new GridFieldDataColumns(),
-			new GridFieldPaginator(),
-			new GridFieldButtonRow('after'),
-			new GridFieldPrintButton('buttons-after-left'),
-			new GridFieldExportButton('buttons-after-left')
+			new GridFieldPaginator()
 		);
 		$gridField = new GridField('Report',null, $items, $gridFieldConfig);
 		$columns = $gridField->getConfig()->getComponentByType('GridFieldDataColumns');
@@ -343,7 +345,7 @@ class SS_Report extends ViewableData
 
 			if(isset($info['link']) && $info['link']) {
 				$link = singleton('CMSPageEditController')->Link('show');
-				$fieldFormatting[$source] = '<a href=\"' . $link . '/$ID\">$value</a>';
+				$fieldFormatting[$source] = '<a class=\"grid-field__link-block\" href=\"' . $link . '/$ID\">$value</a>';
 			}
 
 			$displayFields[$source] = isset($info['title']) ? $info['title'] : $source;
