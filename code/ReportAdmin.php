@@ -41,6 +41,9 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
      */
     protected $reportClass;
 
+    /**
+     * @var SS_Report
+     */
     protected $reportObject;
 
     public function init()
@@ -82,7 +85,6 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
             return false;
         }
 
-        $hasViewableSubclasses = false;
         foreach ($this->Reports() as $report) {
             if ($report->canView($member)) {
                 return true;
@@ -157,11 +159,16 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     public function Link($action = null)
     {
         if ($this->reportObject) {
-            $link = $this->reportObject->getLink($action);
-        } else {
-            $link = self::join_links(parent::Link('index'), $action);
+            return $this->reportObject->getLink($action);
         }
-        return $link;
+
+        // Join parent action
+        if($action) {
+            return static::join_links(parent::Link('index'), $action);
+        }
+
+        // Basic link to this cms section
+        return parent::Link();
     }
 
     public function providePermissions()
