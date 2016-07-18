@@ -8,7 +8,7 @@ use SilverStripe\ORM\ArrayList;
  */
 class ReportTest extends SapphireTest
 {
-    protected $usesDatabase = true;    
+    protected $usesDatabase = true;
 
     public function testGetReports()
     {
