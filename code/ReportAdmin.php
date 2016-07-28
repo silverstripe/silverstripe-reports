@@ -101,7 +101,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
         return $output;
     }
 
-    public function handleAction($request, $action) {
+    public function handleAction($request, $action)
+    {
         $this->reportClass = $request->param('ReportClass');
 
         // Check report
