@@ -343,8 +343,14 @@ class SS_Report extends ViewableData
             }
 
             if (isset($info['link']) && $info['link']) {
-                $link = singleton('CMSPageEditController')->Link('show');
-                $fieldFormatting[$source] = '<a class=\"grid-field__link-block\" href=\"' . $link . '/$ID\">$value</a>';
+                $fieldFormatting[$source] = function($value, $item) {
+                    /** @var CMSPreviewable $item */
+                    return sprintf(
+					    '<a class="grid-field__link-block" href="%s">%s</a>',
+                        Convert::raw2att($item->CMSEditLink()),
+                        Convert::raw2xml($value)
+                    );
+				};
             }
 
             $displayFields[$source] = isset($info['title']) ? $info['title'] : $source;
