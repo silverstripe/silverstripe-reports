@@ -19,11 +19,6 @@
 		"php": ">=5.3.3,<7",
 		"silverstripe/framework": "~3.3"
 	},
-	"extra": {
-		"branch-alias": {
-			"3.x-dev": "3.4.x-dev"
-		}
-	},
 	"require-dev": {
 		"phpunit/PHPUnit": "~3.7"
 	}
