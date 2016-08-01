@@ -18,10 +18,7 @@ use SilverStripe\Security\PermissionProvider;
  */
 class ReportAdmin extends LeftAndMain implements PermissionProvider
 {
-
     private static $url_segment = 'reports';
-
-    private static $url_rule = '/$ReportClass/$Action';
 
     private static $menu_title = 'Reports';
 
@@ -30,7 +27,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     private static $tree_class = 'SS_Report';
 
     private static $url_handlers = array(
-        '$ReportClass/$Action' => 'handleAction'
+        'show/$ReportClass/$Action' => 'handleAction'
     );
 
     /**
@@ -49,13 +46,6 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     public function init()
     {
         parent::init();
-
-        //set the report we are currently viewing from the URL
-        $this->reportClass = (isset($this->urlParams['ReportClass']) && $this->urlParams['ReportClass'] !== 'index')
-            ? $this->urlParams['ReportClass']
-            : null;
-        $allReports = SS_Report::get_reports();
-        $this->reportObject = (isset($allReports[$this->reportClass])) ? $allReports[$this->reportClass] : null;
 
         // Set custom options for TinyMCE specific to ReportAdmin
         HTMLEditorConfig::get('cms')->setOption('content_css', project() . '/css/editor.css');
@@ -111,6 +101,22 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
         return $output;
     }
 
+    public function handleAction($request, $action) {
+        $this->reportClass = $request->param('ReportClass');
+
+        // Check report
+        if ($this->reportClass) {
+            $allReports = SS_Report::get_reports();
+            if (empty($allReports[$this->reportClass])) {
+                return $this->httpError(404);
+            }
+            $this->reportObject = $allReports[$this->reportClass];
+        }
+
+        // Delegate to sub-form
+        return parent::handleAction($request, $action);
+    }
+
     /**
      * Determine if we have reports and need
      * to display the "Reports" main menu item
@@ -142,9 +148,9 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
         if ($this->reportObject) {
             //build breadcrumb trail to the current report
             $items->push(new ArrayData(array(
-                    'Title' => $this->reportObject->title(),
-                    'Link' => Controller::join_links($this->Link(), '?' . http_build_query(array('q' => $this->request->requestVar('q'))))
-                )));
+                'Title' => $this->reportObject->title(),
+                'Link' => Controller::join_links($this->Link(), '?' . http_build_query(array('q' => $this->request->requestVar('q'))))
+            )));
         }
 
         return $items;
@@ -162,13 +168,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
             return $this->reportObject->getLink($action);
         }
 
-        // Join parent action
-        if($action) {
-            return static::join_links(parent::Link('index'), $action);
-        }
-
         // Basic link to this cms section
-        return parent::Link();
+        return parent::Link($action);
     }
 
     public function providePermissions()
