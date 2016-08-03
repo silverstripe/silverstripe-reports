@@ -37,137 +37,136 @@ use SilverStripe\Security\Permission;
  */
 class SS_Report extends ViewableData
 {
-	/**
-	 * This is the title of the report,
-	 * used by the ReportAdmin templates.
-	 *
-	 * @var string
-	 */
-	protected $title = '';
+    /**
+     * This is the title of the report,
+     * used by the ReportAdmin templates.
+     *
+     * @var string
+     */
+    protected $title = '';
 
-	/**
-	 * This is a description about what this
-	 * report does. Used by the ReportAdmin
-	 * templates.
-	 *
-	 * @var string
-	 */
-	protected $description = '';
+    /**
+     * This is a description about what this
+     * report does. Used by the ReportAdmin
+     * templates.
+     *
+     * @var string
+     */
+    protected $description = '';
 
-	/**
-	 * The class of object being managed by this report.
-	 * Set by overriding in your subclass.
-	 */
-	protected $dataClass = 'SiteTree';
+    /**
+     * The class of object being managed by this report.
+     * Set by overriding in your subclass.
+     */
+    protected $dataClass = 'SiteTree';
 
-	/**
-	 * A field that specifies the sort order of this report
-	 * @var int
-	 */
-	protected $sort = 0;
+    /**
+     * A field that specifies the sort order of this report
+     * @var int
+     */
+    protected $sort = 0;
 
-	/**
-	 * Reports which should not be collected and returned in get_reports
-	 * @var array
-	 */
-	public static $excluded_reports = array(
-		'SS_Report',
-		'SS_ReportWrapper',
-		'SideReportWrapper',
-		'SideReport_RecentlyEdited', // @deprecated 3.2..4.0
-		'SideReport_EmptyPages', // @deprecated 3.2..4.0
-		'SideReport_BrokenVirtualPages', // @deprecated 3.2..4.0
-		'SideReport_BrokenRedirectorPages', // @deprecated 3.2..4.0
-		'SideReport_BrokenLinks', // @deprecated 3.2..4.0
-		'SideReport_BrokenFiles' // @deprecated 3.2..4.0
-	);
+    /**
+     * Reports which should not be collected and returned in get_reports
+     * @var array
+     */
+    public static $excluded_reports = array(
+        'SS_Report',
+        'SS_ReportWrapper',
+        'SideReportWrapper',
+        'SideReport_RecentlyEdited', // @deprecated 3.2..4.0
+        'SideReport_EmptyPages', // @deprecated 3.2..4.0
+        'SideReport_BrokenVirtualPages', // @deprecated 3.2..4.0
+        'SideReport_BrokenRedirectorPages', // @deprecated 3.2..4.0
+        'SideReport_BrokenLinks', // @deprecated 3.2..4.0
+        'SideReport_BrokenFiles' // @deprecated 3.2..4.0
+    );
 
-	/**
-	 * Return the title of this report.
-	 *
-	 * You have two ways of specifying the description:
-	 *  - overriding description(), which lets you support i18n
-	 *  - defining the $description property
-	 */
+    /**
+     * Return the title of this report.
+     *
+     * You have two ways of specifying the description:
+     *  - overriding description(), which lets you support i18n
+     *  - defining the $description property
+     */
     public function title()
     {
-		return $this->title;
-	}
+        return $this->title;
+    }
 
-	/**
-	 * Allows access to title as a property
-	 *
-	 * @return string
-	 */
+    /**
+     * Allows access to title as a property
+     *
+     * @return string
+     */
     public function getTitle()
     {
-		return $this->title();
-	}
+        return $this->title();
+    }
 
-	/**
-	 * Return the description of this report.
-	 *
-	 * You have two ways of specifying the description:
-	 *  - overriding description(), which lets you support i18n
-	 *  - defining the $description property
-	 */
+    /**
+     * Return the description of this report.
+     *
+     * You have two ways of specifying the description:
+     *  - overriding description(), which lets you support i18n
+     *  - defining the $description property
+     */
     public function description()
     {
-		return $this->description;
-	}
+        return $this->description;
+    }
 
-	/**
-	 * Return the {@link SQLQuery} that provides your report data.
-	 */
+    /**
+     * Return the {@link SQLQuery} that provides your report data.
+     */
     public function sourceQuery($params)
     {
-		if($this->hasMethod('sourceRecords')) {
-			return $this->sourceRecords($params, null, null)->dataQuery();
-		} else {
-			user_error("Please override sourceQuery()/sourceRecords() and columns() or, if necessary, override getReportField()", E_USER_ERROR);
-		}
-	}
+        if ($this->hasMethod('sourceRecords')) {
+            return $this->sourceRecords($params, null, null)->dataQuery();
+        } else {
+            user_error("Please override sourceQuery()/sourceRecords() and columns() or, if necessary, override getReportField()", E_USER_ERROR);
+        }
+    }
 
-	/**
-	 * Return a SS_List records for this report.
-	 */
+    /**
+     * Return a SS_List records for this report.
+     */
     public function records($params)
     {
-		if($this->hasMethod('sourceRecords')) {
-			return $this->sourceRecords($params, null, null);
-		} else {
-			$query = $this->sourceQuery();
-			$results = new ArrayList();
-			foreach($query->execute() as $data) {
-				$class = $this->dataClass();
-				$result = new $class($data);
-				$results->push($result);
-			}
-			return $results;
-		}
-	}
+        if ($this->hasMethod('sourceRecords')) {
+            return $this->sourceRecords($params, null, null);
+        } else {
+            $query = $this->sourceQuery();
+            $results = new ArrayList();
+            foreach ($query->execute() as $data) {
+                $class = $this->dataClass();
+                $result = new $class($data);
+                $results->push($result);
+            }
+            return $results;
+        }
+    }
 
-	/**
-	 * Return the data class for this report
-	 */
+    /**
+     * Return the data class for this report
+     */
     public function dataClass()
     {
-		return $this->dataClass;
-	}
+        return $this->dataClass;
+    }
 
 
     public function getLink($action = null)
     {
+        return Controller::join_links(
+            ReportAdmin::singleton()->Link('show'),
+            get_class($this),
+            $action
+        );
+    }
 
-		return Controller::join_links(
-		    ReportAdmin::singleton()->Link('show'),
-			get_class($this),
-			$action
-		);
-	}
 
-
-	/**
+    /**
      * counts the number of objects returned
      * @param Array $params - any parameters for the sourceRecords
      * @return Int
@@ -183,150 +182,152 @@ class SS_Report extends ViewableData
     }
 
     /**
-	 * Exclude certain reports classes from the list of Reports in the CMS
-	 * @param $reportClass Can be either a string with the report classname or an array of reports classnames
-	 */
+     * Exclude certain reports classes from the list of Reports in the CMS
+     * @param $reportClass Can be either a string with the report classname or an array of reports classnames
+     */
     public static function add_excluded_reports($reportClass)
     {
-		if (is_array($reportClass)) {
-			self::$excluded_reports = array_merge(self::$excluded_reports, $reportClass);
-		} else {
-			if (is_string($reportClass)) {
-				//add to the excluded reports, so this report doesn't get used
-				self::$excluded_reports[] = $reportClass;
-			}
-		}
-	}
+        if (is_array($reportClass)) {
+            self::$excluded_reports = array_merge(self::$excluded_reports, $reportClass);
+        } else {
+            if (is_string($reportClass)) {
+                //add to the excluded reports, so this report doesn't get used
+                self::$excluded_reports[] = $reportClass;
+            }
+        }
+    }
 
-	/**
-	 * Return an array of excluded reports. That is, reports that will not be included in
-	 * the list of reports in report admin in the CMS.
-	 * @return array
-	 */
+    /**
+     * Return an array of excluded reports. That is, reports that will not be included in
+     * the list of reports in report admin in the CMS.
+     * @return array
+     */
     public static function get_excluded_reports()
     {
-		return self::$excluded_reports;
-	}
+        return self::$excluded_reports;
+    }
 
-	/**
-	 * Return the SS_Report objects making up the given list.
-	 * @return Array of SS_Report objects
-	 */
+    /**
+     * Return the SS_Report objects making up the given list.
+     * @return Array of SS_Report objects
+     */
     public static function get_reports()
     {
-		$reports = ClassInfo::subclassesFor(get_called_class());
+        $reports = ClassInfo::subclassesFor(get_called_class());
 
-		$reportsArray = array();
-		if ($reports && count($reports) > 0) {
-			//collect reports into array with an attribute for 'sort'
-			foreach($reports as $report) {
+        $reportsArray = array();
+        if ($reports && count($reports) > 0) {
+            //collect reports into array with an attribute for 'sort'
+            foreach ($reports as $report) {
                 if (in_array($report, self::$excluded_reports)) {
                     continue;
                 }   //don't use the SS_Report superclass
-				$reflectionClass = new ReflectionClass($report);
+                $reflectionClass = new ReflectionClass($report);
                 if ($reflectionClass->isAbstract()) {
                     continue;
                 }   //don't use abstract classes
 
-				$reportObj = new $report;
+                $reportObj = new $report;
                 if (method_exists($reportObj, 'sort')) {
                     $reportObj->sort = $reportObj->sort();
                 }  //use the sort method to specify the sort field
-				$reportsArray[$report] = $reportObj;
-			}
-		}
+                $reportsArray[$report] = $reportObj;
+            }
+        }
 
-		uasort($reportsArray, function($a, $b) {
+        uasort($reportsArray, function ($a, $b) {
             if ($a->sort == $b->sort) {
                 return 0;
             } else {
                 return ($a->sort < $b->sort) ? -1 : 1;
             }
-		});
+        });
 
-		return $reportsArray;
-	}
+        return $reportsArray;
+    }
 
-	/////////////////////// UI METHODS ///////////////////////
+    /////////////////////// UI METHODS ///////////////////////
 
 
-	/**
-	 * Returns a FieldList with which to create the CMS editing form.
-	 * You can use the extend() method of FieldList to create customised forms for your other
-	 * data objects.
-	 *
-	 * @uses getReportField() to render a table, or similar field for the report. This
-	 * method should be defined on the SS_Report subclasses.
-	 *
-	 * @return FieldList
-	 */
+    /**
+     * Returns a FieldList with which to create the CMS editing form.
+     * You can use the extend() method of FieldList to create customised forms for your other
+     * data objects.
+     *
+     * @uses getReportField() to render a table, or similar field for the report. This
+     * method should be defined on the SS_Report subclasses.
+     *
+     * @return FieldList
+     */
     public function getCMSFields()
     {
-		$fields = new FieldList();
+        $fields = new FieldList();
 
-		if($description = $this->description()) {
-			$fields->push(new LiteralField('ReportDescription', "<p>" . $description . "</p>"));
-		}
+        if ($description = $this->description()) {
+            $fields->push(new LiteralField('ReportDescription', "<p>" . $description . "</p>"));
+        }
 
-		// Add search fields is available
-		if($this->hasMethod('parameterFields') && $parameterFields = $this->parameterFields()) {
-			foreach($parameterFields as $field) {
-				// Namespace fields for easier handling in form submissions
-				$field->setName(sprintf('filters[%s]', $field->getName()));
-				$field->addExtraClass('no-change-track'); // ignore in changetracker
-				$fields->push($field);
-			}
+        // Add search fields is available
+        if ($this->hasMethod('parameterFields') && $parameterFields = $this->parameterFields()) {
+            foreach ($parameterFields as $field) {
+                // Namespace fields for easier handling in form submissions
+                $field->setName(sprintf('filters[%s]', $field->getName()));
+                $field->addExtraClass('no-change-track'); // ignore in changetracker
+                $fields->push($field);
+            }
 
-			// Add a search button
-			$fields->push(new FormAction('updatereport', _t('GridField.Filter')));
-		}
+            // Add a search button
+            $fields->push(new FormAction('updatereport', _t('GridField.Filter')));
+        }
 
-		$fields->push($this->getReportField());
+        $fields->push($this->getReportField());
 
-		$this->extend('updateCMSFields', $fields);
+        $this->extend('updateCMSFields', $fields);
 
-		return $fields;
-	}
+        return $fields;
+    }
 
     public function getCMSActions()
     {
-		// getCMSActions() can be extended with updateCMSActions() on a extension
-		$actions = new FieldList();
-		$this->extend('updateCMSActions', $actions);
-		return $actions;
-	}
+        // getCMSActions() can be extended with updateCMSActions() on a extension
+        $actions = new FieldList();
+        $this->extend('updateCMSActions', $actions);
+        return $actions;
+    }
 
-	/**
-	 * Return a field, such as a {@link GridField} that is
-	 * used to show and manipulate data relating to this report.
-	 *
-	 * Generally, you should override {@link columns()} and {@link records()} to make your report,
-	 * but if they aren't sufficiently flexible, then you can override this method.
-	 *
-	 * @return FormField subclass
-	 */
+    /**
+     * Return a field, such as a {@link GridField} that is
+     * used to show and manipulate data relating to this report.
+     *
+     * Generally, you should override {@link columns()} and {@link records()} to make your report,
+     * but if they aren't sufficiently flexible, then you can override this method.
+     *
+     * @return FormField subclass
+     */
     public function getReportField()
     {
-		// TODO Remove coupling with global state
-		$params = isset($_REQUEST['filters']) ? $_REQUEST['filters'] : array();
-		$items = $this->sourceRecords($params, null, null);
+        // TODO Remove coupling with global state
+        $params = isset($_REQUEST['filters']) ? $_REQUEST['filters'] : array();
+        $items = $this->sourceRecords($params, null, null);
 
-		$gridFieldConfig = GridFieldConfig::create()->addComponents(
-			new GridFieldSortableHeader(),
-			new GridFieldDataColumns(),
-			new GridFieldPaginator(),
-			new GridFieldButtonRow('after'),
-			new GridFieldPrintButton('buttons-after-left'),
-			new GridFieldExportButton('buttons-after-left')
-		);
-		$gridField = new GridField('Report',null, $items, $gridFieldConfig);
-		$columns = $gridField->getConfig()->getComponentByType('GridFieldDataColumns');
-		$displayFields = array();
-		$fieldCasting = array();
-		$fieldFormatting = array();
+        $gridFieldConfig = GridFieldConfig::create()->addComponents(
 
-		// Parse the column information
-		foreach($this->columns() as $source => $info) {
+            new GridFieldButtonRow('before'),
+            new GridFieldPrintButton('buttons-before-left'),
+            new GridFieldExportButton('buttons-before-left'),
+            new GridFieldToolbarHeader(),
+            new GridFieldSortableHeader(),
+            new GridFieldDataColumns(),
+            new GridFieldPaginator()
+        );
+        $gridField = new GridField('Report', null, $items, $gridFieldConfig);
+        $columns = $gridField->getConfig()->getComponentByType('GridFieldDataColumns');
+        $displayFields = array();
+        $fieldCasting = array();
+        $fieldFormatting = array();
+
+        // Parse the column information
+        foreach ($this->columns() as $source => $info) {
             if (is_string($info)) {
                 $info = array('title' => $info);
             }
@@ -341,76 +342,85 @@ class SS_Report extends ViewableData
                 $fieldCasting[$source] = $info['casting'];
             }
 
-			if(isset($info['link']) && $info['link']) {
-				$link = singleton('CMSPageEditController')->Link('show');
-				$fieldFormatting[$source] = '<a href=\"' . $link . '/$ID\">$value</a>';
-			}
+            if (isset($info['link']) && $info['link']) {
+                $fieldFormatting[$source] = function($value, $item) {
+                    /** @var CMSPreviewable $item */
+                    return sprintf(
+					    '<a class="grid-field__link-block" href="%s">%s</a>',
+                        Convert::raw2att($item->CMSEditLink()),
+                        Convert::raw2xml($value)
+                    );
+				};
+            }
 
-			$displayFields[$source] = isset($info['title']) ? $info['title'] : $source;
-		}
-		$columns->setDisplayFields($displayFields);
-		$columns->setFieldCasting($fieldCasting);
-		$columns->setFieldFormatting($fieldFormatting);
+            $displayFields[$source] = isset($info['title']) ? $info['title'] : $source;
+        }
+        $columns->setDisplayFields($displayFields);
+        $columns->setFieldCasting($fieldCasting);
+        $columns->setFieldFormatting($fieldFormatting);
 
-		return $gridField;
-	}
+        return $gridField;
+    }
 
-	/**
-	 * @param Member $member
-	 * @return boolean
-	 */
+    /**
+     * @param Member $member
+     * @return boolean
+     */
     public function canView($member = null)
     {
         if (!$member && $member !== false) {
-			$member = Member::currentUser();
-		}
+            $member = Member::currentUser();
+        }
 
-		$extended = $this->extendedCan('canView', $member);
-		if($extended !== null) {
-			return $extended;
-		}
+        $extended = $this->extendedCan('canView', $member);
+        if ($extended !== null) {
+            return $extended;
+        }
 
-		if($member && Permission::checkMember($member, array('CMS_ACCESS_LeftAndMain', 'CMS_ACCESS_ReportAdmin'))) {
-		return true;
-	}
+        if ($member && Permission::checkMember($member, array('CMS_ACCESS_LeftAndMain', 'CMS_ACCESS_ReportAdmin'))) {
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	/**
-	 * Helper to assist with permission extension
-	 *
-	 * {@see DataObject::extendedCan()}
-	 *
-	 * @param string $methodName Method on the same object, e.g. {@link canEdit()}
-	 * @param Member|int $member
-	 * @return boolean|null
-	 */
-	public function extendedCan($methodName, $member) {
-		$results = $this->extend($methodName, $member);
-		if($results && is_array($results)) {
-			// Remove NULLs
-			$results = array_filter($results, function($v) {return !is_null($v);});
-			// If there are any non-NULL responses, then return the lowest one of them.
-			// If any explicitly deny the permission, then we don't get access
-			if($results) return min($results);
-		}
-		return null;
-	}
+    /**
+     * Helper to assist with permission extension
+     *
+     * {@see DataObject::extendedCan()}
+     *
+     * @param string $methodName Method on the same object, e.g. {@link canEdit()}
+     * @param Member|int $member
+     * @return boolean|null
+     */
+    public function extendedCan($methodName, $member)
+    {
+        $results = $this->extend($methodName, $member);
+        if ($results && is_array($results)) {
+            // Remove NULLs
+            $results = array_filter($results, function ($v) {return !is_null($v);});
+            // If there are any non-NULL responses, then return the lowest one of them.
+            // If any explicitly deny the permission, then we don't get access
+            if ($results) {
+                return min($results);
+            }
+        }
+        return null;
+    }
 
 
-	/**
-	 * Return the name of this report, which
-	 * is used by the templates to render the
-	 * name of the report in the report tree,
-	 * the left hand pane inside ReportAdmin.
-	 *
-	 * @return string
-	 */
+    /**
+     * Return the name of this report, which
+     * is used by the templates to render the
+     * name of the report in the report tree,
+     * the left hand pane inside ReportAdmin.
+     *
+     * @return string
+     */
     public function TreeTitle()
     {
-		return $this->title();
-	}
+        return $this->title();
+    }
 }
 
 /**
@@ -430,103 +440,103 @@ class SS_Report extends ViewableData
  */
 abstract class SS_ReportWrapper extends SS_Report
 {
-	protected $baseReport;
+    protected $baseReport;
 
     public function __construct($baseReport)
     {
-		$this->baseReport = is_string($baseReport) ? new $baseReport : $baseReport;
-		$this->dataClass = $this->baseReport->dataClass();
-		parent::__construct();
-	}
+        $this->baseReport = is_string($baseReport) ? new $baseReport : $baseReport;
+        $this->dataClass = $this->baseReport->dataClass();
+        parent::__construct();
+    }
 
     public function ID()
     {
-		return get_class($this->baseReport) . '_' . get_class($this);
-	}
+        return get_class($this->baseReport) . '_' . get_class($this);
+    }
 
-	///////////////////////////////////////////////////////////////////////////////////////////
-	// Filtering
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // Filtering
 
     public function parameterFields()
     {
-		return $this->baseReport->parameterFields();
-	}
+        return $this->baseReport->parameterFields();
+    }
 
-	///////////////////////////////////////////////////////////////////////////////////////////
-	// Columns
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // Columns
 
     public function columns()
     {
-		return $this->baseReport->columns();
-	}
+        return $this->baseReport->columns();
+    }
 
-	///////////////////////////////////////////////////////////////////////////////////////////
-	// Querying
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // Querying
 
-	/**
-	 * Override this method to perform some actions prior to querying.
-	 */
+    /**
+     * Override this method to perform some actions prior to querying.
+     */
     public function beforeQuery($params)
     {
-	}
+    }
 
-	/**
-	 * Override this method to perform some actions after querying.
-	 */
+    /**
+     * Override this method to perform some actions after querying.
+     */
     public function afterQuery()
     {
     }
 
     public function sourceQuery($params)
     {
-		if($this->baseReport->hasMethod('sourceRecords')) {
-			// The default implementation will create a fake query from our sourceRecords() method
-			return parent::sourceQuery($params);
-		} else if($this->baseReport->hasMethod('sourceQuery')) {
-			$this->beforeQuery($params);
-			$query = $this->baseReport->sourceQuery($params);
-			$this->afterQuery();
-			return $query;
-		} else {
-			user_error("Please override sourceQuery()/sourceRecords() and columns() in your base report", E_USER_ERROR);
-		}
-	}
+        if ($this->baseReport->hasMethod('sourceRecords')) {
+            // The default implementation will create a fake query from our sourceRecords() method
+            return parent::sourceQuery($params);
+        } elseif ($this->baseReport->hasMethod('sourceQuery')) {
+            $this->beforeQuery($params);
+            $query = $this->baseReport->sourceQuery($params);
+            $this->afterQuery();
+            return $query;
+        } else {
+            user_error("Please override sourceQuery()/sourceRecords() and columns() in your base report", E_USER_ERROR);
+        }
+    }
 
     public function sourceRecords($params = array(), $sort = null, $limit = null)
     {
-		$this->beforeQuery($params);
-		$records = $this->baseReport->sourceRecords($params, $sort, $limit);
-		$this->afterQuery();
-		return $records;
-	}
+        $this->beforeQuery($params);
+        $records = $this->baseReport->sourceRecords($params, $sort, $limit);
+        $this->afterQuery();
+        return $records;
+    }
 
 
-	///////////////////////////////////////////////////////////////////////////////////////////
-	// Pass-through
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // Pass-through
 
     public function title()
     {
-		return $this->baseReport->title();
-	}
+        return $this->baseReport->title();
+    }
 
     public function group()
     {
         /** @skipUpgrade */
-		return $this->baseReport->hasMethod('group') ? $this->baseReport->group() : 'Group';
-	}
+        return $this->baseReport->hasMethod('group') ? $this->baseReport->group() : 'Group';
+    }
 
     public function sort()
     {
-		return $this->baseReport->hasMethod('sort') ? $this->baseReport->sort() : 0;
-	}
+        return $this->baseReport->hasMethod('sort') ? $this->baseReport->sort() : 0;
+    }
 
     public function description()
     {
-		return $this->baseReport->description();
-	}
+        return $this->baseReport->description();
+    }
 
     public function canView($member = null)
     {
-		return $this->baseReport->canView($member);
-	}
+        return $this->baseReport->canView($member);
+    }
 }
