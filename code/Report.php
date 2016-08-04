@@ -58,7 +58,7 @@ class SS_Report extends ViewableData
      * The class of object being managed by this report.
      * Set by overriding in your subclass.
      */
-    protected $dataClass = 'SiteTree';
+    protected $dataClass = 'SilverStripe\\CMS\\Model\\SiteTree';
 
     /**
      * A field that specifies the sort order of this report
@@ -74,12 +74,6 @@ class SS_Report extends ViewableData
         'SS_Report',
         'SS_ReportWrapper',
         'SideReportWrapper',
-        'SideReport_RecentlyEdited', // @deprecated 3.2..4.0
-        'SideReport_EmptyPages', // @deprecated 3.2..4.0
-        'SideReport_BrokenVirtualPages', // @deprecated 3.2..4.0
-        'SideReport_BrokenRedirectorPages', // @deprecated 3.2..4.0
-        'SideReport_BrokenLinks', // @deprecated 3.2..4.0
-        'SideReport_BrokenFiles' // @deprecated 3.2..4.0
     );
 
     /**
