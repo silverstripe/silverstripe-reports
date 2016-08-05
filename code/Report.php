@@ -219,7 +219,7 @@ class SS_Report extends ViewableData {
 	 */
 	public function getCMSFields() {
 		$fields = new FieldList();
-		
+
 		if($description = $this->description()) {
 			$fields->push(new LiteralField('ReportDescription', "<p>" . $description . "</p>"));
 		}
@@ -288,8 +288,20 @@ class SS_Report extends ViewableData {
 			if(isset($info['casting'])) $fieldCasting[$source] = $info['casting'];
 
 			if(isset($info['link']) && $info['link']) {
-				$link = singleton('CMSPageEditController')->Link('show');
-				$fieldFormatting[$source] = '<a href=\"' . $link . '/$ID\">$value</a>';
+				$fieldFormatting[$source] = function($value, $item) {
+					$title = Convert::raw2xml($value);
+
+					// If this item is previewable, decorate with link
+					if ($item instanceof CMSPreviewable) {
+						return sprintf(
+							'<a href="%s" title="%s">%s</a>',
+							$item->CMSEditLink(), $title, $title
+						);
+					}
+
+					// Fall back to basic title
+					return $title;
+				};
 			}
 
 			$displayFields[$source] = isset($info['title']) ? $info['title'] : $source;
