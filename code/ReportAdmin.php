@@ -4,6 +4,7 @@ use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\PermissionProvider;
+use SilverStripe\Admin\LeftAndMain;
 
 /**
  * Reports section of the CMS.
@@ -93,6 +94,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     public function Reports()
     {
         $output = new ArrayList();
+        /** @var SS_Report $report */
         foreach (SS_Report::get_reports() as $report) {
             if ($report->canView()) {
                 $output->push($report);
@@ -136,6 +138,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     /**
      * Returns the Breadcrumbs for the ReportAdmin
+     *
+     * @param bool $unlinked
      * @return ArrayList
      */
     public function Breadcrumbs($unlinked = false)
@@ -175,10 +179,11 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     public function providePermissions()
     {
-        $title = _t("ReportAdmin.MENUTITLE", LeftAndMain::menu_title_for_class($this->class));
         return array(
             "CMS_ACCESS_ReportAdmin" => array(
-                'name' => _t('CMSMain.ACCESS', "Access to '{title}' section", array('title' => $title)),
+                'name' => _t('CMSMain.ACCESS', "Access to '{title}' section", array(
+                    'title' => static::menu_title()
+                )),
                 'category' => _t('Permission.CMS_ACCESS_CATEGORY', 'CMS Access')
             )
         );
@@ -199,6 +204,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
                 new GridFieldFooter()
             );
             $gridField = new GridField('Reports', false, $this->Reports(), $gridFieldConfig);
+            /** @var GridFieldDataColumns $columns */
             $columns = $gridField->getConfig()->getComponentByType('GridFieldDataColumns');
             $columns->setDisplayFields(array(
                 'title' => _t('ReportAdmin.ReportTitle', 'Title'),
