@@ -44,6 +44,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
      */
     protected $reportObject;
 
+    private static $required_permission_codes = 'CMS_ACCESS_ReportAdmin';
+
     public function init()
     {
         parent::init();
@@ -105,7 +107,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     public function handleAction($request, $action)
     {
-        $this->reportClass = $request->param('ReportClass');
+        $this->reportClass = $this->unsanitiseClassName($request->param('ReportClass'));
 
         // Check report
         if ($this->reportClass) {
@@ -119,6 +121,16 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
         // Delegate to sub-form
         return parent::handleAction($request, $action);
     }
+
+	/**
+	 * Unsanitise a model class' name from a URL param
+	 *
+	 * @param string $class
+	 * @return string
+	 */
+	protected function unsanitiseClassName($class) {
+		return str_replace('-', '\\', $class);
+	}
 
     /**
      * Determine if we have reports and need

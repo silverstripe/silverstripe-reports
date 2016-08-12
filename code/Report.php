@@ -154,10 +154,20 @@ class SS_Report extends ViewableData
     {
         return Controller::join_links(
             ReportAdmin::singleton()->Link('show'),
-            get_class($this),
+            $this->sanitiseClassName(get_class($this)),
             $action
         );
     }
+
+	/**
+	 * Sanitise a model class' name for inclusion in a link
+	 *
+	 * @param string $class
+	 * @return string
+	 */
+	protected function sanitiseClassName($class) {
+		return str_replace('\\', '-', $class);
+	}
 
 
     /**

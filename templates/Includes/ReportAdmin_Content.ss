@@ -3,9 +3,9 @@
 	<div class="cms-content-header north">
 		<% with $EditForm %>
 			<div class="cms-content-header-info">
-				<% include BackLink_Button %>
+				<% include SilverStripe\\Admin\\BackLink_Button %>
 				<% with $Controller %>
-					<% include CMSBreadcrumbs %>
+					<% include SilverStripe\\Admin\\CMSBreadcrumbs %>
 				<% end_with %>
 			</div>
 		<% end_with %>
