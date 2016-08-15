@@ -34,10 +34,12 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider {
 	 */
 	protected $reportClass;
 
+	/**
+	 * @var SS_Report
+	 */
 	protected $reportObject;
 	
 	public function init() {
-		parent::init();
 
 		//set the report we are currently viewing from the URL
 		$this->reportClass = (isset($this->urlParams['ReportClass']) && $this->urlParams['ReportClass'] !== 'index')
@@ -45,6 +47,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider {
 			: null;
 		$allReports = SS_Report::get_reports();
 		$this->reportObject = (isset($allReports[$this->reportClass])) ? $allReports[$this->reportClass] : null;
+
+		parent::init();
 
 		// Set custom options for TinyMCE specific to ReportAdmin
 		HtmlEditorConfig::get('cms')->setOption('content_css', project() . '/css/editor.css');
@@ -69,7 +73,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider {
 
 		if(!parent::canView($member)) return false;
 
-		$hasViewableSubclasses = false;
+		if ($this->reportObject) return $this->reportObject->canView($member);
+
 		foreach($this->Reports() as $report) {
 			if($report->canView($member)) return true;
 		}
