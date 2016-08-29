@@ -1,0 +1,6 @@
+mappings:
+  SS_Report: SilverStripe\Reports\SS_Report
+  SS_ReportWrapper: SilverStripe\Reports\SS_ReportWrapper
+  ReportAdmin: SilverStripe\Reports\ReportAdmin
+  SideReportView: SilverStripe\Reports\SideReportView
+  SideReportWrapper: SilverStripe\Reports\SideReportWrapper

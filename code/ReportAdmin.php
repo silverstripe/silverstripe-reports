@@ -1,10 +1,25 @@
 <?php
 
+namespace SilverStripe\Reports;
+
+use SilverStripe\Admin\LeftAndMain;
+use SilverStripe\Control\Controller;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\GridField\GridFieldSortableHeader;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridFieldFooter;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
+use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\PermissionProvider;
-use SilverStripe\Admin\LeftAndMain;
+use SilverStripe\View\ArrayData;
+use SilverStripe\View\Requirements;
 
 /**
  * Reports section of the CMS.
@@ -12,10 +27,6 @@ use SilverStripe\Admin\LeftAndMain;
  * All reports that should show in the ReportAdmin section
  * of the CMS need to subclass {@link SS_Report}, and implement
  * the appropriate methods and variables that are required.
- *
- * @see SS_Report
- *
- * @package reports
  */
 class ReportAdmin extends LeftAndMain implements PermissionProvider
 {
@@ -25,7 +36,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     private static $template_path = null; // defaults to (project)/templates/email
 
-    private static $tree_class = 'SS_Report';
+    private static $tree_class = 'SilverStripe\\Reports\\SS_Report';
 
     private static $url_handlers = array(
         'show/$ReportClass/$Action' => 'handleAction'
@@ -160,7 +171,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
         // The root element should explicitly point to the root node.
         // Uses session state for current record otherwise.
-        $items[0]->Link = singleton('ReportAdmin')->Link();
+        $items[0]->Link = singleton('SilverStripe\\Reports\\ReportAdmin')->Link();
 
         if ($this->reportObject) {
             //build breadcrumb trail to the current report
@@ -217,7 +228,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
             );
             $gridField = new GridField('Reports', false, $this->Reports(), $gridFieldConfig);
             /** @var GridFieldDataColumns $columns */
-            $columns = $gridField->getConfig()->getComponentByType('GridFieldDataColumns');
+            $columns = $gridField->getConfig()->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
             $columns->setDisplayFields(array(
                 'title' => _t('ReportAdmin.ReportTitle', 'Title'),
             ));
