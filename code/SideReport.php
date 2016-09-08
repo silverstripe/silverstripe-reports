@@ -1,46 +1,50 @@
 <?php
 
+namespace SilverStripe\Reports;
+
+use TableListField;
+use SilverStripe\Core\Convert;
+use SilverStripe\View\ViewableData;
+
 /**
  * Renderer for showing SideReports in CMSMain
- * 
- * @package reports
  */
 class SideReportView extends ViewableData
 {
 
     protected $controller, $report;
     protected $parameters;
-    
+
     public function __construct($controller, $report)
     {
         $this->controller = $controller;
         $this->report = $report;
         parent::__construct();
     }
-    
+
     public function group()
     {
         return _t('SideReport.OtherGroupTitle', "Other");
     }
-    
+
     public function sort()
     {
         return 0;
     }
-    
+
     public function setParameters($parameters)
     {
         $this->parameters = $parameters;
     }
-    
+
     public function forTemplate()
     {
         $records = $this->report->records($this->parameters);
         $columns = $this->report->columns();
-        
+
         if ($records && $records->Count()) {
             $result = "<ul class=\"$this->class\">\n";
-            
+
             foreach ($records as $record) {
                 $result .= "<li>\n";
                 foreach ($columns as $source => $info) {
@@ -63,7 +67,7 @@ class SideReportView extends ViewableData
         }
         return $result;
     }
-    
+
     protected function formatValue($record, $source, $info)
     {
         // Field sources
@@ -78,7 +82,7 @@ class SideReportView extends ViewableData
         if (!empty($info['casting'])) {
             $val = TableListField::getCastedValue($val, $info['casting']);
         }
-        
+
         // Formatting, a la TableListField
         if (!empty($info['formatting'])) {
             $format = str_replace('$value', "__VAL__", $info['formatting']);
@@ -89,13 +93,13 @@ class SideReportView extends ViewableData
 
         $prefix = empty($info['newline']) ? "" : "<br>";
 
-        
+
         $classClause = "";
         if (isset($info['title'])) {
             $cssClass = preg_replace('/[^A-Za-z0-9]+/', '', $info['title']);
             $classClause = "class=\"$cssClass\"";
         }
-        
+
         if (isset($info['link']) && $info['link']) {
             $link = ($info['link'] === true && $record->hasMethod('CMSEditLink'))
                 ? $record->CMSEditLink()
@@ -103,25 +107,6 @@ class SideReportView extends ViewableData
             return $prefix . "<a $classClause href=\"$link\">$val</a>";
         } else {
             return $prefix . "<span $classClause>$val</span>";
-        }
-    }
-}
-
-/**
- * A report wrapper that makes it easier to define slightly different behaviour for side-reports.
- * 
- * This report wrapper will use sideReportColumns() for the report columns, instead of columns().
- * 
- * @package reports
- */
-class SideReportWrapper extends SS_ReportWrapper
-{
-    public function columns()
-    {
-        if ($this->baseReport->hasMethod('sideReportColumns')) {
-            return $this->baseReport->sideReportColumns();
-        } else {
-            return parent::columns();
         }
     }
 }

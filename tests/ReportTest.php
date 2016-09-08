@@ -1,6 +1,11 @@
 <?php
 
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\Reports\SS_Report;
+use SilverStripe\Control\Session;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Dev\TestOnly;
+
 
 /**
  * @package reports
