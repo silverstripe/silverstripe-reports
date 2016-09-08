@@ -7,7 +7,7 @@ namespace SilverStripe\Reports;
  *
  * This report wrapper will use sideReportColumns() for the report columns, instead of columns().
  */
-class SideReportWrapper extends SS_ReportWrapper
+class SideReportWrapper extends ReportWrapper
 {
     public function columns()
     {

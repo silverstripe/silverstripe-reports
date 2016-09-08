@@ -36,7 +36,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     private static $template_path = null; // defaults to (project)/templates/email
 
-    private static $tree_class = 'SilverStripe\\Reports\\SS_Report';
+    private static $tree_class = 'SilverStripe\\Reports\\Report';
 
     private static $url_handlers = array(
         'show/$ReportClass/$Action' => 'handleAction'
@@ -51,7 +51,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     protected $reportClass;
 
     /**
-     * @var SS_Report
+     * @var Report
      */
     protected $reportObject;
 
@@ -107,8 +107,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     public function Reports()
     {
         $output = new ArrayList();
-        /** @var SS_Report $report */
-        foreach (SS_Report::get_reports() as $report) {
+        /** @var Report $report */
+        foreach (Report::get_reports() as $report) {
             if ($report->canView()) {
                 $output->push($report);
             }
@@ -122,7 +122,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
         // Check report
         if ($this->reportClass) {
-            $allReports = SS_Report::get_reports();
+            $allReports = Report::get_reports();
             if (empty($allReports[$this->reportClass])) {
                 return $this->httpError(404);
             }
@@ -156,7 +156,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
      */
     public static function has_reports()
     {
-        return sizeof(SS_Report::get_reports()) > 0;
+        return sizeof(Report::get_reports()) > 0;
     }
 
     /**

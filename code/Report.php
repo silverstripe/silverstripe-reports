@@ -52,7 +52,7 @@ use ReflectionClass;
  * Right now, all subclasses of SS_Report will be shown in the ReportAdmin. In SS3 there is only
  * one place where reports can go, so this class is greatly simplifed from its version in SS2.
  */
-class SS_Report extends ViewableData
+class Report extends ViewableData
 {
     /**
      * This is the title of the report,
@@ -88,8 +88,8 @@ class SS_Report extends ViewableData
      * @var array
      */
     public static $excluded_reports = array(
-        'SilverStripe\\Reports\\SS_Report',
-        'SilverStripe\\Reports\\SS_ReportWrapper',
+        'SilverStripe\\Reports\\Report',
+        'SilverStripe\\Reports\\ReportWrapper',
         'SilverStripe\\Reports\\SideReportWrapper',
     );
 
@@ -189,8 +189,8 @@ class SS_Report extends ViewableData
 
     /**
      * counts the number of objects returned
-     * @param Array $params - any parameters for the sourceRecords
-     * @return Int
+     * @param array $params - any parameters for the sourceRecords
+     * @return int
      */
     public function getCount($params = array())
     {

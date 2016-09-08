@@ -1,6 +1,8 @@
 mappings:
-  SS_Report: SilverStripe\Reports\SS_Report
-  SS_ReportWrapper: SilverStripe\Reports\SS_ReportWrapper
+  SS_Report: SilverStripe\Reports\Report
+  SilverStripe\Reports\SS_Report: SilverStripe\Reports\Report
+  SS_ReportWrapper: SilverStripe\Reports\ReportWrapper
+  SilverStripe\Reports\SS_ReportWrapper: SilverStripe\Reports\ReportWrapper
   ReportAdmin: SilverStripe\Reports\ReportAdmin
   SideReportView: SilverStripe\Reports\SideReportView
   SideReportWrapper: SilverStripe\Reports\SideReportWrapper

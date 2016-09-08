@@ -15,7 +15,7 @@ namespace SilverStripe\Reports;
  * It also makes calls to 2 empty methods that you can override {@link beforeQuery()} and
  * {@link afterQuery()}
  */
-abstract class SS_ReportWrapper extends SS_Report
+abstract class ReportWrapper extends Report
 {
     protected $baseReport;
 

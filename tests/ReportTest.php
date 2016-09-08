@@ -1,7 +1,7 @@
 <?php
 
 use SilverStripe\ORM\ArrayList;
-use SilverStripe\Reports\SS_Report;
+use SilverStripe\Reports\Report;
 use SilverStripe\Control\Session;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Dev\TestOnly;
@@ -17,7 +17,7 @@ class ReportTest extends SapphireTest
 
     public function testGetReports()
     {
-        $reports = SS_Report::get_reports();
+        $reports = Report::get_reports();
         $this->assertNotNull($reports, "Reports returned");
         $previousSort = 0;
         foreach ($reports as $report) {
@@ -28,7 +28,7 @@ class ReportTest extends SapphireTest
 
     public function testExcludeReport()
     {
-        $reports = SS_Report::get_reports();
+        $reports = Report::get_reports();
         $reportNames = array();
         foreach ($reports as $report) {
             $reportNames[] = $report->class;
@@ -36,9 +36,9 @@ class ReportTest extends SapphireTest
         $this->assertContains('ReportTest_FakeTest', $reportNames, 'ReportTest_FakeTest is in reports list');
 
         //exclude one report
-        SS_Report::add_excluded_reports('ReportTest_FakeTest');
+        Report::add_excluded_reports('ReportTest_FakeTest');
 
-        $reports = SS_Report::get_reports();
+        $reports = Report::get_reports();
         $reportNames = array();
         foreach ($reports as $report) {
             $reportNames[] = $report->class;
@@ -46,9 +46,9 @@ class ReportTest extends SapphireTest
         $this->assertNotContains('ReportTest_FakeTest', $reportNames, 'ReportTest_FakeTest is NOT in reports list');
 
         //exclude two reports
-        SS_Report::add_excluded_reports(array('ReportTest_FakeTest', 'ReportTest_FakeTest2'));
+        Report::add_excluded_reports(array('ReportTest_FakeTest', 'ReportTest_FakeTest2'));
 
-        $reports = SS_Report::get_reports();
+        $reports = Report::get_reports();
         $reportNames = array();
         foreach ($reports as $report) {
             $reportNames[] = $report->class;
@@ -59,7 +59,7 @@ class ReportTest extends SapphireTest
 
     public function testAbstractClassesAreExcluded()
     {
-        $reports = SS_Report::get_reports();
+        $reports = Report::get_reports();
         $reportNames = array();
         foreach ($reports as $report) {
             $reportNames[] = $report->class;
@@ -95,7 +95,7 @@ class ReportTest extends SapphireTest
  * @package reports
  * @subpackage tests
  */
-class ReportTest_FakeTest extends SS_Report implements TestOnly
+class ReportTest_FakeTest extends Report implements TestOnly
 {
     public function title()
     {
@@ -124,7 +124,7 @@ class ReportTest_FakeTest extends SS_Report implements TestOnly
  * @package reports
  * @subpackage tests
  */
-class ReportTest_FakeTest2 extends SS_Report implements TestOnly
+class ReportTest_FakeTest2 extends Report implements TestOnly
 {
     public function title()
     {
@@ -153,7 +153,7 @@ class ReportTest_FakeTest2 extends SS_Report implements TestOnly
  * @package reports
  * @subpackage tests
  */
-abstract class ReportTest_FakeTest_Abstract extends SS_Report implements TestOnly
+abstract class ReportTest_FakeTest_Abstract extends Report implements TestOnly
 {
 
     public function title()
