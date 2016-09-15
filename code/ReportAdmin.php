@@ -65,8 +65,6 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
         HTMLEditorConfig::get('cms')->setOption('content_css', project() . '/css/editor.css');
         HTMLEditorConfig::get('cms')->setOption('Lang', i18n::get_tinymce_lang());
 
-        // Always block the HtmlEditorField.js otherwise it will be sent with an ajax request
-        Requirements::block(FRAMEWORK_DIR . '/javascript/HtmlEditorField.js');
         Requirements::javascript(REPORTS_DIR . '/javascript/ReportAdmin.js');
     }
 
