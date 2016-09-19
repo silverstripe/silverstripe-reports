@@ -240,7 +240,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
         $actions = new FieldList();
         $form = new Form($this, "EditForm", $fields, $actions);
-        $form->addExtraClass('cms-edit-form cms-panel-padded center ' . $this->BaseCSSClasses());
+        $form->addExtraClass('panel panel--padded panel--scrollable cms-edit-form cms-panel-padded' . $this->BaseCSSClasses());
         $form->loadDataFrom($this->request->getVars());
 
         $this->extend('updateEditForm', $form);
