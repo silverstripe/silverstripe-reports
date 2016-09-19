@@ -1,6 +1,6 @@
 # Reports
 
-[![Build Status](https://secure.travis-ci.org/silverstripe-labs/silverstripe-reports.png?branch=master)](http://travis-ci.org/silverstripe-labs/silverstripe-reports)
+[![Build Status](https://secure.travis-ci.org/silverstripe/silverstripe-reports.png?branch=master)](http://travis-ci.org/silverstripe/silverstripe-reports)
 
 ## Introduction
 
