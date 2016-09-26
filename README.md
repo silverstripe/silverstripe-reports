@@ -1,6 +1,7 @@
 # Reports
 
 [![Build Status](https://secure.travis-ci.org/silverstripe/silverstripe-reports.png?branch=master)](http://travis-ci.org/silverstripe/silverstripe-reports)
+[![codecov](https://codecov.io/gh/silverstripe/silverstripe-reports/branch/master/graph/badge.svg)](https://codecov.io/gh/silverstripe/silverstripe-reports)
 
 ## Introduction
 
