@@ -43,7 +43,7 @@ class SideReportView extends ViewableData
         $columns = $this->report->columns();
 
         if ($records && $records->Count()) {
-            $result = "<ul class=\"$this->class\">\n";
+            $result = "<ul class=\"" . get_class($this) . "\">\n";
 
             foreach ($records as $record) {
                 $result .= "<li>\n";
