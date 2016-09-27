@@ -28,7 +28,7 @@ abstract class ReportWrapper extends Report
 
     public function ID()
     {
-        return get_class($this->baseReport) . '_' . get_class($this);
+        return get_class($this->baseReport) . '_' . static::class;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////

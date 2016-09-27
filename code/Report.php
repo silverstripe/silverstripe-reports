@@ -171,7 +171,7 @@ class Report extends ViewableData
     {
         return Controller::join_links(
             ReportAdmin::singleton()->Link('show'),
-            $this->sanitiseClassName(get_class($this)),
+            $this->sanitiseClassName(static::class),
             $action
         );
     }
@@ -197,7 +197,7 @@ class Report extends ViewableData
         $sourceRecords = $this->sourceRecords($params, null, null);
         if (!$sourceRecords instanceof SS_List) {
 
-            user_error(get_class($this) . "::sourceRecords does not return an SS_List", E_USER_NOTICE);
+            user_error(static::class . "::sourceRecords does not return an SS_List", E_USER_NOTICE);
             return "-1";
         }
         return $sourceRecords->count();
