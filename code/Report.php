@@ -196,7 +196,8 @@ class Report extends ViewableData
     {
         $sourceRecords = $this->sourceRecords($params, null, null);
         if (!$sourceRecords instanceof SS_List) {
-            user_error($this->class."::sourceRecords does not return an SS_List", E_USER_NOTICE);
+
+            user_error(get_class($this) . "::sourceRecords does not return an SS_List", E_USER_NOTICE);
             return "-1";
         }
         return $sourceRecords->count();
