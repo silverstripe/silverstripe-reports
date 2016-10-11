@@ -1,6 +1,6 @@
-<div id="reportadmin-cms-content" class="cms-content center cms-tabset $BaseCSSClasses" data-layout-type="border" data-pjax-fragment="Content">
+<div id="reportadmin-cms-content" class="flexbox-area-grow fill-height cms-content cms-tabset $BaseCSSClasses" data-layout-type="border" data-pjax-fragment="Content">
 
-	<div class="cms-content-header north">
+	<div class="cms-content-header">
 		<% with $EditForm %>
 			<div class="cms-content-header-info">
 				<% include SilverStripe\\Admin\\BackLink_Button %>
@@ -11,7 +11,7 @@
 		<% end_with %>
 	</div>
 
-	<div class="cms-content-fields center ui-widget-content" data-layout-type="border">
+	<div class="flexbox-area-grow cms-content-fields ui-widget-content" data-layout-type="border">
 
 		$EditForm
 
