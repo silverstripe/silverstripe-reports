@@ -1,10 +1,13 @@
 <?php
 
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\Reports\Report;
+use SilverStripe\Control\Controller;
 use SilverStripe\Control\Session;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Dev\TestOnly;
+use SilverStripe\Admin\CMSPreviewable ;
 
 
 /**
@@ -85,9 +88,53 @@ class ReportTest extends SapphireTest
         $this->logInWithPermission('CMS_ACCESS_ReportAdmin');
         $this->assertTrue($report->canView());
 
-        // Admin can view
-        $this->logInWithPermission('ADMIN');
-        $this->assertTrue($report->canView());
+		// Admin can view
+		$this->logInWithPermission('ADMIN');
+		$this->assertTrue($report->canView());
+	}
+
+	public function testColumnLink() {
+		$report = new ReportTest_FakeTest();
+		/** @var GridField $gridField */
+		$gridField = $report->getReportField();
+		/** @var GridFieldDataColumns $columns */
+		$columns = $gridField->getConfig()->getComponentByType('GridFieldDataColumns');
+
+		$page = new ReportTest_FakeObject();
+		$page->Title = 'My Object';
+		$page->ID = 959547;
+
+		$titleContent = $columns->getColumnContent($gridField, $page, 'Title');
+		$this->assertEquals('<a href="dummy-edit-link/959547" title="My Object">My Object</a>', $titleContent);
+	}
+}
+
+class ReportTest_FakeObject extends DataObject implements CMSPreviewable, TestOnly {
+
+	private static $db = array(
+		'Title' => 'Varchar'
+	);
+
+	/**
+	 * @return String Absolute URL to the end-user view for this record.
+	 * Example: http://mysite.com/my-record
+	 */
+	public function Link()
+	{
+		return Controller::join_links('dummy-link', $this->ID);
+	}
+
+	public function CMSEditLink()
+	{
+		return Controller::join_links('dummy-edit-link', $this->ID);
+	}
+
+    public function PreviewLink($action = null) {
+        return false;
+	}
+
+	public function getMimeType() {
+        return 'text/html';
     }
 }
 
@@ -105,7 +152,8 @@ class ReportTest_FakeTest extends Report implements TestOnly
     {
         return array(
             "Title" => array(
-                "title" => "Page Title"
+                "title" => "Page Title",
+                "link" => true,
             )
         );
     }

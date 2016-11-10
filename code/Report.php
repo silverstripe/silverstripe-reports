@@ -23,6 +23,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Core\Convert;
 use SilverStripe\View\ViewableData;
 use ReflectionClass;
+use SilverStripe\Admin\CMSPreviewable ;
 
 /**
  * Base "abstract" class creating reports on your data.
@@ -369,12 +370,15 @@ class Report extends ViewableData
 
             if (isset($info['link']) && $info['link']) {
                 $fieldFormatting[$source] = function($value, $item) {
-                    /** @var CMSPreviewable $item */
-                    return sprintf(
-					    '<a class="grid-field__link-block" href="%s">%s</a>',
-                        Convert::raw2att($item->CMSEditLink()),
-                        Convert::raw2xml($value)
-                    );
+                    if ($item instanceof CMSPreviewable) {
+                        /** @var CMSPreviewable $item */
+                        return sprintf(
+                            '<a class="grid-field__link-block" href="%s">%s</a>',
+                            Convert::raw2att($item->CMSEditLink()),
+                            Convert::raw2xml($value)
+                        );
+                    }
+                    return $value;
 				};
             }
 
