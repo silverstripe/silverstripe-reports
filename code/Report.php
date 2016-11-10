@@ -328,7 +328,7 @@ class Report extends ViewableData
      * Generally, you should override {@link columns()} and {@link records()} to make your report,
      * but if they aren't sufficiently flexible, then you can override this method.
      *
-     * @return FormField subclass
+     * @return \SilverStripe\Forms\FormField subclass
      */
     public function getReportField()
     {
@@ -373,8 +373,9 @@ class Report extends ViewableData
                     if ($item instanceof CMSPreviewable) {
                         /** @var CMSPreviewable $item */
                         return sprintf(
-                            '<a class="grid-field__link-block" href="%s">%s</a>',
+                            '<a class="grid-field__link-block" href="%s" title="%s">%s</a>',
                             Convert::raw2att($item->CMSEditLink()),
+                            Convert::raw2att($value),
                             Convert::raw2xml($value)
                         );
                     }

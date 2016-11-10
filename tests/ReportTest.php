@@ -8,6 +8,7 @@ use SilverStripe\Control\Session;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\Admin\CMSPreviewable ;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
 
 
 /**
@@ -98,14 +99,14 @@ class ReportTest extends SapphireTest
 		/** @var GridField $gridField */
 		$gridField = $report->getReportField();
 		/** @var GridFieldDataColumns $columns */
-		$columns = $gridField->getConfig()->getComponentByType('GridFieldDataColumns');
+		$columns = $gridField->getConfig()->getComponentByType(GridFieldDataColumns::class);
 
 		$page = new ReportTest_FakeObject();
 		$page->Title = 'My Object';
 		$page->ID = 959547;
 
 		$titleContent = $columns->getColumnContent($gridField, $page, 'Title');
-		$this->assertEquals('<a href="dummy-edit-link/959547" title="My Object">My Object</a>', $titleContent);
+		$this->assertEquals('<a class="grid-field__link-block" href="dummy-edit-link/959547" title="My Object">My Object</a>', $titleContent);
 	}
 }
 
