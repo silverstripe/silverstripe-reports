@@ -34,6 +34,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     private static $menu_title = 'Reports';
 
+    private static $menu_icon_class = 'font-icon-chart-line';
+
     private static $template_path = null; // defaults to (project)/templates/email
 
     private static $tree_class = 'SilverStripe\\Reports\\Report';
