@@ -300,7 +300,7 @@ class Report extends ViewableData
             }
 
             // Add a search button
-            $formAction = new FormAction('updatereport', _t('GridField.Filter'));
+            $formAction = new FormAction('updatereport', _t('GridField.Filter', 'Filter'));
             $formAction->addExtraClass("m-b-2");
 
             $fields->push($formAction);
