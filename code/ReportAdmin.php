@@ -13,7 +13,6 @@ use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldFooter;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
-use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\Security\Member;
@@ -65,7 +64,6 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
         // Set custom options for TinyMCE specific to ReportAdmin
         HTMLEditorConfig::get('cms')->setOption('content_css', project() . '/css/editor.css');
-        HTMLEditorConfig::get('cms')->setOption('Lang', i18n::get_tinymce_lang());
 
         Requirements::javascript(REPORTS_DIR . '/javascript/ReportAdmin.js');
     }
