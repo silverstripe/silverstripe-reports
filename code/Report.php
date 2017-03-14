@@ -23,7 +23,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Core\Convert;
 use SilverStripe\View\ViewableData;
 use ReflectionClass;
-use SilverStripe\Admin\CMSPreviewable ;
+use SilverStripe\ORM\CMSPreviewable ;
 
 /**
  * Base "abstract" class creating reports on your data.
