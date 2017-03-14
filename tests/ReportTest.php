@@ -7,7 +7,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Control\Session;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Dev\TestOnly;
-use SilverStripe\Admin\CMSPreviewable ;
+use SilverStripe\ORM\CMSPreviewable ;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 
 
