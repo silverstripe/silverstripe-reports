@@ -18,3 +18,7 @@ The reports section will not show up in the CMS if:
 
  * There are no reports to show
  * The logged in user does not have permission to view any reports
+
+## Links ##
+
+ * [License](./LICENSE)
