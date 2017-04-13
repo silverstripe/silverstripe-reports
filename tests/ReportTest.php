@@ -2,10 +2,9 @@
 
 namespace SilverStripe\Reports\Tests;
 
-use SilverStripe\Dev\SapphireTest;
-use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Reports\Report;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Reports\Tests\ReportTest\FakeObject;
 use SilverStripe\Reports\Tests\ReportTest\FakeTest;
 use SilverStripe\Reports\Tests\ReportTest\FakeTest2;
