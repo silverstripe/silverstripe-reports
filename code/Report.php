@@ -206,7 +206,7 @@ class Report extends ViewableData
 
     /**
      * Exclude certain reports classes from the list of Reports in the CMS
-     * @param $reportClass Can be either a string with the report classname or an array of reports classnames
+     * @param $reportClass string|array A string with the Report classname or an array of Report classnames
      */
     public static function add_excluded_reports($reportClass)
     {
