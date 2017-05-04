@@ -1,0 +1,10 @@
+id:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Laman dengan berkas rusak'
+    BROKENREDIRECTORPAGES: 'LamanPengarah mengarah pada laman terhapus'
+    BROKENVIRTUALPAGES: 'LamanVirtual mengarah pada laman terhapus'
+    BrokenLinksGroupTitle: 'Laporan tautan-tautan rusak'
+    ContentGroupTitle: 'Laporan konten'
+    EMPTYPAGES: 'Laman tanpa konten'
+    LAST2WEEKS: 'Laman diedit dalam 2 minggu terakhir'
+    ParameterLiveCheckbox: 'Periksa situs live'

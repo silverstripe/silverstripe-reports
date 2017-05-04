@@ -1,0 +1,4 @@
+fo:
+  SilverStripe\Reports\SideReport:
+    EMPTYPAGES: 'Tómar síður'
+    LAST2WEEKS: 'Síður broyttar seinastu 2 vikurnar'

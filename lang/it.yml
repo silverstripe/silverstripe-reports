@@ -1,0 +1,10 @@
+it:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Pagine con file non funzionanti'
+    BROKENREDIRECTORPAGES: 'Pagina di redirezione che puntano a pagine eliminate'
+    BROKENVIRTUALPAGES: 'Pagine virtuali che puntano a pagine eliminate'
+    BrokenLinksGroupTitle: 'Rapporto link non funzionanti'
+    ContentGroupTitle: 'Rapporti sui contenuti'
+    EMPTYPAGES: 'Pagine vuote'
+    LAST2WEEKS: 'Pagine modificate nelle ultime 2 settimane'
+    ParameterLiveCheckbox: 'Verifica sito pubblicato'

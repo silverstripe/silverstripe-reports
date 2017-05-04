@@ -1,0 +1,10 @@
+es_MX:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Páginas con archivos en mal estado'
+    BROKENREDIRECTORPAGES: 'La redirección de página está apuntando a páginas eliminadas'
+    BROKENVIRTUALPAGES: 'Las páginas virtuales están apuntando a páginas eliminadas'
+    BrokenLinksGroupTitle: 'Informe de enlaces rotos'
+    ContentGroupTitle: 'Informe de contenido'
+    EMPTYPAGES: 'Páginas vacías'
+    LAST2WEEKS: 'Páginas editadas en las últimas 2 semanas'
+    ParameterLiveCheckbox: 'Comprobar el sitio vivo'

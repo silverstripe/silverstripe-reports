@@ -1,0 +1,10 @@
+gl_ES:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Páxinas con ficheiros rotos'
+    BROKENREDIRECTORPAGES: 'RedirectorPages apuntando a páxinas eliminadas'
+    BROKENVIRTUALPAGES: 'VirtualPages apuntando a páxinas eliminadas'
+    BrokenLinksGroupTitle: 'Informes de ligazóns rotas'
+    ContentGroupTitle: 'Informes do Contido'
+    EMPTYPAGES: 'Páxinas sen contido'
+    LAST2WEEKS: 'Páxinas editadas nas 2 últimas semanas'
+    ParameterLiveCheckbox: 'Probar o sitio en vivo'

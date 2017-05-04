@@ -1,0 +1,10 @@
+eo:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Paĝoj kun rompitaj dosieroj'
+    BROKENREDIRECTORPAGES: 'Redirektaj paĝoj indikantaj forigitajn paĝojn'
+    BROKENVIRTUALPAGES: 'VirtualajPaĝoj indikantaj forigitajn paĝojn'
+    BrokenLinksGroupTitle: 'Raporto pri rompitaj ligiloj'
+    ContentGroupTitle: 'Raportoj pri enhavo'
+    EMPTYPAGES: 'Malplenaj paĝoj'
+    LAST2WEEKS: 'Paĝoj redaktitaj dum la lastaj 2 semajnoj'
+    ParameterLiveCheckbox: 'Kontroli publikan retejon'

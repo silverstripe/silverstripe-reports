@@ -1,0 +1,10 @@
+zh:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: '页面含有无效文件的'
+    BROKENREDIRECTORPAGES: '重定向页面指向了已删除页面'
+    BROKENVIRTUALPAGES: '虚拟页面指向了已删除页面'
+    BrokenLinksGroupTitle: '无效链接报告'
+    ContentGroupTitle: '内容报告'
+    EMPTYPAGES: '无内容页面'
+    LAST2WEEKS: '过去2周内编辑过的页面'
+    ParameterLiveCheckbox: 检查线上站点

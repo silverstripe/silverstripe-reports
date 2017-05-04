@@ -1,0 +1,10 @@
+pt:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Páginas com ficheiros corrompidos'
+    BROKENREDIRECTORPAGES: 'As páginas redireccionadas apontam para páginas apagadas'
+    BROKENVIRTUALPAGES: 'Página virtuais apontam para páginas apagadas'
+    BrokenLinksGroupTitle: 'Relatório de links inválidos'
+    ContentGroupTitle: 'Conteúdo dos relatórios'
+    EMPTYPAGES: 'Páginas sem conteúdo'
+    LAST2WEEKS: 'Páginas editadas nas 2 últimas semanas'
+    ParameterLiveCheckbox: 'Verificar site publicado'

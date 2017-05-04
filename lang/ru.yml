@@ -1,0 +1,10 @@
+ru:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Страницы с ошибочными файлами'
+    BROKENREDIRECTORPAGES: 'Страницы перенаправления, указывающие на удаленные страницы'
+    BROKENVIRTUALPAGES: 'Виртуальные страницы, указывающие на удаленные страницы'
+    BrokenLinksGroupTitle: 'Отчеты об ошибочных ссылках'
+    ContentGroupTitle: 'Отчеты по контенту'
+    EMPTYPAGES: 'Пустые страницы'
+    LAST2WEEKS: 'Страницы, которые редактировались в последние 2 недели'
+    ParameterLiveCheckbox: 'Проверить опубликованный сайт'

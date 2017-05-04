@@ -1,0 +1,4 @@
+zh_CN:
+  SilverStripe\Reports\SideReport:
+    EMPTYPAGES: 空白页
+    LAST2WEEKS: '在过去2周内编辑过的网页'

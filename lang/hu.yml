@@ -1,0 +1,10 @@
+hu:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Oldalak hibás fájl hivatkozásokkal'
+    BROKENREDIRECTORPAGES: 'RedirectorPage-ek törölt oldalakra hivatkoznak'
+    BROKENVIRTUALPAGES: 'VirtualPages törölt oldalakra mutatnak'
+    BrokenLinksGroupTitle: 'Hibás linkek listája'
+    ContentGroupTitle: 'Tartalommal kapcsolatos riportok'
+    EMPTYPAGES: 'Üres oldalak'
+    LAST2WEEKS: 'Elmúlt 2 héten belül szerkesztett oldalak'
+    ParameterLiveCheckbox: 'Éles oldal megtekintése'

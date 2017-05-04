@@ -1,0 +1,8 @@
+tr:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Kırık link bulunan sayfalar'
+    BrokenLinksGroupTitle: 'Kırık linki rapor et'
+    ContentGroupTitle: 'İçerik raporları'
+    EMPTYPAGES: 'Boş sayfalar'
+    LAST2WEEKS: 'Son 2 haftada düzenlenmiş sayfalar'
+    ParameterLiveCheckbox: 'Yayındaki siteyi kontrol et'

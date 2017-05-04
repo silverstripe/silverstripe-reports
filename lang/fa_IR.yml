@@ -1,0 +1,10 @@
+fa_IR:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'صفحات دارای فایل معیوب'
+    BROKENREDIRECTORPAGES: 'صفحات هدایت‌گر اشاره‌کننده به صفحات حذف شده'
+    BROKENVIRTUALPAGES: 'صفحات مجازی اشاره‌کننده به صفحات حذف شده'
+    BrokenLinksGroupTitle: 'گزارش پیوندهای معیوب'
+    ContentGroupTitle: 'گزارشات محتوا'
+    EMPTYPAGES: 'صفحات بدون مطلب'
+    LAST2WEEKS: 'صفحات ویرایش شده در 2 هفته گذشته'
+    ParameterLiveCheckbox: 'بررسی سایت به صورت زنده'

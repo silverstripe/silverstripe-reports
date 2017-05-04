@@ -1,0 +1,10 @@
+sr_RS@latin:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Stranice sa oštećenim datotekama'
+    BROKENREDIRECTORPAGES: 'Stranice za preusmerivanje koje pokazuju na izbrisane stranice'
+    BROKENVIRTUALPAGES: 'Virtuelne stranice koja pokazuju na izbrisane stranice'
+    BrokenLinksGroupTitle: 'Izveštaj o oštećenim linkovima'
+    ContentGroupTitle: 'Izveštaji o sadržaju'
+    EMPTYPAGES: 'Prazne stranice'
+    LAST2WEEKS: 'Stranice menjane u zadnje 2 nedelje'
+    ParameterLiveCheckbox: 'Proveri objavljeni sajt'

@@ -1,0 +1,10 @@
+nl:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Pagina''s met verbroken bestanden'
+    BROKENREDIRECTORPAGES: 'Verwijzingspagina''s die naar verwijderde pagina''s verwijzen'
+    BROKENVIRTUALPAGES: 'Virtuele pagina''s die naar verwijderde pagina''s verwijzen'
+    BrokenLinksGroupTitle: 'Rapport van verbroken links'
+    ContentGroupTitle: Inhoudsrapporten
+    EMPTYPAGES: 'Lege pagina''s'
+    LAST2WEEKS: 'Pagina''s gewijzigd in de laatste twee weken'
+    ParameterLiveCheckbox: 'Controleer gepubliceerde site'

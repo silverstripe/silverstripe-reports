@@ -1,0 +1,4 @@
+bs:
+  SilverStripe\Reports\SideReport:
+    EMPTYPAGES: 'Prazne stranice'
+    LAST2WEEKS: 'Izmjenjene stranice u posljednje 2 sedmice'

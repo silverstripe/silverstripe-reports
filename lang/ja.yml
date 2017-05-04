@@ -1,0 +1,10 @@
+ja:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 壊れているファイルがあるページ
+    BROKENREDIRECTORPAGES: リダイレクトしたページが削除されています
+    BROKENVIRTUALPAGES: '削除されたページを参照している仮想ページ'
+    BrokenLinksGroupTitle: 壊れているリンクのレポート
+    ContentGroupTitle: コンテンツのレポート
+    EMPTYPAGES: 空のページ
+    LAST2WEEKS: '過去２週間以内に編集されたページ'
+    ParameterLiveCheckbox: 'ライブ配信のサイトをチェックする'

@@ -1,0 +1,10 @@
+he_IL:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'עמודים עם קבצים שבורים'
+    BROKENREDIRECTORPAGES: 'עמודי הפנייה שמצביעים לעמודים שנמחקו'
+    BROKENVIRTUALPAGES: 'עמודים וירטואליים שמצביעים לעמודים שנמחקו'
+    BrokenLinksGroupTitle: 'דוחות קישורים שבורים'
+    ContentGroupTitle: 'דוחות תוכן'
+    EMPTYPAGES: 'עמודים ריקים'
+    LAST2WEEKS: 'עמודים שנערכו בשבועיים האחרונים'
+    ParameterLiveCheckbox: 'בדיקת האתר החי'

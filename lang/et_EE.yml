@@ -1,0 +1,10 @@
+et_EE:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Katkiste failidega lehed'
+    BROKENREDIRECTORPAGES: 'Ümbersuunamislehed, mis suunavad kustutatud lehtedele'
+    BROKENVIRTUALPAGES: 'Virtuaallehed, mis suunavad kustutatud lehtedele'
+    BrokenLinksGroupTitle: 'Katkiste linkide aruanded'
+    ContentGroupTitle: Sisuaruanded
+    EMPTYPAGES: 'Tühjad leheküljed'
+    LAST2WEEKS: 'Viimase kahe nädala jooksul muudetud leheküljed'
+    ParameterLiveCheckbox: 'Kontrolli avaldatud saiti'

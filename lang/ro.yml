@@ -1,0 +1,10 @@
+ro:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Pagini cu fișiere incorecte'
+    BROKENREDIRECTORPAGES: 'Pagini referitoare indică spre pagini șterse'
+    BROKENVIRTUALPAGES: 'Pagini virtuale indică spre pagini șterse'
+    BrokenLinksGroupTitle: 'Raport referințe nefuncționale'
+    ContentGroupTitle: 'Rapoarte conținut'
+    EMPTYPAGES: 'Pagini fără conținut'
+    LAST2WEEKS: 'Pagini editate în ultimele 2 săptămâni'
+    ParameterLiveCheckbox: 'Verifică site live'

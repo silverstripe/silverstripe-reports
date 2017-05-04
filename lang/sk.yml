@@ -1,0 +1,10 @@
+sk:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Stránky z poškodenými súbormi'
+    BROKENREDIRECTORPAGES: 'Presmerovacie stránky ukazujú na zmazané stránky'
+    BROKENVIRTUALPAGES: 'Virtuálne stránky odkazujú na vymazané stránky'
+    BrokenLinksGroupTitle: 'Výkazy porušených odkazov'
+    ContentGroupTitle: 'Výkazy obsahu'
+    EMPTYPAGES: 'Prázdne stránky'
+    LAST2WEEKS: 'Stránky upravené počas posledných 2 týždňov'
+    ParameterLiveCheckbox: 'Skontrolovať publikovanú stránku'

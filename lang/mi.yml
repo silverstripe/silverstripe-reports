@@ -1,0 +1,10 @@
+mi:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Ngā whārangi me ngā kōnae whati'
+    BROKENREDIRECTORPAGES: 'Ngā WhārangiTukuAnō e tohu ana ki ngā whārangi kua mukua'
+    BROKENVIRTUALPAGES: 'Ngā WhārangiMariko e tohu ana ki ngā whārangi kua mukua'
+    BrokenLinksGroupTitle: 'Ngā pūrongo hononga whati'
+    ContentGroupTitle: 'Ngā pūrongo ihirangi'
+    EMPTYPAGES: 'Ngā whārangi me te kore ihirangi'
+    LAST2WEEKS: 'Ngā whārangi i whakatikatia i ngā wiki e 2 kua hipa'
+    ParameterLiveCheckbox: 'Tirohia te pae ora'

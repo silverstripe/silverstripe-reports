@@ -1,0 +1,10 @@
+sv:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Sidor med trasiga filer'
+    BROKENREDIRECTORPAGES: 'Omdirigeringssidor som pekar på raderade sidor'
+    BROKENVIRTUALPAGES: 'Virtuella sidor som pekar på raderade sidor'
+    BrokenLinksGroupTitle: 'Rapport för trasiga länkar'
+    ContentGroupTitle: Innehållsrapport
+    EMPTYPAGES: 'Tomma sidor'
+    LAST2WEEKS: 'Sidor som har redigerats de senaste 2 veckorna'
+    ParameterLiveCheckbox: 'Kontrollera live sajt'

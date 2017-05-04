@@ -1,0 +1,10 @@
+bg:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Страници с несъществуващи файлове'
+    BROKENREDIRECTORPAGES: 'Пренасочващи страници, които сочат към изтрити страници'
+    BROKENVIRTUALPAGES: 'Виртуални страници, които сочат към изтрити страници'
+    BrokenLinksGroupTitle: 'Отчет за страници съдържащи невалидни препратки.'
+    ContentGroupTitle: 'Отчети за съдържание'
+    EMPTYPAGES: 'Страници без съдържание'
+    LAST2WEEKS: 'Страници редактирани през последните 2 седмици'
+    ParameterLiveCheckbox: 'Провери реалния сайт'

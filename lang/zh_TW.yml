@@ -1,0 +1,4 @@
+zh_TW:
+  SilverStripe\Reports\SideReport:
+    EMPTYPAGES: '空頁'
+    LAST2WEEKS: '網頁在過去兩個禮拜有被更改過'

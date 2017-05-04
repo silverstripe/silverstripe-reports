@@ -1,0 +1,10 @@
+uk:
+  SilverStripe\Reports\SideReport:
+    BROKENFILES: 'Сторінки з пошкодженими файлами'
+    BROKENREDIRECTORPAGES: 'Сторінки-перенаправлення вказують на видалені сторінки'
+    BROKENVIRTUALPAGES: 'Віртуальні сторінки вказують на видалені сторінки'
+    BrokenLinksGroupTitle: 'Звіт про биті посилання'
+    ContentGroupTitle: 'Звіти про вміст'
+    EMPTYPAGES: 'Порожні сторінки'
+    LAST2WEEKS: 'Сторінки, відредаговані за останні два тижні'
+    ParameterLiveCheckbox: 'Перевірити робочий сайт'
