@@ -1,0 +1,8 @@
+en:
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Reports
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Other
+    REPEMPTY: 'The {title} report is empty.'

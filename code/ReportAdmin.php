@@ -202,10 +202,10 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     {
         return array(
             "CMS_ACCESS_ReportAdmin" => array(
-                'name' => _t('CMSMain.ACCESS', "Access to '{title}' section", array(
+                'name' => _t('SilverStripe\\CMS\\Controllers\\CMSMain.ACCESS', "Access to '{title}' section", array(
                     'title' => static::menu_title()
                 )),
-                'category' => _t('Permission.CMS_ACCESS_CATEGORY', 'CMS Access')
+                'category' => _t('SilverStripe\\Security\\Permission.CMS_ACCESS_CATEGORY', 'CMS Access')
             )
         );
     }
@@ -228,7 +228,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
             /** @var GridFieldDataColumns $columns */
             $columns = $gridField->getConfig()->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
             $columns->setDisplayFields(array(
-                'title' => _t('ReportAdmin.ReportTitle', 'Title'),
+                'title' => _t('SilverStripe\\Reports\\ReportAdmin.ReportTitle', 'Title'),
             ));
 
             $columns->setFieldFormatting(array(
