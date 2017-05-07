@@ -5,11 +5,3 @@ en:
   SilverStripe\Reports\SideReport:
     OtherGroupTitle: Other
     REPEMPTY: 'The {title} report is empty.'
-    BROKENFILES: 'Pages with broken files'
-    BROKENREDIRECTORPAGES: 'RedirectorPages pointing to deleted pages'
-    BROKENVIRTUALPAGES: 'VirtualPages pointing to deleted pages'
-    BrokenLinksGroupTitle: 'Broken links reports'
-    ContentGroupTitle: 'Content reports'
-    EMPTYPAGES: 'Pages with no content'
-    LAST2WEEKS: 'Pages edited in the last 2 weeks'
-    ParameterLiveCheckbox: 'Check live site'
