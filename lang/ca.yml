@@ -1,4 +1,0 @@
-ca:
-  SilverStripe\Reports\SideReport:
-    EMPTYPAGES: 'Pàgines buides'
-    LAST2WEEKS: 'Pàgines editades les dues darreres setmanes'

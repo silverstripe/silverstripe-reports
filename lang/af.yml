@@ -1,6 +1,0 @@
-af:
-  SilverStripe\Reports\SideReport:
-    BROKENFILES: 'Bladsye met gebreekte lêers'
-    BrokenLinksGroupTitle: 'Gebreekte skakels verslae'
-    ContentGroupTitle: 'Inhoud verslae'
-    ParameterLiveCheckbox: 'Kies lewendige werf'

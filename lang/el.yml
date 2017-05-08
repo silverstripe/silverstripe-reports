@@ -1,5 +1,0 @@
-el:
-  SilverStripe\Reports\SideReport:
-    BrokenLinksGroupTitle: 'Αναφορές ανενεργών συνδέσμων'
-    ContentGroupTitle: 'Αναφορές περιεχομένου'
-    EMPTYPAGES: 'Σελίδες χωρίς περιεχόμενο'
