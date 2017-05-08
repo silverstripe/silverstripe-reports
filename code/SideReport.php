@@ -24,7 +24,7 @@ class SideReportView extends ViewableData
 
     public function group()
     {
-        return _t('SideReport.OtherGroupTitle', "Other");
+        return _t('SilverStripe\\Reports\\SideReport.OtherGroupTitle', "Other");
     }
 
     public function sort()
@@ -59,7 +59,7 @@ class SideReportView extends ViewableData
         } else {
             $result = "<p class=\"message notice\">" .
                 _t(
-                    'SideReport.REPEMPTY',
+                    'SilverStripe\\Reports\\SideReport.REPEMPTY',
                     'The {title} report is empty.',
                     array('title' => $this->report->title())
                 )
