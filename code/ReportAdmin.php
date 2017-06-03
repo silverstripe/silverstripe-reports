@@ -17,6 +17,7 @@ use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\PermissionProvider;
+use SilverStripe\Security\Security;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 
@@ -80,7 +81,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     public function canView($member = null)
     {
         if (!$member && $member !== false) {
-            $member = Member::currentUser();
+            $member = Security::getCurrentUser();
         }
 
         if (!parent::canView($member)) {

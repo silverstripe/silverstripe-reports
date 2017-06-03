@@ -21,6 +21,7 @@ use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Core\Convert;
+use SilverStripe\Security\Security;
 use SilverStripe\View\ViewableData;
 use ReflectionClass;
 use SilverStripe\ORM\CMSPreviewable ;
@@ -399,7 +400,7 @@ class Report extends ViewableData
     public function canView($member = null)
     {
         if (!$member && $member !== false) {
-            $member = Member::currentUser();
+            $member = Security::getCurrentUser();
         }
 
         $extended = $this->extendedCan('canView', $member);
