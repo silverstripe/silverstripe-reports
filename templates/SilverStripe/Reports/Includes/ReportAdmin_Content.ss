@@ -1,3 +1,4 @@
+<div class="cms-mobile-menu-toggle-wrapper"></div>
 <div id="reportadmin-cms-content" class="flexbox-area-grow fill-height cms-content cms-tabset $BaseCSSClasses" data-layout-type="border" data-pjax-fragment="Content">
 
 	<div class="cms-content-header">
