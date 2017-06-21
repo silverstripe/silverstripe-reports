@@ -26,8 +26,13 @@
   },
   "autoload": {
     "psr-4": {
-      "SilverStripe\\Reports\\": "code/"
+      "SilverStripe\\Reports\\": "code/",
+      "SilverStripe\\Reports\\Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "lint": "phpcs code/ tests/",
+    "lint-clean": "phpcbf code/ tests/"
   },
   "require-dev": {
     "phpunit/PHPUnit": "~4.8"

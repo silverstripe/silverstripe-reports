@@ -6,12 +6,11 @@ use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Control\Controller;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
+use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
-use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldFooter;
-use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\SS_List;
@@ -132,15 +131,16 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
         return parent::handleAction($request, $action);
     }
 
-	/**
-	 * Unsanitise a model class' name from a URL param
-	 *
-	 * @param string $class
-	 * @return string
-	 */
-	protected function unsanitiseClassName($class) {
-		return str_replace('-', '\\', $class);
-	}
+    /**
+     * Unsanitise a model class' name from a URL param
+     *
+     * @param string $class
+     * @return string
+     */
+    protected function unsanitiseClassName($class)
+    {
+        return str_replace('-', '\\', $class);
+    }
 
     /**
      * Determine if we have reports and need

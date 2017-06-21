@@ -2,29 +2,29 @@
 
 namespace SilverStripe\Reports;
 
+use ReflectionClass;
+use SilverStripe\Control\Controller;
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\Core\Convert;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldConfig;
+use SilverStripe\Forms\GridField\GridFieldDataColumns;
+use SilverStripe\Forms\GridField\GridFieldExportButton;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
+use SilverStripe\Forms\GridField\GridFieldPrintButton;
+use SilverStripe\Forms\GridField\GridFieldSortableHeader;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\CMSPreviewable;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
-use SilverStripe\Control\Controller;
-use SilverStripe\Core\ClassInfo;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\FormAction;
-use SilverStripe\Forms\GridField\GridFieldConfig;
-use SilverStripe\Forms\GridField\GridFieldButtonRow;
-use SilverStripe\Forms\GridField\GridFieldPrintButton;
-use SilverStripe\Forms\GridField\GridFieldExportButton;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
-use SilverStripe\Forms\GridField\GridFieldSortableHeader;
-use SilverStripe\Forms\GridField\GridFieldDataColumns;
-use SilverStripe\Forms\GridField\GridFieldPaginator;
-use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Core\Convert;
 use SilverStripe\Security\Security;
 use SilverStripe\View\ViewableData;
-use ReflectionClass;
-use SilverStripe\ORM\CMSPreviewable ;
 
 /**
  * Base "abstract" class creating reports on your data.
@@ -178,15 +178,16 @@ class Report extends ViewableData
         );
     }
 
-	/**
-	 * Sanitise a model class' name for inclusion in a link
-	 *
-	 * @param string $class
-	 * @return string
-	 */
-	protected function sanitiseClassName($class) {
-		return str_replace('\\', '-', $class);
-	}
+    /**
+     * Sanitise a model class' name for inclusion in a link
+     *
+     * @param string $class
+     * @return string
+     */
+    protected function sanitiseClassName($class)
+    {
+        return str_replace('\\', '-', $class);
+    }
 
 
     /**
@@ -198,7 +199,6 @@ class Report extends ViewableData
     {
         $sourceRecords = $this->sourceRecords($params, null, null);
         if (!$sourceRecords instanceof SS_List) {
-
             user_error(static::class . "::sourceRecords does not return an SS_List", E_USER_NOTICE);
             return "-1";
         }
@@ -370,7 +370,7 @@ class Report extends ViewableData
             }
 
             if (isset($info['link']) && $info['link']) {
-                $fieldFormatting[$source] = function($value, $item) {
+                $fieldFormatting[$source] = function ($value, $item) {
                     if ($item instanceof CMSPreviewable) {
                         /** @var CMSPreviewable $item */
                         return sprintf(
@@ -381,7 +381,7 @@ class Report extends ViewableData
                         );
                     }
                     return $value;
-				};
+                };
             }
 
             $displayFields[$source] = isset($info['title']) ? $info['title'] : $source;
@@ -429,7 +429,9 @@ class Report extends ViewableData
         $results = $this->extend($methodName, $member);
         if ($results && is_array($results)) {
             // Remove NULLs
-            $results = array_filter($results, function ($v) {return !is_null($v);});
+            $results = array_filter($results, function ($v) {
+                return !is_null($v);
+            });
             // If there are any non-NULL responses, then return the lowest one of them.
             // If any explicitly deny the permission, then we don't get access
             if ($results) {
