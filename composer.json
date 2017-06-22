@@ -19,6 +19,9 @@
     "silverstripe/framework": "^4.0@dev",
     "silverstripe/admin": "^1.0@dev"
   },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7"
+  },
   "extra": {
     "branch-alias": {
       "dev-master": "4.0.x-dev"
@@ -26,10 +29,12 @@
   },
   "autoload": {
     "psr-4": {
-      "SilverStripe\\Reports\\": "code/"
+      "SilverStripe\\Reports\\": "code/",
+      "SilverStripe\\Reports\\Tests\\": "tests/"
     }
   },
-  "require-dev": {
-    "phpunit/PHPUnit": "~4.8"
+  "scripts": {
+    "lint": "phpcs code/ tests/",
+    "lint-clean": "phpcbf code/ tests/"
   }
 }

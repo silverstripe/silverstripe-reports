@@ -2,8 +2,8 @@
 
 namespace SilverStripe\Reports;
 
-use TableListField;
 use SilverStripe\Core\Convert;
+use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\View\ViewableData;
 
 /**
@@ -70,17 +70,11 @@ class SideReportView extends ViewableData
 
     protected function formatValue($record, $source, $info)
     {
-        // Field sources
-        //if(is_string($source)) {
-            $val = Convert::raw2xml($record->$source);
-        //} else {
-        //	$val = $record->val($source[0], $source[1]);
-        //}
-
-        // Casting, a la TableListField.  We're deep-calling a helper method on TableListField that
-        // should probably be pushed elsewhere...
+        // Cast value
         if (!empty($info['casting'])) {
-            $val = TableListField::getCastedValue($val, $info['casting']);
+            $val = DBField::create_field($info['casting'], $record->source)->forTemplate();
+        } else {
+            $val = Convert::raw2xml($record->$source);
         }
 
         // Formatting, a la TableListField
