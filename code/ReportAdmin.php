@@ -24,7 +24,7 @@ use SilverStripe\View\Requirements;
  * Reports section of the CMS.
  *
  * All reports that should show in the ReportAdmin section
- * of the CMS need to subclass {@link SS_Report}, and implement
+ * of the CMS need to subclass {@link SilverStripe\Reports\Report}, and implement
  * the appropriate methods and variables that are required.
  */
 class ReportAdmin extends LeftAndMain implements PermissionProvider
@@ -71,7 +71,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     /**
      * Does the parent permission checks, but also
      * makes sure that instantiatable subclasses of
-     * {@link Report} exist. By default, the CMS doesn't
+     * {@link SilverStripe\Reports\Report} exist. By default, the CMS doesn't
      * include any Reports, so there's no point in showing
      *
      * @param Member $member
