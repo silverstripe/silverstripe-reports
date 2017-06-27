@@ -130,7 +130,7 @@ class Report extends ViewableData
     }
 
     /**
-     * Return the {@link SQLQuery} that provides your report data.
+     * Return the {@link SilverStripe\ORM\Queries\SQLSelect} that provides your report data.
      */
     public function sourceQuery($params)
     {
