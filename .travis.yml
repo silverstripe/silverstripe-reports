@@ -1,13 +1,12 @@
-language: php
+# See https://github.com/silverstripe/silverstripe-travis-support for setup details
 
 sudo: false
+
+language: php
 
 env:
   global:
     - COMPOSER_ROOT_VERSION=1.0.x-dev
-
-env:
-  global:
     - CORE_RELEASE=master
 
 matrix:
