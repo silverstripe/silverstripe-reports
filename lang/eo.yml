@@ -1,0 +1,7 @@
+eo:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Raportoj
+    ReportTitle: Titoloj
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Aliaj
+    REPEMPTY: 'La raporto {title} estas malplena.'

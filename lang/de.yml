@@ -1,0 +1,7 @@
+de:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Berichte
+    ReportTitle: Titel
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Andere
+    REPEMPTY: 'Der Bericht {title} ist leer.'

@@ -1,0 +1,7 @@
+ru:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Отчёты
+    ReportTitle: Заголовок
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Другое
+    REPEMPTY: 'Отчёт {title} пустой.'
