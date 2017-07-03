@@ -1,49 +1,49 @@
 {
-    "name": "silverstripe/reports",
-    "type": "silverstripe-module",
-    "description": "Reports module for SilverStripe CMS",
-    "homepage": "http://silverstripe.org",
-    "license": "BSD-3-Clause",
-    "keywords": [
-        "silverstripe",
-        "cms",
-        "reports"
-    ],
-    "authors": [
-        {
-            "name": "SilverStripe",
-            "homepage": "http://silverstripe.com"
-        },
-        {
-            "name": "The SilverStripe Community",
-            "homepage": "http://silverstripe.org"
-        }
-    ],
-    "require": {
-        "silverstripe/framework": "^4.0@dev",
-        "silverstripe/admin": "^1.0@dev",
-        "silverstripe/versioned": "^1.0@dev",
-        "silverstripe/config": "^1.0@dev",
-        "silverstripe/assets": "^1.0@dev"
+  "name": "silverstripe/reports",
+  "type": "silverstripe-module",
+  "description": "Reports module for SilverStripe CMS",
+  "homepage": "http://silverstripe.org",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "silverstripe",
+    "cms",
+    "reports"
+  ],
+  "authors": [
+    {
+      "name": "SilverStripe",
+      "homepage": "http://silverstripe.com"
     },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7"
-    },
-    "extra": {
-      "branch-alias": {
-        "dev-master": "4.1.x-dev"
-      }
-    },
-    "autoload": {
-        "psr-4": {
-            "SilverStripe\\Reports\\": "code/",
-            "SilverStripe\\Reports\\Tests\\": "tests/"
-        }
-    },
-    "scripts": {
-        "lint": "phpcs code/ tests/",
-        "lint-clean": "phpcbf code/ tests/"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    {
+      "name": "The SilverStripe Community",
+      "homepage": "http://silverstripe.org"
+    }
+  ],
+  "require": {
+    "silverstripe/framework": "^4.0@dev",
+    "silverstripe/admin": "^1.0@dev",
+    "silverstripe/versioned": "^1.0@dev",
+    "silverstripe/config": "^1.0@dev",
+    "silverstripe/assets": "^1.0@dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "4.1.x-dev"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "SilverStripe\\Reports\\": "code/",
+      "SilverStripe\\Reports\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "lint": "phpcs code/ tests/",
+    "lint-clean": "phpcbf code/ tests/"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
