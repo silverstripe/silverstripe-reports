@@ -1,0 +1,7 @@
+it:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Rapporti
+    ReportTitle: Titolo
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Altro
+    REPEMPTY: 'Il rapporto {title} è vuoto.'

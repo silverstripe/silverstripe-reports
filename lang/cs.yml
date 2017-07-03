@@ -1,0 +1,7 @@
+cs:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Výkazy
+    ReportTitle: Titulek
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Jiné
+    REPEMPTY: 'Výkaz {title} je prázdný.'
