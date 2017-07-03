@@ -20,11 +20,11 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "4.0.x-dev",
-        "silverstripe/admin": "1.0.x-dev",
-        "silverstripe/versioned": "1.0.x-dev",
-        "silverstripe/config": "1.0.x-dev",
-        "silverstripe/assets": "1.0.x-dev"
+        "silverstripe/framework": "^4.0@dev",
+        "silverstripe/admin": "^1.0@dev",
+        "silverstripe/versioned": "^1.0@dev",
+        "silverstripe/config": "^1.0@dev",
+        "silverstripe/assets": "^1.0@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
