@@ -6,3 +6,4 @@ mappings:
   ReportAdmin: SilverStripe\Reports\ReportAdmin
   SideReportView: SilverStripe\Reports\SideReportView
   SideReportWrapper: SilverStripe\Reports\SideReportWrapper
+  SideReport: SilverStripe\Reports\SideReportView
