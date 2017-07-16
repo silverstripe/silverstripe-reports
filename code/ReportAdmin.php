@@ -37,7 +37,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     private static $template_path = null; // defaults to (project)/templates/email
 
-    private static $tree_class = 'SilverStripe\\Reports\\Report';
+    private static $tree_class = Report::class;
 
     private static $url_handlers = array(
         'show/$ReportClass/$Action' => 'handleAction'
