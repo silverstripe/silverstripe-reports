@@ -10,7 +10,7 @@ versions of SilverStripe (2.4 and 3.0).
 
 ## Requirements
 
- * SilverStripe 3.2
+ * SilverStripe 4.0
 
 ## Troubleshooting
 
