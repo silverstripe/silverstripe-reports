@@ -2,12 +2,13 @@
 
 namespace SilverStripe\Reports\Tests;
 
-use SilverStripe\Reports\Report;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Reports\Tests\ReportTest\FakeObject;
 use SilverStripe\Reports\Tests\ReportTest\FakeTest;
 use SilverStripe\Reports\Tests\ReportTest\FakeTest2;
+use SilverStripe\Reports\Report;
 
 class ReportTest extends SapphireTest
 {
@@ -29,14 +30,14 @@ class ReportTest extends SapphireTest
     public function testExcludeReport()
     {
         $reports = Report::get_reports();
-        $reportNames = array();
+        $reportNames = [];
         foreach ($reports as $report) {
             $reportNames[] = get_class($report);
         }
         $this->assertContains(FakeTest::class, $reportNames, 'ReportTest_FakeTest is in reports list');
 
-        //exclude one report
-        Report::add_excluded_reports(FakeTest::class);
+        // Exclude one report
+        Config::modify()->merge(Report::class, 'excluded_reports', [FakeTest::class]);
 
         $reports = Report::get_reports();
         $reportNames = array();
@@ -45,11 +46,14 @@ class ReportTest extends SapphireTest
         }
         $this->assertNotContains(FakeTest::class, $reportNames, 'ReportTest_FakeTest is NOT in reports list');
 
-        //exclude two reports
-        Report::add_excluded_reports(array(FakeTest::class, FakeTest2::class));
+        // Exclude two reports
+        Config::modify()->merge(Report::class, 'excluded_reports', [
+            FakeTest::class,
+            FakeTest2::class
+        ]);
 
         $reports = Report::get_reports();
-        $reportNames = array();
+        $reportNames = [];
         foreach ($reports as $report) {
             $reportNames[] = get_class($report);
         }
@@ -105,6 +109,9 @@ class ReportTest extends SapphireTest
         $page->ID = 959547;
 
         $titleContent = $columns->getColumnContent($gridField, $page, 'Title');
-        $this->assertEquals('<a class="grid-field__link-block" href="dummy-edit-link/959547" title="My Object">My Object</a>', $titleContent);
+        $this->assertEquals(
+            '<a class="grid-field__link-block" href="dummy-edit-link/959547" title="My Object">My Object</a>',
+            $titleContent
+        );
     }
 }
