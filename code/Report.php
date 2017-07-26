@@ -87,13 +87,15 @@ class Report extends ViewableData
 
     /**
      * Reports which should not be collected and returned in get_reports
+     *
+     * @config
      * @var array
      */
-    public static $excluded_reports = array(
-        'SilverStripe\\Reports\\Report',
-        'SilverStripe\\Reports\\ReportWrapper',
-        'SilverStripe\\Reports\\SideReportWrapper',
-    );
+    private static $excluded_reports = [
+        self::class,
+        ReportWrapper::class,
+        SideReportWrapper::class,
+    ];
 
     /**
      * Return the title of this report.
@@ -206,29 +208,14 @@ class Report extends ViewableData
     }
 
     /**
-     * Exclude certain reports classes from the list of Reports in the CMS
-     * @param $reportClass string|array A string with the Report classname or an array of Report classnames
-     */
-    public static function add_excluded_reports($reportClass)
-    {
-        if (is_array($reportClass)) {
-            self::$excluded_reports = array_merge(self::$excluded_reports, $reportClass);
-        } else {
-            if (is_string($reportClass)) {
-                //add to the excluded reports, so this report doesn't get used
-                self::$excluded_reports[] = $reportClass;
-            }
-        }
-    }
-
-    /**
      * Return an array of excluded reports. That is, reports that will not be included in
      * the list of reports in report admin in the CMS.
+     *
      * @return array
      */
     public static function get_excluded_reports()
     {
-        return self::$excluded_reports;
+        return (array) self::config()->get('excluded_reports');
     }
 
     /**
@@ -239,22 +226,26 @@ class Report extends ViewableData
     {
         $reports = ClassInfo::subclassesFor(get_called_class());
 
-        $reportsArray = array();
+        $reportsArray = [];
         if ($reports && count($reports) > 0) {
-            //collect reports into array with an attribute for 'sort'
+            $excludedReports = static::get_excluded_reports();
+            // Collect reports into array with an attribute for 'sort'
             foreach ($reports as $report) {
-                if (in_array($report, self::$excluded_reports)) {
+                // Don't use the Report superclass, or any excluded report classes
+                if (in_array($report, $excludedReports)) {
                     continue;
-                }   //don't use the SS_Report superclass
+                }
                 $reflectionClass = new ReflectionClass($report);
+                // Don't use abstract classes
                 if ($reflectionClass->isAbstract()) {
                     continue;
-                }   //don't use abstract classes
+                }
 
-                $reportObj = new $report;
-                if (method_exists($reportObj, 'sort')) {
+                $reportObj = $report::create();
+                if ($reportObj->hasMethod('sort')) {
+                    // Use the sort method to specify the sort field
                     $reportObj->sort = $reportObj->sort();
-                }  //use the sort method to specify the sort field
+                }
                 $reportsArray[$report] = $reportObj;
             }
         }
