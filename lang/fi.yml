@@ -1,0 +1,7 @@
+fi:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Raportit
+    ReportTitle: Otsikko
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Muu
+    REPEMPTY: '{title} raportti on tyhjä.'
