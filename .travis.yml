@@ -1,10 +1,10 @@
-# See https://github.com/silverstripe/silverstripe-travis-support for setup details
-
-sudo: false
-
-dist: precise
-
 language: php
+
+dist: trusty
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
 
 env:
   global:
@@ -22,20 +22,23 @@ matrix:
       env: DB=MYSQL PDO=1 PHPUNIT_COVERAGE_TEST=1
 
 before_script:
-  - composer validate
-  - composer self-update || true
-  - "if [ \"$PHPCS_TEST\" = \"1\" ]; then pyrus install pear/PHP_CodeSniffer; fi"
+# Init PHP
   - phpenv rehash
-  - phpenv config-rm xdebug.ini
+  - phpenv config-rm xdebug.ini || true
+
+# Install composer dependencies
+  - export PATH=~/.composer/vendor/bin:$PATH
   - composer validate
-  - composer install --prefer-dist
-  - composer require --no-update --prefer-dist silverstripe/admin:1.0.x-dev silverstripe/framework:4.0.x-dev silverstripe/versioned:1.0.x-dev silverstripe/config:1.0.x-dev silverstripe/assets:1.0.x-dev --prefer-dist
-  - composer update
+  - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:2.0.x-dev --no-update; fi
+  - if [[ $DB == SQLITE ]]; then composer require silverstripe/sqlite3:2.0.x-dev --no-update; fi
+  - composer require silverstripe/admin:1.0.x-dev silverstripe/framework:4.0.x-dev silverstripe/versioned:1.0.x-dev silverstripe/config:1.0.x-dev silverstripe/assets:1.0.x-dev --no-update
+  - if [[ $PHPCS_TEST ]]; then composer global require squizlabs/php_codesniffer:^3 --prefer-dist --no-interaction --no-progress --no-suggest -o; fi
+  - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
 
 script:
-  - "if [ \"$PHPUNIT_TEST\" = \"1\" ]; then vendor/bin/phpunit; fi"
-  - "if [ \"$PHPCS_TEST\" = \"1\" ]; then composer run-script lint; fi"
-  - "if [ \"$PHPUNIT_COVERAGE_TEST\" = \"1\" ]; then phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml; fi"
+  - if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit tests; fi
+  - if [[ $PHPUNIT_COVERAGE_TEST ]]; then phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml tests; fi
+  - if [[ $PHPCS_TEST ]]; then composer run-script lint; fi
 
 after_success:
-  - "if [ \"$PHPUNIT_COVERAGE_TEST\" = \"1\" ]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi"
+  - if [[ $PHPUNIT_COVERAGE_TEST ]]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi
