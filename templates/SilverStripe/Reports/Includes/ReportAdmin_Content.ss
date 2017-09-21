@@ -2,7 +2,7 @@
 
 	<div class="cms-content-header">
 		<% with $EditForm %>
-			<div class="cms-content-header-info">
+			<div class="cms-content-header-info vertical-align-items">
 				<% include SilverStripe\\Admin\\BackLink_Button %>
 				<% with $Controller %>
 					<% include SilverStripe\\Admin\\CMSBreadcrumbs %>

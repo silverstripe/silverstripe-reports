@@ -293,7 +293,7 @@ class Report extends ViewableData
 
             // Add a search button
             $formAction = new FormAction('updatereport', _t('SilverStripe\\Forms\\GridField\\GridField.Filter', 'Filter'));
-            $formAction->addExtraClass("m-b-2");
+            $formAction->addExtraClass("mb-4");
 
             $fields->push($formAction);
         }
