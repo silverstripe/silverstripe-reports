@@ -1,6 +1,6 @@
 {
     "name": "silverstripe/reports",
-    "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
     "description": "Reports module for SilverStripe CMS",
     "homepage": "http://silverstripe.org",
     "license": "BSD-3-Clause",
@@ -24,7 +24,8 @@
         "silverstripe/admin": "^1.0@dev",
         "silverstripe/versioned": "^1.0@dev",
         "silverstripe/config": "^1.0@dev",
-        "silverstripe/assets": "^1.0@dev"
+        "silverstripe/assets": "^1.0@dev",
+        "silverstripe/vendor-plugin": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
@@ -33,7 +34,10 @@
         "branch-alias": {
             "4.x-dev": "4.0.x-dev",
             "dev-master": "5.x-dev"
-        }
+        },
+        "expose": [
+          "javascript"
+        ]
     },
     "autoload": {
         "psr-4": {
