@@ -31,12 +31,8 @@
         "phpunit/phpunit": "^5.7"
     },
     "extra": {
-        "branch-alias": {
-            "4.x-dev": "4.0.x-dev",
-            "dev-master": "5.x-dev"
-        },
         "expose": [
-          "javascript"
+            "javascript"
         ]
     },
     "autoload": {
