@@ -25,7 +25,8 @@ use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\Security;
 use SilverStripe\View\ViewableData;
-
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Control\HTTPRequest;
 /**
  * Base "abstract" class creating reports on your data.
  *
@@ -85,6 +86,8 @@ class Report extends ViewableData
      */
     protected $sort = 0;
 
+    protected $params = [];
+
     /**
      * Reports which should not be collected and returned in get_reports
      *
@@ -96,6 +99,15 @@ class Report extends ViewableData
         ReportWrapper::class,
         SideReportWrapper::class,
     ];
+
+    public function __construct()
+    {
+        if (Injector::inst()->has(HTTPRequest::class)) {
+            $this->params = Injector::inst()->get(HTTPRequest::class)->param('filters');
+        }
+
+        parent::__construct();
+    }
 
     /**
      * Return the title of this report.
@@ -160,6 +172,11 @@ class Report extends ViewableData
             }
             return $results;
         }
+    }
+
+    public function columns()
+    {
+        return [];
     }
 
     /**
@@ -324,9 +341,7 @@ class Report extends ViewableData
      */
     public function getReportField()
     {
-        // TODO Remove coupling with global state
-        $params = isset($_REQUEST['filters']) ? $_REQUEST['filters'] : array();
-        $items = $this->sourceRecords($params, null, null);
+        $items = $this->sourceRecords($this->params, null, null);
 
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
 
@@ -334,7 +349,6 @@ class Report extends ViewableData
             new GridFieldPrintButton('buttons-before-left'),
             new GridFieldExportButton('buttons-before-left'),
             new GridFieldToolbarHeader(),
-            new GridFieldSortableHeader(),
             new GridFieldDataColumns(),
             new GridFieldPaginator()
         );
@@ -361,18 +375,22 @@ class Report extends ViewableData
             }
 
             if (isset($info['link']) && $info['link']) {
-                $fieldFormatting[$source] = function ($value, $item) {
-                    if ($item instanceof CMSPreviewable) {
-                        /** @var CMSPreviewable $item */
-                        return sprintf(
-                            '<a class="grid-field__link-block" href="%s" title="%s">%s</a>',
-                            Convert::raw2att($item->CMSEditLink()),
-                            Convert::raw2att($value),
-                            Convert::raw2xml($value)
-                        );
-                    }
-                    return $value;
-                };
+                if (is_callable($info['link'])) {
+                    $fieldFormatting[$source] = $info['link'];
+                } else {
+                    $fieldFormatting[$source] = function ($value, $item) {
+                        if ($item instanceof CMSPreviewable) {
+                            /** @var CMSPreviewable $item */
+                            return sprintf(
+                                '<a class="grid-field__link-block" href="%s" title="%s">%s</a>',
+                                Convert::raw2att($item->CMSEditLink()),
+                                Convert::raw2att($value),
+                                Convert::raw2xml($value)
+                            );
+                        }
+                        return $value;
+                    };
+                }
             }
 
             $displayFields[$source] = isset($info['title']) ? $info['title'] : $source;
