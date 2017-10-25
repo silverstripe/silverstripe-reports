@@ -1,6 +1,6 @@
 <div id="reportadmin-cms-content" class="flexbox-area-grow fill-height cms-content cms-tabset $BaseCSSClasses" data-layout-type="border" data-pjax-fragment="Content">
 
-	<div class="cms-content-header">
+	<div class="cms-content-header vertical-align-items">
 		<% with $EditForm %>
 			<div class="cms-content-header-info vertical-align-items">
 				<% include SilverStripe\\Admin\\BackLink_Button %>
