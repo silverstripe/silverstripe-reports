@@ -26,5 +26,8 @@
 	},
 	"require-dev": {
 		"phpunit/PHPUnit": "~3.7"
+	},
+	"autoload": {
+		"classmap": ["code"]
 	}
 }
