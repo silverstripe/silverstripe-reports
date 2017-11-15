@@ -292,8 +292,8 @@ class Report extends ViewableData
             }
 
             // Add a search button
-            $formAction = new FormAction('updatereport', _t('SilverStripe\\Forms\\GridField\\GridField.Filter', 'Filter'));
-            $formAction->addExtraClass("mb-4");
+            $formAction = FormAction::create('updatereport', _t('SilverStripe\\Forms\\GridField\\GridField.Filter', 'Filter'));
+            $formAction->addExtraClass('btn-primary mb-4');
 
             $fields->push($formAction);
         }
