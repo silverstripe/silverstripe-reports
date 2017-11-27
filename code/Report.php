@@ -86,8 +86,6 @@ class Report extends ViewableData
      */
     protected $sort = 0;
 
-    protected $params = [];
-
     /**
      * Reports which should not be collected and returned in get_reports
      *
@@ -99,15 +97,6 @@ class Report extends ViewableData
         ReportWrapper::class,
         SideReportWrapper::class,
     ];
-
-    public function __construct()
-    {
-        if (Injector::inst()->has(HTTPRequest::class)) {
-            $this->params = Injector::inst()->get(HTTPRequest::class)->param('filters');
-        }
-
-        parent::__construct();
-    }
 
     /**
      * Return the title of this report.
@@ -341,7 +330,13 @@ class Report extends ViewableData
      */
     public function getReportField()
     {
-        $items = $this->sourceRecords($this->params, null, null);
+        $params = [];
+        if (Injector::inst()->has(HTTPRequest::class)) {
+            /** @var HTTPRequest $request */
+            $request = Injector::inst()->get(HTTPRequest::class);
+            $params = $request->param('filters') ?: [];
+        }
+        $items = $this->sourceRecords($params, null, null);
 
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
 
@@ -349,19 +344,20 @@ class Report extends ViewableData
             new GridFieldPrintButton('buttons-before-left'),
             new GridFieldExportButton('buttons-before-left'),
             new GridFieldToolbarHeader(),
+            new GridFieldSortableHeader(),
             new GridFieldDataColumns(),
             new GridFieldPaginator()
         );
         $gridField = new GridField('Report', null, $items, $gridFieldConfig);
-        $columns = $gridField->getConfig()->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
-        $displayFields = array();
-        $fieldCasting = array();
-        $fieldFormatting = array();
+        $columns = $gridField->getConfig()->getComponentByType(GridFieldDataColumns::class);
+        $displayFields = [];
+        $fieldCasting = [];
+        $fieldFormatting = [];
 
         // Parse the column information
         foreach ($this->columns() as $source => $info) {
             if (is_string($info)) {
-                $info = array('title' => $info);
+                $info = ['title' => $info];
             }
 
             if (isset($info['formatting'])) {
