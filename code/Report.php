@@ -3,11 +3,15 @@
 namespace SilverStripe\Reports;
 
 use ReflectionClass;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Convert;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
@@ -20,13 +24,13 @@ use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\CMSPreviewable;
+use SilverStripe\ORM\DataList;
+use SilverStripe\ORM\DataQuery;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\Security;
 use SilverStripe\View\ViewableData;
-use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Control\HTTPRequest;
 
 /**
  * Base "abstract" class creating reports on your data.
@@ -55,6 +59,8 @@ use SilverStripe\Control\HTTPRequest;
  *
  * Right now, all subclasses of SS_Report will be shown in the ReportAdmin. In SS3 there is only
  * one place where reports can go, so this class is greatly simplifed from its version in SS2.
+ *
+ * @method SS_List|DataList sourceRecords($params = [], $sort = null, $limit = null) List of records to show for this report
  */
 class Report extends ViewableData
 {
@@ -79,7 +85,7 @@ class Report extends ViewableData
      * The class of object being managed by this report.
      * Set by overriding in your subclass.
      */
-    protected $dataClass = 'SilverStripe\\CMS\\Model\\SiteTree';
+    protected $dataClass = SiteTree::class;
 
     /**
      * A field that specifies the sort order of this report
@@ -134,7 +140,10 @@ class Report extends ViewableData
     }
 
     /**
-     * Return the {@link SilverStripe\ORM\Queries\SQLSelect} that provides your report data.
+     * Return the {@link DataQuery} that provides your report data.
+     *
+     * @param array $params
+     * @return DataQuery
      */
     public function sourceQuery($params)
     {
@@ -147,6 +156,9 @@ class Report extends ViewableData
 
     /**
      * Return a SS_List records for this report.
+     *
+     * @param array $params
+     * @return SS_List
      */
     public function records($params)
     {
@@ -227,7 +239,8 @@ class Report extends ViewableData
 
     /**
      * Return the SS_Report objects making up the given list.
-     * @return Array of SS_Report objects
+     *
+     * @return Report[] Array of Report objects
      */
     public static function get_reports()
     {
@@ -248,6 +261,7 @@ class Report extends ViewableData
                     continue;
                 }
 
+                /** @var Report $reportObj */
                 $reportObj = $report::create();
                 if ($reportObj->hasMethod('sort')) {
                     // Use the sort method to specify the sort field
@@ -291,6 +305,7 @@ class Report extends ViewableData
 
         // Add search fields is available
         if ($this->hasMethod('parameterFields') && $parameterFields = $this->parameterFields()) {
+            /** @var FormField $field */
             foreach ($parameterFields as $field) {
                 // Namespace fields for easier handling in form submissions
                 $field->setName(sprintf('filters[%s]', $field->getName()));
