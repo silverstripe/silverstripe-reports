@@ -27,6 +27,7 @@ use SilverStripe\Security\Security;
 use SilverStripe\View\ViewableData;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Control\HTTPRequest;
+
 /**
  * Base "abstract" class creating reports on your data.
  *
