@@ -20,7 +20,6 @@ use SilverStripe\Forms\GridField\GridFieldExportButton;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\GridField\GridFieldPrintButton;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\CMSPreviewable;
@@ -359,7 +358,6 @@ class Report extends ViewableData
             new GridFieldButtonRow('before'),
             new GridFieldPrintButton('buttons-before-left'),
             new GridFieldExportButton('buttons-before-left'),
-            new GridFieldToolbarHeader(),
             new GridFieldSortableHeader(),
             new GridFieldDataColumns(),
             new GridFieldPaginator()
