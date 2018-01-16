@@ -3,11 +3,15 @@
 namespace SilverStripe\Reports;
 
 use ReflectionClass;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Convert;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
@@ -16,10 +20,11 @@ use SilverStripe\Forms\GridField\GridFieldExportButton;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Forms\GridField\GridFieldPrintButton;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\CMSPreviewable;
+use SilverStripe\ORM\DataList;
+use SilverStripe\ORM\DataQuery;
 use SilverStripe\ORM\SS_List;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
@@ -53,6 +58,8 @@ use SilverStripe\View\ViewableData;
  *
  * Right now, all subclasses of SS_Report will be shown in the ReportAdmin. In SS3 there is only
  * one place where reports can go, so this class is greatly simplifed from its version in SS2.
+ *
+ * @method SS_List|DataList sourceRecords($params = [], $sort = null, $limit = null) List of records to show for this report
  */
 class Report extends ViewableData
 {
@@ -77,7 +84,7 @@ class Report extends ViewableData
      * The class of object being managed by this report.
      * Set by overriding in your subclass.
      */
-    protected $dataClass = 'SilverStripe\\CMS\\Model\\SiteTree';
+    protected $dataClass = SiteTree::class;
 
     /**
      * A field that specifies the sort order of this report
@@ -132,7 +139,10 @@ class Report extends ViewableData
     }
 
     /**
-     * Return the {@link SilverStripe\ORM\Queries\SQLSelect} that provides your report data.
+     * Return the {@link DataQuery} that provides your report data.
+     *
+     * @param array $params
+     * @return DataQuery
      */
     public function sourceQuery($params)
     {
@@ -145,6 +155,9 @@ class Report extends ViewableData
 
     /**
      * Return a SS_List records for this report.
+     *
+     * @param array $params
+     * @return SS_List
      */
     public function records($params)
     {
@@ -160,6 +173,11 @@ class Report extends ViewableData
             }
             return $results;
         }
+    }
+
+    public function columns()
+    {
+        return [];
     }
 
     /**
@@ -220,7 +238,8 @@ class Report extends ViewableData
 
     /**
      * Return the SS_Report objects making up the given list.
-     * @return Array of SS_Report objects
+     *
+     * @return Report[] Array of Report objects
      */
     public static function get_reports()
     {
@@ -241,6 +260,7 @@ class Report extends ViewableData
                     continue;
                 }
 
+                /** @var Report $reportObj */
                 $reportObj = $report::create();
                 if ($reportObj->hasMethod('sort')) {
                     // Use the sort method to specify the sort field
@@ -284,6 +304,7 @@ class Report extends ViewableData
 
         // Add search fields is available
         if ($this->hasMethod('parameterFields') && $parameterFields = $this->parameterFields()) {
+            /** @var FormField $field */
             foreach ($parameterFields as $field) {
                 // Namespace fields for easier handling in form submissions
                 $field->setName(sprintf('filters[%s]', $field->getName()));
@@ -292,8 +313,8 @@ class Report extends ViewableData
             }
 
             // Add a search button
-            $formAction = new FormAction('updatereport', _t('SilverStripe\\Forms\\GridField\\GridField.Filter', 'Filter'));
-            $formAction->addExtraClass("mb-4");
+            $formAction = FormAction::create('updatereport', _t('SilverStripe\\Forms\\GridField\\GridField.Filter', 'Filter'));
+            $formAction->addExtraClass('btn-primary mb-4');
 
             $fields->push($formAction);
         }
@@ -324,8 +345,12 @@ class Report extends ViewableData
      */
     public function getReportField()
     {
-        // TODO Remove coupling with global state
-        $params = isset($_REQUEST['filters']) ? $_REQUEST['filters'] : array();
+        $params = [];
+        if (Injector::inst()->has(HTTPRequest::class)) {
+            /** @var HTTPRequest $request */
+            $request = Injector::inst()->get(HTTPRequest::class);
+            $params = $request->param('filters') ?: [];
+        }
         $items = $this->sourceRecords($params, null, null);
 
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
@@ -333,21 +358,20 @@ class Report extends ViewableData
             new GridFieldButtonRow('before'),
             new GridFieldPrintButton('buttons-before-left'),
             new GridFieldExportButton('buttons-before-left'),
-            new GridFieldToolbarHeader(),
             new GridFieldSortableHeader(),
             new GridFieldDataColumns(),
             new GridFieldPaginator()
         );
         $gridField = new GridField('Report', null, $items, $gridFieldConfig);
-        $columns = $gridField->getConfig()->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
-        $displayFields = array();
-        $fieldCasting = array();
-        $fieldFormatting = array();
+        $columns = $gridField->getConfig()->getComponentByType(GridFieldDataColumns::class);
+        $displayFields = [];
+        $fieldCasting = [];
+        $fieldFormatting = [];
 
         // Parse the column information
         foreach ($this->columns() as $source => $info) {
             if (is_string($info)) {
-                $info = array('title' => $info);
+                $info = ['title' => $info];
             }
 
             if (isset($info['formatting'])) {
@@ -361,18 +385,22 @@ class Report extends ViewableData
             }
 
             if (isset($info['link']) && $info['link']) {
-                $fieldFormatting[$source] = function ($value, $item) {
-                    if ($item instanceof CMSPreviewable) {
-                        /** @var CMSPreviewable $item */
-                        return sprintf(
-                            '<a class="grid-field__link-block" href="%s" title="%s">%s</a>',
-                            Convert::raw2att($item->CMSEditLink()),
-                            Convert::raw2att($value),
-                            Convert::raw2xml($value)
-                        );
-                    }
-                    return $value;
-                };
+                if (is_callable($info['link'])) {
+                    $fieldFormatting[$source] = $info['link'];
+                } else {
+                    $fieldFormatting[$source] = function ($value, $item) {
+                        if ($item instanceof CMSPreviewable) {
+                            /** @var CMSPreviewable $item */
+                            return sprintf(
+                                '<a class="grid-field__link-block" href="%s" title="%s">%s</a>',
+                                Convert::raw2att($item->CMSEditLink()),
+                                Convert::raw2att($value),
+                                Convert::raw2xml($value)
+                            );
+                        }
+                        return $value;
+                    };
+                }
             }
 
             $displayFields[$source] = isset($info['title']) ? $info['title'] : $source;
