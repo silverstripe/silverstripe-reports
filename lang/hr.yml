@@ -1,0 +1,6 @@
+hr:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Izvještaji
+    ReportTitle: Naslov
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Drugi
