@@ -8,7 +8,7 @@ cache:
 
 env:
   global:
-    - COMPOSER_ROOT_VERSION=4.0.x-dev
+    - COMPOSER_ROOT_VERSION=5.x-dev
     - CORE_RELEASE=master
 
 matrix:
@@ -29,9 +29,9 @@ before_script:
 # Install composer dependencies
   - export PATH=~/.composer/vendor/bin:$PATH
   - composer validate
-  - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:2.0.x-dev --no-update; fi
-  - if [[ $DB == SQLITE ]]; then composer require silverstripe/sqlite3:2.0.x-dev --no-update; fi
-  - composer require silverstripe/admin:1.0.x-dev silverstripe/framework:4.0.x-dev silverstripe/versioned:1.0.x-dev silverstripe/config:1.0.x-dev silverstripe/assets:1.0.x-dev --no-update
+  - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:3.x-dev --no-update; fi
+  - if [[ $DB == SQLITE ]]; then composer require silverstripe/sqlite3:3.x-dev --no-update; fi
+  - composer require silverstripe/recipe-core:2.x-dev silverstripe/admin:2.x-dev silverstripe/versioned:2.x-dev --no-update
   - if [[ $PHPCS_TEST ]]; then composer global require squizlabs/php_codesniffer:^3 --prefer-dist --no-interaction --no-progress --no-suggest -o; fi
   - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
 
