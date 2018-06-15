@@ -1,6 +1,7 @@
 # Reports
 
 [![Build Status](https://secure.travis-ci.org/silverstripe/silverstripe-reports.png?branch=master)](http://travis-ci.org/silverstripe/silverstripe-reports)
+[![SilverStripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
 
 ## Introduction
 
