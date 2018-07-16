@@ -164,11 +164,11 @@ class Report extends ViewableData
         if ($this->hasMethod('sourceRecords')) {
             return $this->sourceRecords($params, null, null);
         } else {
-            $query = $this->sourceQuery();
-            $results = new ArrayList();
+            $query = $this->sourceQuery($params);
+            $results = ArrayList::create();
             foreach ($query->execute() as $data) {
                 $class = $this->dataClass();
-                $result = new $class($data);
+                $result = Injector::inst()->create($class, $data);
                 $results->push($result);
             }
             return $results;
@@ -362,7 +362,9 @@ class Report extends ViewableData
             new GridFieldDataColumns(),
             new GridFieldPaginator()
         );
-        $gridField = new GridField('Report', null, $items, $gridFieldConfig);
+        /** @var GridField $gridField */
+        $gridField = GridField::create('Report', null, $items, $gridFieldConfig);
+        /** @var GridFieldDataColumns $columns */
         $columns = $gridField->getConfig()->getComponentByType(GridFieldDataColumns::class);
         $displayFields = [];
         $fieldCasting = [];
