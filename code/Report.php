@@ -349,7 +349,7 @@ class Report extends ViewableData
         if (Injector::inst()->has(HTTPRequest::class)) {
             /** @var HTTPRequest $request */
             $request = Injector::inst()->get(HTTPRequest::class);
-            $params = $request->param('filters') ?: [];
+            $params = $request->param('filters') ?: $request->requestVar('filters') ?: [];
         }
         $items = $this->sourceRecords($params, null, null);
 
