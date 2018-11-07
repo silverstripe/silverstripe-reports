@@ -1,0 +1,7 @@
+nl:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Rapporten
+    ReportTitle: Naam
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Overig
+    REPEMPTY: 'Het {title} rapport is leeg.'
