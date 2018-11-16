@@ -29,6 +29,7 @@ use SilverStripe\ORM\SS_List;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\Security;
+use SilverStripe\View\ArrayData;
 use SilverStripe\View\ViewableData;
 
 /**
@@ -464,15 +465,23 @@ class Report extends ViewableData
 
 
     /**
-     * Return the name of this report, which
-     * is used by the templates to render the
-     * name of the report in the report tree,
-     * the left hand pane inside ReportAdmin.
+     * Return the name of this report, which is used by the templates to render the name of the report in the report
+     * tree, the left hand pane inside ReportAdmin.
      *
      * @return string
      */
     public function TreeTitle()
     {
         return $this->title();
+    }
+
+    /**
+     * Return additional breadcrumbs for this report. Useful when this report is a child of another.
+     *
+     * @return ArrayData[]
+     */
+    public function getBreadcrumbs()
+    {
+        return [];
     }
 }
