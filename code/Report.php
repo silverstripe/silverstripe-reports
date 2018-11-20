@@ -346,12 +346,7 @@ class Report extends ViewableData
      */
     public function getReportField()
     {
-        $params = [];
-        if (Injector::inst()->has(HTTPRequest::class)) {
-            /** @var HTTPRequest $request */
-            $request = Injector::inst()->get(HTTPRequest::class);
-            $params = $request->param('filters') ?: $request->requestVar('filters') ?: [];
-        }
+        $params = $this->getSourceParams();
         $items = $this->sourceRecords($params, null, null);
 
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
@@ -483,5 +478,24 @@ class Report extends ViewableData
     public function getBreadcrumbs()
     {
         return [];
+    }
+
+    /**
+     * Get source params for the report to filter by
+     *
+     * @return array
+     */
+    protected function getSourceParams()
+    {
+        $params = [];
+        if (Injector::inst()->has(HTTPRequest::class)) {
+            /** @var HTTPRequest $request */
+            $request = Injector::inst()->get(HTTPRequest::class);
+            $params = $request->param('filters') ?: $request->requestVar('filters') ?: [];
+        }
+
+        $this->extend('updateSourceParams', $params);
+
+        return $params;
     }
 }
