@@ -59,7 +59,8 @@ use SilverStripe\View\ViewableData;
  * Right now, all subclasses of SS_Report will be shown in the ReportAdmin. In SS3 there is only
  * one place where reports can go, so this class is greatly simplifed from its version in SS2.
  *
- * @method SS_List|DataList sourceRecords($params = [], $sort = null, $limit = null) List of records to show for this report
+ * @method SS_List|DataList sourceRecords($params = [], $sort = null, $limit = null)
+ *      List of records to show for this report
  */
 class Report extends ViewableData
 {
@@ -149,7 +150,11 @@ class Report extends ViewableData
         if ($this->hasMethod('sourceRecords')) {
             return $this->sourceRecords($params, null, null)->dataQuery();
         } else {
-            user_error("Please override sourceQuery()/sourceRecords() and columns() or, if necessary, override getReportField()", E_USER_ERROR);
+            user_error(
+                "Please override sourceQuery()/sourceRecords() and columns() or, if necessary, "
+                . "override getReportField()",
+                E_USER_ERROR
+            );
         }
     }
 
@@ -313,7 +318,10 @@ class Report extends ViewableData
             }
 
             // Add a search button
-            $formAction = FormAction::create('updatereport', _t('SilverStripe\\Forms\\GridField\\GridField.Filter', 'Filter'));
+            $formAction = FormAction::create(
+                'updatereport',
+                _t('SilverStripe\\Forms\\GridField\\GridField.Filter', 'Filter')
+            );
             $formAction->addExtraClass('btn-primary mb-4');
 
             $fields->push($formAction);

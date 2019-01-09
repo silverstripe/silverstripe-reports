@@ -21,7 +21,7 @@ abstract class ReportWrapper extends Report
 
     public function __construct($baseReport)
     {
-        $this->baseReport = is_string($baseReport) ? new $baseReport : $baseReport;
+        $this->baseReport = is_string($baseReport) ? new $baseReport() : $baseReport;
         $this->dataClass = $this->baseReport->dataClass();
         parent::__construct();
     }
