@@ -181,13 +181,13 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
             }
 
             //build breadcrumb trail to the current report
-            $items->push(new ArrayData(array(
+            $items->push(ArrayData::create([
                 'Title' => $report->title(),
                 'Link' => Controller::join_links(
                     $this->Link(),
-                    '?' . http_build_query(array('q' => $this->request->requestVar('q')))
+                    '?' . http_build_query(['q' => $this->request->requestVar('q')])
                 )
-            )));
+            ]));
         }
 
         return $items;
@@ -236,7 +236,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
             );
             $gridField = GridField::create('Reports', false, $this->Reports(), $gridFieldConfig);
             /** @var GridFieldDataColumns $columns */
-            $columns = $gridField->getConfig()->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
+            $columns = $gridField->getConfig()
+                ->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
             $columns->setDisplayFields(array(
                 'title' => _t('SilverStripe\\Reports\\ReportAdmin.ReportTitle', 'Title'),
             ));
@@ -250,7 +251,9 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
         $actions = new FieldList();
         $form = new Form($this, "EditForm", $fields, $actions);
-        $form->addExtraClass('panel panel--padded panel--scrollable cms-edit-form cms-panel-padded' . $this->BaseCSSClasses());
+        $form->addExtraClass(
+            'panel panel--padded panel--scrollable cms-edit-form cms-panel-padded' . $this->BaseCSSClasses()
+        );
         $form->loadDataFrom($this->request->getVars());
 
         $this->extend('updateEditForm', $form);
