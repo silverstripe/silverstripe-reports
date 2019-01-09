@@ -39,7 +39,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SilverStripe\\Reports\\": "code/",
+            "SilverStripe\\Reports\\": "src/",
             "SilverStripe\\Reports\\Tests\\": "tests/"
         }
     },
