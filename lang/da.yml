@@ -1,0 +1,7 @@
+da:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Rapporter
+    ReportTitle: Titel
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Andre
+    REPEMPTY: 'Rapporten {title} er tom.'
