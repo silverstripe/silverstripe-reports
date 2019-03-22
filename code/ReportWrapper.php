@@ -2,6 +2,8 @@
 
 namespace SilverStripe\Reports;
 
+use SilverStripe\Core\Injector\Injector;
+
 /**
  * SS_ReportWrapper is a base class for creating report wappers.
  *
@@ -21,7 +23,7 @@ abstract class ReportWrapper extends Report
 
     public function __construct($baseReport)
     {
-        $this->baseReport = is_string($baseReport) ? new $baseReport() : $baseReport;
+        $this->baseReport = is_string($baseReport) ? Injector::inst()->create($baseReport) : $baseReport;
         $this->dataClass = $this->baseReport->dataClass();
         parent::__construct();
     }
