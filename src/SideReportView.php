@@ -11,8 +11,8 @@ use SilverStripe\View\ViewableData;
  */
 class SideReportView extends ViewableData
 {
-
-    protected $controller, $report;
+    protected $controller;
+    protected $report;
     protected $parameters;
 
     public function __construct($controller, $report)
