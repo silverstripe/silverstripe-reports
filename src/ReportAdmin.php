@@ -172,10 +172,17 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
         // Uses session state for current record otherwise.
         $items[0]->Link = singleton('SilverStripe\\Reports\\ReportAdmin')->Link();
 
-        if ($this->reportObject) {
+        if ($report = $this->reportObject) {
+            $breadcrumbs = $report->getBreadcrumbs();
+            if (!empty($breadcrumbs)) {
+                foreach ($breadcrumbs as $crumb) {
+                    $items->push($crumb);
+                }
+            }
+
             //build breadcrumb trail to the current report
             $items->push(ArrayData::create([
-                'Title' => $this->reportObject->title(),
+                'Title' => $report->title(),
                 'Link' => Controller::join_links(
                     $this->Link(),
                     '?' . http_build_query(['q' => $this->request->requestVar('q')])
