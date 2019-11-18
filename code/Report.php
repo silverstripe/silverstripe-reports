@@ -350,7 +350,6 @@ class Report extends ViewableData
         $items = $this->sourceRecords($params, null, null);
 
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
-
             new GridFieldButtonRow('before'),
             new GridFieldPrintButton('buttons-before-left'),
             new GridFieldExportButton('buttons-before-left'),
