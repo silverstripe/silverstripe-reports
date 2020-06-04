@@ -14,7 +14,6 @@ cache:
 env:
   global:
     - COMPOSER_ROOT_VERSION=4.x-dev
-    - CORE_RELEASE=master
 
 matrix:
   fast_finish: true
