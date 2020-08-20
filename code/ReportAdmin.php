@@ -79,7 +79,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
      */
     public function canView($member = null)
     {
-        if (!$member && $member !== false) {
+        if (!$member) {
             $member = Security::getCurrentUser();
         }
 
