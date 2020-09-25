@@ -5,7 +5,6 @@ dist: xenial
 services:
   - mysql
   - postgresql
-  - xvfb
 
 cache:
   directories:
@@ -19,13 +18,13 @@ matrix:
   fast_finish: true
   include:
     - php: 7.1
-      env: DB=MYSQL PHPUNIT_TEST=1 PHPCS_TEST=1
+      env: DB=MYSQL RECIPE_VERSION=4.6.x-dev PHPUNIT_TEST=1 PHPCS_TEST=1 PDO=1
     - php: 7.2
-      env: DB=MYSQL PHPUNIT_TEST=1
+      env: DB=PGSQL RECIPE_VERSION=4.6.x-dev PHPUNIT_COVERAGE_TEST=1
     - php: 7.3
-      env: DB=MYSQL PDO=1 PHPUNIT_COVERAGE_TEST=1
+      env: DB=MYSQL RECIPE_VERSION=4.6.x-dev PHPUNIT_TEST=1
     - php: 7.4
-      env: DB=MYSQL PHPUNIT_TEST=1
+      env: DB=MYSQL RECIPE_VERSION=4.6.x-dev PHPUNIT_TEST=1
 
 before_script:
 # Init PHP
@@ -35,9 +34,10 @@ before_script:
 # Install composer dependencies
   - export PATH=~/.composer/vendor/bin:$PATH
   - composer validate
-  - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:2.x-dev --no-update; fi
-  - if [[ $DB == SQLITE ]]; then composer require silverstripe/sqlite3:2.x-dev --no-update; fi
-  - composer require silverstripe/recipe-core:4.6.x-dev silverstripe/admin:1.6.x-dev silverstripe/versioned:1.6.x-dev --no-update
+  # Fix for running phpunit 5 on php 7.4+
+  - composer require --no-update sminnee/phpunit-mock-objects:^3
+  - if [[ $DB == PGSQL ]]; then composer require silverstripe/postgresql:^2 --no-update; fi
+  - composer require silverstripe/recipe-cms:$RECIPE_VERSION --no-update
   - if [[ $PHPCS_TEST ]]; then composer global require squizlabs/php_codesniffer:^3 --prefer-dist --no-interaction --no-progress --no-suggest -o; fi
   - composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
 
