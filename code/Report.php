@@ -147,11 +147,13 @@ class Report extends ViewableData
      */
     public function sourceQuery($params)
     {
-        if ($this->hasMethod('sourceRecords')) {
-            return $this->sourceRecords($params, null, null)->dataQuery();
-        } else {
-            user_error("Please override sourceQuery()/sourceRecords() and columns() or, if necessary, override getReportField()", E_USER_ERROR);
+        if (!$this->hasMethod('sourceRecords')) {
+            throw new \RuntimeException(
+                'Please override sourceQuery()/sourceRecords() and columns() or, if necessary, override getReportField()'
+            );
         }
+
+        return $this->sourceRecords($params, null, null)->dataQuery();
     }
 
     /**
