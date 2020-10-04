@@ -75,7 +75,9 @@ abstract class ReportWrapper extends Report
             $this->afterQuery();
             return $query;
         } else {
-            user_error("Please override sourceQuery()/sourceRecords() and columns() in your base report", E_USER_ERROR);
+            throw new \RuntimeException(
+                "Please override sourceQuery()/sourceRecords() and columns() in your base report"
+            );
         }
     }
 
