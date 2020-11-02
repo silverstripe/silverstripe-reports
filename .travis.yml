@@ -5,7 +5,6 @@ dist: xenial
 services:
   - mysql
   - postgresql
-  - xvfb
 
 cache:
   directories:
@@ -23,7 +22,7 @@ matrix:
     - php: 7.2
       env: DB=MYSQL PHPUNIT_TEST=1 PHPCS_TEST=1
     - php: 7.3
-      env: DB=MYSQL PDO=1 PHPUNIT_COVERAGE_TEST=1
+      env: DB=MYSQL RECIPE_VERSION=4.6.x-dev PHPUNIT_TEST=1
     - php: 7.4
       env: DB=MYSQL PHPUNIT_TEST=1
     - php: nightly
