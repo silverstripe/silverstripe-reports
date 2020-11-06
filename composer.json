@@ -41,10 +41,6 @@
             "SilverStripe\\Reports\\Tests\\": "tests/"
         }
     },
-    "scripts": {
-        "lint": "phpcs code/ tests/",
-        "lint-clean": "phpcbf code/ tests/"
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
