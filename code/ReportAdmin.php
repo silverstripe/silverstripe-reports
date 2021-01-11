@@ -251,7 +251,11 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
         $actions = new FieldList();
         $form = new Form($this, "EditForm", $fields, $actions);
         $form->addExtraClass('panel panel--padded panel--scrollable cms-edit-form cms-panel-padded' . $this->BaseCSSClasses());
-        $form->loadDataFrom($this->request->getVars());
+        $vars = $this->request->getVars();
+        array_walk_recursive($vars, function (&$value) {
+            $value = urldecode($value);
+        });
+        $form->loadDataFrom($vars);
 
         $this->extend('updateEditForm', $form);
 
