@@ -1,0 +1,7 @@
+sl:
+  SilverStripe\Reports\ReportAdmin:
+    MENUTITLE: Poročila
+    ReportTitle: Naslov
+  SilverStripe\Reports\SideReport:
+    OtherGroupTitle: Drugo
+    REPEMPTY: 'Poročilo ''{title}'' je prazno.'
