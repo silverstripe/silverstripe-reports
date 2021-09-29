@@ -39,7 +39,8 @@
     "autoload": {
         "psr-4": {
             "SilverStripe\\Reports\\": "code/",
-            "SilverStripe\\Reports\\Tests\\": "tests/"
+            "SilverStripe\\Reports\\Tests\\": "tests/",
+            "SilverStripe\\Reports\\Tests\\Behat\\Context\\": "tests/behat/src/"
         }
     },
     "minimum-stability": "dev",
