@@ -114,4 +114,20 @@ class ReportTest extends SapphireTest
             $titleContent
         );
     }
+
+    public function testCountForOverview()
+    {
+        $report = new ReportTest\FakeTest3();
+
+        // Count is limited to 10000 by default
+        $this->assertEquals('10000+', $report->getCountForOverview());
+
+        // Count is limited as per configuration
+        Config::modify()->set(ReportTest\FakeTest3::class, 'limit_count_in_overview', 15);
+        $this->assertEquals('15+', $report->getCountForOverview());
+
+        // A null limit displays the full count
+        Config::modify()->set(ReportTest\FakeTest3::class, 'limit_count_in_overview', null);
+        $this->assertEquals('15000', $report->getCountForOverview());
+    }
 }
