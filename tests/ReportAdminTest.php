@@ -5,6 +5,7 @@ use ReflectionClass;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\SapphireTest;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use SilverStripe\Reports\Report;
 use SilverStripe\Reports\ReportAdmin;
 use SilverStripe\Reports\Tests\ReportAdminTest\FakeReport;
@@ -12,6 +13,8 @@ use SilverStripe\Reports\Tests\ReportAdminTest\FakeReport2;
 
 class ReportAdminTest extends SapphireTest
 {
+    use ArraySubsetAsserts;
+
     public function testBreadcrumbsAreGenerated()
     {
         $noExtraCrumbs = FakeReport::create();
