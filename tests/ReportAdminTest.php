@@ -5,7 +5,6 @@ use ReflectionClass;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\SapphireTest;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use SilverStripe\Reports\Report;
 use SilverStripe\Reports\ReportAdmin;
 use SilverStripe\Reports\Tests\ReportAdminTest\FakeReport;
@@ -13,8 +12,6 @@ use SilverStripe\Reports\Tests\ReportAdminTest\FakeReport2;
 
 class ReportAdminTest extends SapphireTest
 {
-    use ArraySubsetAsserts;
-
     public function testBreadcrumbsAreGenerated()
     {
         $noExtraCrumbs = FakeReport::create();
@@ -23,15 +20,12 @@ class ReportAdminTest extends SapphireTest
         $breadcrumbs = $controller->BreadCrumbs();
 
         $this->assertCount(2, $breadcrumbs);
+        $map = $breadcrumbs[0]->toMap();
+        $this->assertSame('Reports', $map['Title']);
+        $this->assertSame('admin/reports/', $map['Link']);
 
-        $this->assertArraySubset([
-            'Title' => 'Reports',
-            'Link' => 'admin/reports/',
-        ], $breadcrumbs[0]->toMap(), true, 'Link to top level reports is within breadcrumbs');
-
-        $this->assertArraySubset([
-            'Title' => 'Fake report'
-        ], $breadcrumbs[1]->toMap(), true, 'Current report is within breadcrumbs');
+        $map = $breadcrumbs[1]->toMap();
+        $this->assertSame('Fake report', $map['Title']);
 
         $extraCrumbs = FakeReport2::create();
         $controller = $this->mockController($extraCrumbs);
@@ -39,19 +33,16 @@ class ReportAdminTest extends SapphireTest
 
         $this->assertCount(3, $breadcrumbs);
 
-        $this->assertArraySubset([
-            'Title' => 'Reports',
-            'Link' => 'admin/reports/',
-        ], $breadcrumbs[0]->toMap(), true, 'Link to top level reports is within breadcrumbs (again)');
+        $map = $breadcrumbs[0]->toMap();
+        $this->assertSame('Reports', $map['Title']);
+        $this->assertSame('admin/reports/', $map['Link']);
 
-        $this->assertArraySubset([
-            'Title' => 'Fake report title',
-            'Link' => 'admin/reports/show/SilverStripe-Reports-Tests-ReportAdminTest-FakeReport',
-        ], $breadcrumbs[1]->toMap(), true, 'Custom breadcrumb appears');
+        $map = $breadcrumbs[1]->toMap();
+        $this->assertSame('Fake report title', $map['Title']);
+        $this->assertSame('admin/reports/show/SilverStripe-Reports-Tests-ReportAdminTest-FakeReport', $map['Link']);
 
-        $this->assertArraySubset([
-            'Title' => 'Fake report two'
-        ], $breadcrumbs[2]->toMap(), true, 'Current report is still within breadcrumbs');
+        $map = $breadcrumbs[2]->toMap();
+        $this->assertSame('Fake report two', $map['Title']);
     }
 
     /**
