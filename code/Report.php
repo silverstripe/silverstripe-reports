@@ -307,14 +307,21 @@ class Report extends ViewableData
 
         // Add search fields is available
         if ($this->hasMethod('parameterFields') && $parameterFields = $this->parameterFields()) {
-            /** @var FormField $field */
-            foreach ($parameterFields as $field) {
-                // Namespace fields for easier handling in form submissions
-                $field->setName(sprintf('filters[%s]', $field->getName()));
-                $field->addExtraClass('no-change-track'); // ignore in changetracker
+
+            //standardise fields with filter[name] and .no-change-track
+            $parameterFields->recursiveWalk(
+                function(FormField $field) {
+                    if(strpos($field->getName(), 'filter[') !== 0) {
+                        $field->setName(sprintf('filters[%s]', $field->getName()));
+                    }
+                    $field->addExtraClass('no-change-track'); // ignore in changetracker
+                }
+            );
+            // add fields
+            foreach($parameterFields as $field) {
                 $fields->push($field);
             }
-
+            
             // Add a search button
             $formAction = FormAction::create('updatereport', _t('SilverStripe\\Forms\\GridField\\GridField.Filter', 'Filter'));
             $formAction->addExtraClass('btn-primary mb-4');
