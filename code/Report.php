@@ -304,21 +304,19 @@ class Report extends ViewableData
         if ($description = $this->description()) {
             $fields->push(new LiteralField('ReportDescription', "<p>" . $description . "</p>"));
         }
-
         // Add search fields is available
         if ($this->hasMethod('parameterFields') && $parameterFields = $this->parameterFields()) {
-
             //standardise fields with filter[name] and .no-change-track
             $parameterFields->recursiveWalk(
-                function(FormField $field) {
-                    if(strpos($field->getName(), 'filter[') !== 0) {
+                function (FormField $field) {
+                    if (strpos($field->getName(), 'filter[') !== 0) {
                         $field->setName(sprintf('filters[%s]', $field->getName()));
                     }
                     $field->addExtraClass('no-change-track'); // ignore in changetracker
                 }
             );
             // add fields
-            foreach($parameterFields as $field) {
+            foreach ($parameterFields as $field) {
                 $fields->push($field);
             }
             
