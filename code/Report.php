@@ -389,12 +389,12 @@ class Report extends ViewableData
         $items = $this->sourceRecords($params, null, null);
 
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
-            new GridFieldButtonRow('before'),
-            new GridFieldPrintButton('buttons-before-left'),
-            new GridFieldExportButton('buttons-before-left'),
-            new GridFieldSortableHeader(),
-            new GridFieldDataColumns(),
-            new GridFieldPaginator()
+            GridFieldButtonRow::create('before'),
+            GridFieldPrintButton::create('buttons-before-left'),
+            GridFieldExportButton::create('buttons-before-left'),
+            GridFieldSortableHeader::create(),
+            GridFieldDataColumns::create(),
+            GridFieldPaginator::create()
         );
         /** @var GridField $gridField */
         $gridField = GridField::create('Report', null, $items, $gridFieldConfig);
