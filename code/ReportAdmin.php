@@ -230,11 +230,11 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
             // List all reports
             $fields = new FieldList();
             $gridFieldConfig = GridFieldConfig::create()->addComponents(
-                new GridFieldSortableHeader(),
-                new GridFieldDataColumns(),
-                new GridFieldFooter()
+                GridFieldSortableHeader::create(),
+                GridFieldDataColumns::create(),
+                GridFieldFooter::create()
             );
-            $gridField = new GridField('Reports', false, $this->Reports(), $gridFieldConfig);
+            $gridField = GridField::create('Reports', false, $this->Reports(), $gridFieldConfig);
             /** @var GridFieldDataColumns $columns */
             $columns = $gridField->getConfig()->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
             $columns->setDisplayFields(array(
