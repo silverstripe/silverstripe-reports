@@ -218,7 +218,7 @@ class Report extends ViewableData
      */
     protected function sanitiseClassName($class)
     {
-        return str_replace('\\', '-', $class);
+        return str_replace('\\', '-', $class ?? '');
     }
 
 
@@ -286,12 +286,12 @@ class Report extends ViewableData
         $reports = ClassInfo::subclassesFor(get_called_class());
 
         $reportsArray = [];
-        if ($reports && count($reports) > 0) {
+        if ($reports && count($reports ?? []) > 0) {
             $excludedReports = static::get_excluded_reports();
             // Collect reports into array with an attribute for 'sort'
             foreach ($reports as $report) {
                 // Don't use the Report superclass, or any excluded report classes
-                if (in_array($report, $excludedReports)) {
+                if (in_array($report, $excludedReports ?? [])) {
                     continue;
                 }
                 $reflectionClass = new ReflectionClass($report);
@@ -484,7 +484,7 @@ class Report extends ViewableData
         $results = $this->extend($methodName, $member);
         if ($results && is_array($results)) {
             // Remove NULLs
-            $results = array_filter($results, function ($v) {
+            $results = array_filter($results ?? [], function ($v) {
                 return !is_null($v);
             });
             // If there are any non-NULL responses, then return the lowest one of them.
