@@ -79,9 +79,9 @@ class SideReportView extends ViewableData
 
         // Formatting, a la TableListField
         if (!empty($info['formatting'])) {
-            $format = str_replace('$value', "__VAL__", $info['formatting']);
-            $format = preg_replace('/\$([A-Za-z0-9-_]+)/', '$record->$1', $format);
-            $format = str_replace('__VAL__', '$val', $format);
+            $format = str_replace('$value', "__VAL__", $info['formatting'] ?? '');
+            $format = preg_replace('/\$([A-Za-z0-9-_]+)/', '$record->$1', $format ?? '');
+            $format = str_replace('__VAL__', '$val', $format ?? '');
             $val = eval('return "' . $format . '";');
         }
 
@@ -90,7 +90,7 @@ class SideReportView extends ViewableData
 
         $classClause = "";
         if (isset($info['title'])) {
-            $cssClass = preg_replace('/[^A-Za-z0-9]+/', '', $info['title']);
+            $cssClass = preg_replace('/[^A-Za-z0-9]+/', '', $info['title'] ?? '');
             $classClause = "class=\"$cssClass\"";
         }
 

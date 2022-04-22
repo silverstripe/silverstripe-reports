@@ -139,7 +139,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
      */
     protected function unsanitiseClassName($class)
     {
-        return str_replace('-', '\\', $class);
+        return str_replace('-', '\\', $class ?? '');
     }
 
     /**
@@ -155,7 +155,7 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
      */
     public static function has_reports()
     {
-        return sizeof(Report::get_reports()) > 0;
+        return sizeof(Report::get_reports() ?? []) > 0;
     }
 
     /**
