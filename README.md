@@ -1,6 +1,6 @@
 # Reports
 
-[![Build Status](https://api.travis-ci.com/silverstripe/silverstripe-reports.svg?branch=4)](https://travis-ci.com/silverstripe/silverstripe-reports)
+[![CI](https://github.com/silverstripe/silverstripe-reports/actions/workflows/ci.yml/badge.svg)](https://github.com/silverstripe/silverstripe-reports/actions/workflows/ci.yml)
 [![SilverStripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
 
 ## Introduction
