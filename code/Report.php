@@ -22,7 +22,7 @@ use SilverStripe\Forms\GridField\GridFieldPrintButton;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\CMSPreviewable;
+use SilverStripe\Admin\Previewable;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataQuery;
 use SilverStripe\ORM\Limitable;
@@ -425,8 +425,8 @@ class Report extends ViewableData
                     $fieldFormatting[$source] = $info['link'];
                 } else {
                     $fieldFormatting[$source] = function ($value, $item) {
-                        if ($item instanceof CMSPreviewable) {
-                            /** @var CMSPreviewable $item */
+                        if ($item instanceof Previewable) {
+                            /** @var Previewable $item */
                             return sprintf(
                                 '<a class="grid-field__link-block" href="%s" title="%s">%s</a>',
                                 Convert::raw2att($item->CMSEditLink()),

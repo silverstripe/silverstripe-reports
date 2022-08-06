@@ -4,10 +4,10 @@ namespace SilverStripe\Reports\Tests\ReportTest;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\Dev\TestOnly;
-use SilverStripe\ORM\CMSPreviewable;
+use SilverStripe\Admin\Previewable;
 use SilverStripe\ORM\DataObject;
 
-class FakeObject extends DataObject implements CMSPreviewable, TestOnly
+class FakeObject extends DataObject implements Previewable, TestOnly
 {
     private static $table_name = 'ReportTest_FakeObject';
 
