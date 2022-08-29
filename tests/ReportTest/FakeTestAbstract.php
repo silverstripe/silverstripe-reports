@@ -8,7 +8,6 @@ use SilverStripe\Reports\Report;
 
 abstract class FakeTestAbstract extends Report implements TestOnly
 {
-
     public function title()
     {
         return 'Report title Abstract';
