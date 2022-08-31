@@ -1,4 +1,5 @@
 <?php
+
 namespace SilverStripe\Reports\Tests\ReportAdminTest;
 
 use SilverStripe\Control\Controller;

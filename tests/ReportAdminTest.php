@@ -1,4 +1,5 @@
 <?php
+
 namespace SilverStripe\Reports\Tests;
 
 use ReflectionClass;
