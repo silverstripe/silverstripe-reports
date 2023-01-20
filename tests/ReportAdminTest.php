@@ -23,7 +23,7 @@ class ReportAdminTest extends SapphireTest
         $this->assertCount(2, $breadcrumbs);
         $map = $breadcrumbs[0]->toMap();
         $this->assertSame('Reports', $map['Title']);
-        $this->assertSame('admin/reports/', $map['Link']);
+        $this->assertSame('admin/reports', $map['Link']);
 
         $map = $breadcrumbs[1]->toMap();
         $this->assertSame('Fake report', $map['Title']);
@@ -36,7 +36,7 @@ class ReportAdminTest extends SapphireTest
 
         $map = $breadcrumbs[0]->toMap();
         $this->assertSame('Reports', $map['Title']);
-        $this->assertSame('admin/reports/', $map['Link']);
+        $this->assertSame('admin/reports', $map['Link']);
 
         $map = $breadcrumbs[1]->toMap();
         $this->assertSame('Fake report title', $map['Title']);
