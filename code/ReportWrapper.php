@@ -102,7 +102,6 @@ abstract class ReportWrapper extends Report
 
     public function group()
     {
-        /** @skipUpgrade */
         return $this->baseReport->hasMethod('group') ? $this->baseReport->group() : 'Group';
     }
 
