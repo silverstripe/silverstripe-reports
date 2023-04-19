@@ -3,15 +3,16 @@
 [![CI](https://github.com/silverstripe/silverstripe-reports/actions/workflows/ci.yml/badge.svg)](https://github.com/silverstripe/silverstripe-reports/actions/workflows/ci.yml)
 [![Silverstripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
 
+## Installation
+
+```sh
+composer require silverstripe/reports
+```
+
 ## Introduction
 
 This module contains the API's for building Reports that are displayed in the
-Silverstripe backend. This module replaces the built-in reports API from earlier
-versions of Silverstripe (2.4 and 3.0).
-
-## Requirements
-
- * Silverstripe 4.0
+Silverstripe backend.
 
 ## Troubleshooting
 
