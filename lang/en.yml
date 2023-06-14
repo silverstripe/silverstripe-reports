@@ -1,4 +1,8 @@
 en:
+  SilverStripe\CMS\Controllers\CMSPageHistoryController:
+    PREVIEW: 'Website preview'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
   SilverStripe\Reports\ReportAdmin:
     MENUTITLE: Reports
     ReportTitle: Title
