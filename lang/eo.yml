@@ -1,4 +1,8 @@
 eo:
+  SilverStripe\CMS\Controllers\CMSPageHistoryController:
+    PREVIEW: 'Retejon antaŭvidi'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filtrilo
   SilverStripe\Reports\ReportAdmin:
     MENUTITLE: Raportoj
     ReportTitle: Titoloj

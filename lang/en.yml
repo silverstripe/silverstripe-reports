@@ -1,11 +1,11 @@
 en:
+  SilverStripe\CMS\Controllers\CMSPageHistoryController:
+    PREVIEW: 'Website preview'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
   SilverStripe\Reports\ReportAdmin:
     MENUTITLE: Reports
     ReportTitle: Title
   SilverStripe\Reports\SideReport:
     OtherGroupTitle: Other
     REPEMPTY: 'The {title} report is empty.'
-  SilverStripe\CMS\Controllers\CMSPageHistoryController:
-    PREVIEW: 'Website preview'
-  SilverStripe\Forms\GridField\GridField:
-    Filter: Filter
