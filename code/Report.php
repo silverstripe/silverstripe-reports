@@ -401,9 +401,7 @@ class Report extends ViewableData
             GridFieldDataColumns::create(),
             GridFieldPaginator::create()
         );
-        /** @var GridField $gridField */
         $gridField = GridField::create('Report', null, $items, $gridFieldConfig);
-        /** @var GridFieldDataColumns $columns */
         $columns = $gridField->getConfig()->getComponentByType(GridFieldDataColumns::class);
         $displayFields = [];
         $fieldCasting = [];
@@ -431,7 +429,6 @@ class Report extends ViewableData
                 } else {
                     $fieldFormatting[$source] = function ($value, $item) {
                         if ($item instanceof CMSPreviewable) {
-                            /** @var CMSPreviewable $item */
                             return sprintf(
                                 '<a class="grid-field__link-block" href="%s" title="%s">%s</a>',
                                 Convert::raw2att($item->CMSEditLink()),
@@ -532,7 +529,6 @@ class Report extends ViewableData
     {
         $params = [];
         if (Injector::inst()->has(HTTPRequest::class)) {
-            /** @var HTTPRequest $request */
             $request = Injector::inst()->get(HTTPRequest::class);
             $params = $request->param('filters') ?: $request->requestVar('filters') ?: [];
         }
