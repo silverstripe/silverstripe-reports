@@ -105,7 +105,6 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     public function Reports()
     {
         $output = new ArrayList();
-        /** @var Report $report */
         foreach (Report::get_reports() as $report) {
             if ($report->canView()) {
                 $output->push($report);
@@ -160,9 +159,6 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     /**
      * Returns the Breadcrumbs for the ReportAdmin
-     *
-     * @param bool $unlinked
-     * @return ArrayList
      */
     public function Breadcrumbs($unlinked = false)
     {
@@ -235,9 +231,8 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
                 GridFieldFooter::create()
             );
             $gridField = GridField::create('Reports', false, $this->Reports(), $gridFieldConfig);
-            /** @var GridFieldDataColumns $columns */
             $columns = $gridField->getConfig()
-                ->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
+                ->getComponentByType(GridFieldDataColumns::class);
             $columns->setDisplayFields(array(
                 'title' => _t('SilverStripe\\Reports\\ReportAdmin.ReportTitle', 'Title'),
             ));
