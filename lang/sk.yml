@@ -1,7 +1,11 @@
 sk:
+  SilverStripe\CMS\Controllers\CMSPageHistoryController:
+    PREVIEW: 'Náhľad webovej stránky'
+  SilverStripe\Forms\GridField\GridField:
+    Filter: Filter
   SilverStripe\Reports\ReportAdmin:
-    MENUTITLE: Výkazy
-    ReportTitle: Titulok
+    MENUTITLE: Správy
+    ReportTitle: Názov
   SilverStripe\Reports\SideReport:
     OtherGroupTitle: Iné
-    REPEMPTY: 'Výkaz {title} je prázdny.'
+    REPEMPTY: 'Správa {title} je prázdna.'
