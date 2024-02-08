@@ -1,8 +1,6 @@
 sk:
   SilverStripe\CMS\Controllers\CMSPageHistoryController:
     PREVIEW: 'Náhľad webovej stránky'
-  SilverStripe\Forms\GridField\GridField:
-    Filter: Filter
   SilverStripe\Reports\ReportAdmin:
     MENUTITLE: Správy
     ReportTitle: Názov
