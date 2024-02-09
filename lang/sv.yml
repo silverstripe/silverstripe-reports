@@ -1,4 +1,6 @@
 sv:
+  SilverStripe\CMS\Controllers\CMSPageHistoryController:
+    PREVIEW: 'Webbplats förhandsvisning'
   SilverStripe\Reports\ReportAdmin:
     MENUTITLE: Rapporter
     ReportTitle: Titel
