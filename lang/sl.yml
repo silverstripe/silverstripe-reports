@@ -4,4 +4,4 @@ sl:
     ReportTitle: Naslov
   SilverStripe\Reports\SideReport:
     OtherGroupTitle: Drugo
-    REPEMPTY: 'Poročilo ''{title}'' je prazno.'
+    REPEMPTY: "Poročilo '{title}' je prazno."
