@@ -24,7 +24,7 @@ class FakeObject extends DataObject implements CMSPreviewable, TestOnly
         return Controller::join_links('dummy-link', $this->ID);
     }
 
-    public function CMSEditLink()
+    public function getCMSEditLink(): ?string
     {
         return Controller::join_links('dummy-edit-link', $this->ID);
     }

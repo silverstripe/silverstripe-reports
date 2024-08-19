@@ -431,7 +431,7 @@ class Report extends ViewableData
                         if ($item instanceof CMSPreviewable) {
                             return sprintf(
                                 '<a class="grid-field__link-block" href="%s" title="%s">%s</a>',
-                                Convert::raw2att($item->CMSEditLink()),
+                                Convert::raw2att($item->getCMSEditLink()),
                                 Convert::raw2att($value),
                                 Convert::raw2xml($value)
                             );

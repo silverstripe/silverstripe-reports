@@ -95,8 +95,8 @@ class SideReportView extends ViewableData
         }
 
         if (isset($info['link']) && $info['link']) {
-            $link = ($info['link'] === true && $record->hasMethod('CMSEditLink'))
-                ? $record->CMSEditLink()
+            $link = ($info['link'] === true && $record->hasMethod('getCMSEditLink'))
+                ? $record->getCMSEditLink()
                 : $info['link'];
             return $prefix . "<a $classClause href=\"$link\">$val</a>";
         } else {
