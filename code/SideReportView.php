@@ -37,7 +37,7 @@ class SideReportView extends ViewableData
         $this->parameters = $parameters;
     }
 
-    public function forTemplate()
+    public function forTemplate(): string
     {
         $records = $this->report->records($this->parameters);
         $columns = $this->report->columns();
