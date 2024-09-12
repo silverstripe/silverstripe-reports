@@ -3,7 +3,7 @@
 namespace SilverStripe\Reports\Tests\ReportAdminTest;
 
 use SilverStripe\Dev\TestOnly;
-use SilverStripe\ORM\ArrayList;
+use SilverStripe\Model\List\ArrayList;
 use SilverStripe\Reports\Report;
 use SilverStripe\Security\Member;
 

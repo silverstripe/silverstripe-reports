@@ -4,12 +4,12 @@ namespace SilverStripe\Reports;
 
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\View\ViewableData;
+use SilverStripe\Model\ModelData;
 
 /**
  * Renderer for showing SideReports in CMSMain
  */
-class SideReportView extends ViewableData
+class SideReportView extends ModelData
 {
     protected $controller;
     protected $report;

@@ -6,7 +6,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\Reports\Report;
 use SilverStripe\Reports\ReportAdmin;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 
 class FakeReport2 extends Report implements TestOnly
 {

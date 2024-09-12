@@ -3,7 +3,7 @@
 namespace SilverStripe\Reports\Tests\ReportTest;
 
 use SilverStripe\Dev\TestOnly;
-use SilverStripe\ORM\ArrayList;
+use SilverStripe\Model\List\ArrayList;
 use SilverStripe\Reports\Report;
 
 class FakeReport extends Report implements TestOnly

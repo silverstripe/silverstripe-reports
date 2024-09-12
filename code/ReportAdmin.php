@@ -12,12 +12,12 @@ use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldFooter;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\SS_List;
+use SilverStripe\Model\List\ArrayList;
+use SilverStripe\Model\List\SS_List;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\PermissionProvider;
 use SilverStripe\Security\Security;
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\View\Requirements;
 
 /**
