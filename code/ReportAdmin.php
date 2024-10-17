@@ -222,10 +222,10 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     {
         return array(
             "CMS_ACCESS_ReportAdmin" => array(
-                'name' => _t('SilverStripe\\CMS\\Controllers\\CMSMain.ACCESS', "Access to '{title}' section", array(
+                'name' => _t(LeftAndMain::class . '.ACCESS', "Access to '{title}' section", array(
                     'title' => static::menu_title()
                 )),
-                'category' => _t('SilverStripe\\Security\\Permission.CMS_ACCESS_CATEGORY', 'CMS Access')
+                'category' => _t(LeftAndMain::class . '.CMS_ACCESS_CATEGORY', 'CMS Access')
             )
         );
     }
