@@ -25,7 +25,6 @@ use SilverStripe\Model\List\ArrayList;
 use SilverStripe\ORM\CMSPreviewable;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\DataQuery;
-use SilverStripe\Model\List\Limitable;
 use SilverStripe\Model\List\SS_List;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
@@ -239,7 +238,7 @@ class Report extends ModelData
         }
         // Some reports may not use the $limit parameter in sourceRecords since it isn't actually
         // used anywhere else - so make sure we limit record counts if possible.
-        if ($sourceRecords instanceof Limitable) {
+        if ($sourceRecords instanceof SS_List) {
             $sourceRecords = $sourceRecords->limit($limit);
         }
         return $sourceRecords->count();
