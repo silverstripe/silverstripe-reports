@@ -44,6 +44,9 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
 
     private static $template_path = null; // defaults to (project)/templates/email
 
+    /**
+     * @deprecated 5.4.0 Will be renamed to model_class
+     */
     private static $tree_class = Report::class;
 
     private static $url_handlers = array(
