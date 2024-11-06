@@ -5,6 +5,7 @@ en:
     Filter: Filter
   SilverStripe\Reports\ReportAdmin:
     MENUTITLE: Reports
+    ReportDescription: Description
     ReportTitle: Title
   SilverStripe\Reports\SideReport:
     OtherGroupTitle: Other
