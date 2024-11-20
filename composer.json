@@ -42,7 +42,7 @@
     "autoload": {
         "psr-4": {
             "SilverStripe\\Reports\\": "code/",
-            "SilverStripe\\Reports\\Tests\\": "tests/"
+            "SilverStripe\\Reports\\Tests\\": "tests/php/"
         }
     },
     "minimum-stability": "dev",
