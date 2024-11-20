@@ -10,3 +10,10 @@ en:
   SilverStripe\Reports\SideReport:
     OtherGroupTitle: Other
     REPEMPTY: 'The {title} report is empty.'
+  SilverStripe\Reports\SecurityReport\MemberReportExtension:
+    NEVER: Never
+    NOGROUPS: 'Not in a Security Group'
+    NOPERMISSIONS: 'No Permissions'
+    UNKNOWN: Unknown
+  SilverStripe\Reports\SecurityReport\UserSecurityReport:
+    REPORTTITLE: 'Users, Groups and Permissions'

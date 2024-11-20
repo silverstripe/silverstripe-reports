@@ -14,6 +14,9 @@ composer require silverstripe/reports
 This module contains the API's for building Reports that are displayed in the
 Silverstripe backend.
 
+There are also a few CMS reports that comes out of the box:
+- A "Users, Groups and Permissions" report allowing administrators to get a quick overview of who has access to the CMS.
+
 ## Troubleshooting
 
 The reports section will not show up in the CMS if:
