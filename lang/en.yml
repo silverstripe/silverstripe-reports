@@ -17,3 +17,26 @@ en:
     UNKNOWN: Unknown
   SilverStripe\Reports\SecurityReport\UserSecurityReport:
     REPORTTITLE: 'Users, Groups and Permissions'
+  SilverStripe\Reports\SiteWideContentReport\SitewideContentReport:
+    Created: 'Date created'
+    Description: 'All pages and files across the system'
+    Directory: Directory
+    Draft: Draft
+    FileType: 'File type'
+    Files: Files
+    FilterBy: 'Filter by:'
+    LastEdited: 'Date last edited'
+    Link: Link
+    MainSite: 'Main Site'
+    MetaDescription: Description
+    Name: Name
+    PageType: 'Page type'
+    Pages: Pages
+    Published: Published
+    PublishedWithChanges: 'Published (with changes)'
+    ReviewDate: 'Review Date'
+    Reviewer: Reviewer
+    Size: Size
+    Stage: Stage
+    Tags: Tags
+    Title: 'Site-wide content report'

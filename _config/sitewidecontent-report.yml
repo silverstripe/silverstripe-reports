@@ -1,0 +1,8 @@
+---
+Name: reports-sitewidecontenttaxonomy
+Only:
+  moduleexists: silverstripe/taxonomy
+---
+SilverStripe\Reports\SiteWideContentReport\SitewideContentReport:
+  extensions:
+    - SilverStripe\Reports\SiteWideContentReport\Model\SitewideContentTaxonomy
