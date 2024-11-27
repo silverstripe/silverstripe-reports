@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\Reports\SecurityReport;
+namespace SilverStripe\Reports\SecurityReport\Extensions;
 
 use SilverStripe\Core\Extension;
 use SilverStripe\ORM\FieldType\DBDatetime;

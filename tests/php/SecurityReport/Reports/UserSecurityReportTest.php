@@ -1,16 +1,16 @@
 <?php
 
-namespace SilverStripe\Reports\Tests\SecurityReport;
+namespace SilverStripe\Reports\Tests\SecurityReport\Reports;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Model\List\ArrayList;
 use SilverStripe\Security\Group;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Security;
-use SilverStripe\Reports\SecurityReport\MemberReportExtension;
+use SilverStripe\Reports\SecurityReport\Extensions\MemberReportExtension;
 use SilverStripe\Reports\Report;
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\Reports\SecurityReport\UserSecurityReport;
+use SilverStripe\Reports\SecurityReport\Reports\UserSecurityReport;
 
 /**
  * User Security Report Tests.

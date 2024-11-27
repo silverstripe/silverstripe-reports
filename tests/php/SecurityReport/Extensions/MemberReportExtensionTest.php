@@ -1,11 +1,11 @@
 <?php
 
-namespace SilverStripe\Reports\Tests\SecurityReport;
+namespace SilverStripe\Reports\Tests\SecurityReport\Extensions;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\Security\Member;
-use SilverStripe\Reports\SecurityReport\MemberReportExtension;
+use SilverStripe\Reports\SecurityReport\Extensions\MemberReportExtension;
 
 class MemberReportExtensionTest extends SapphireTest
 {

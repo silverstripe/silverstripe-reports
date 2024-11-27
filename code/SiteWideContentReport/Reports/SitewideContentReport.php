@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\Reports\SiteWideContentReport;
+namespace SilverStripe\Reports\SiteWideContentReport\Reports;
 
 use Page;
 use SilverStripe\AssetAdmin\Controller\AssetAdmin;

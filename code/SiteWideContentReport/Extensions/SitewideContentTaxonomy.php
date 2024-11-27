@@ -1,10 +1,12 @@
 <?php
 
-namespace SilverStripe\Reports\SiteWideContentReport\Model;
+namespace SilverStripe\Reports\SiteWideContentReport\Extensions;
+
+;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
-use SilverStripe\Reports\SiteWideContentReport\SitewideContentReport;
+use SilverStripe\Reports\SitewideContentReport\Reports\SitewideContentReport;
 use SilverStripe\Taxonomy\TaxonomyTerm;
 
 /**

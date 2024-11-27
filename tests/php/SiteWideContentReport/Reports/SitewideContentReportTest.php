@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\Reports\Tests\SiteWideContentReport;
+namespace SilverStripe\Reports\Tests\SiteWideContentReport\Reports;
 
 use Page;
 use SilverStripe\CMS\Model\SiteTree;
@@ -11,8 +11,8 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldExportButton;
 use SilverStripe\ORM\DataList;
-use SilverStripe\Reports\SiteWideContentReport\Model\SitewideContentTaxonomy;
-use SilverStripe\Reports\SiteWideContentReport\SitewideContentReport;
+use SilverStripe\Reports\SiteWideContentReport\Extensions\SitewideContentTaxonomy;
+use SilverStripe\Reports\SitewideContentReport\Reports\SitewideContentReport;
 
 class SitewideContentReportTest extends SapphireTest
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverStripe\Reports\SecurityReport;
+namespace SilverStripe\Reports\SecurityReport\Reports;
 
 use SilverStripe\Control\Director;
 use SilverStripe\Forms\FormField;

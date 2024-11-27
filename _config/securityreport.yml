@@ -3,4 +3,4 @@ Name: reports-securityreportconfig
 ---
 SilverStripe\Security\Member:
   extensions:
-    - SilverStripe\Reports\SecurityReport\MemberReportExtension
+    - SilverStripe\Reports\SecurityReport\Extensions\MemberReportExtension
