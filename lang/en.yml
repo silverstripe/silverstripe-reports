@@ -10,3 +10,70 @@ en:
   SilverStripe\Reports\SideReport:
     OtherGroupTitle: Other
     REPEMPTY: 'The {title} report is empty.'
+  SilverStripe\Reports\SecurityReport\MemberReportExtension:
+    NEVER: Never
+    NOGROUPS: 'Not in a Security Group'
+    NOPERMISSIONS: 'No Permissions'
+    UNKNOWN: Unknown
+  SilverStripe\Reports\SecurityReport\UserSecurityReport:
+    REPORTTITLE: 'Users, Groups and Permissions'
+  SilverStripe\Reports\SiteWideContentReport\SitewideContentReport:
+    Created: 'Date created'
+    Description: 'All pages and files across the system'
+    Directory: Directory
+    Draft: Draft
+    FileType: 'File type'
+    Files: Files
+    FilterBy: 'Filter by:'
+    LastEdited: 'Date last edited'
+    Link: Link
+    MainSite: 'Main Site'
+    MetaDescription: Description
+    Name: Name
+    PageType: 'Page type'
+    Pages: Pages
+    Published: Published
+    PublishedWithChanges: 'Published (with changes)'
+    ReviewDate: 'Review Date'
+    Reviewer: Reviewer
+    Size: Size
+    Stage: Stage
+    Tags: Tags
+    Title: 'Site-wide content report'
+  SilverStripe\Reports\ExternalLinks\Jobs\CheckExternalLinksJob:
+    TITLE: 'Checking for external broken links'
+  SilverStripe\Reports\ExternalLinks\Model\BrokenExternalLink:
+    NOTAVAILABLE: 'Server Not Available'
+    PLURALNAME: 'Broken External Links'
+    PLURALS:
+      one: 'A Broken External Link'
+      other: '{count} Broken External Links'
+    SINGULARNAME: 'Broken External Link'
+    UNKNOWNRESPONSE: 'Unknown Response Code'
+    db_HTTPCode: 'HTTP code'
+    db_Link: Link
+    has_one_Status: Status
+    has_one_Track: Track
+  SilverStripe\Reports\ExternalLinks\Model\BrokenExternalPageTrack:
+    PLURALNAME: 'Broken External Page Tracks'
+    PLURALS:
+      one: 'A Broken External Page Track'
+      other: '{count} Broken External Page Tracks'
+    SINGULARNAME: 'Broken External Page Track'
+    db_Processed: Processed
+    has_many_BrokenLinks: 'Broken links'
+    has_one_Page: Page
+    has_one_Status: Status
+  SilverStripe\Reports\ExternalLinks\Model\BrokenExternalPageTrackStatus:
+    PLURALNAME: 'Broken External Page Track Statuses'
+    PLURALS:
+      one: 'A Broken External Page Track Status'
+      other: '{count} Broken External Page Track Statuses'
+    SINGULARNAME: 'Broken External Page Track Status'
+    db_JobInfo: 'Job info'
+    db_Status: Status
+    has_many_BrokenLinks: 'Broken links'
+    has_many_TrackedPages: 'Tracked pages'
+  SilverStripe\Reports\ExternalLinks\Reports\BrokenExternalLinksReport:
+    EXTERNALBROKENLINKS: 'External broken links report'
+    RUNREPORT: 'Create new report'

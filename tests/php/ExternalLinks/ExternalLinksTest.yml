@@ -1,0 +1,56 @@
+SilverStripe\Reports\Tests\ExternalLinks\Stubs\ExternalLinksTestPage:
+  # Tests mix of broken and working external links
+  page1:
+    Title: 'Page 1'
+    Content: >
+      <h1>Links</h1>
+      <a href="http://www.working.com">This is a working site</a>
+      <h2>Other Links</h2>
+      <a href="http://www.broken.com">but this isn't</a>
+    ExpectedContent: >
+      <h1>Links</h1>
+      <a href="http://www.working.com">This is a working site</a>
+      <h2>Other Links</h2>
+      <a href="http://www.broken.com" class="ss-broken">but this isn't</a>
+  # Tests broken external link staying broken
+  page2:
+    Title: 'Page 2'
+    Content: >
+      <p><a href="http://www.broken.com/url/thing" class="ss-broken">Still Broken</a></p>
+    ExpectedContent: >
+      <p><a href="http://www.broken.com/url/thing" class="ss-broken">Still Broken</a></p>
+  # Tests internal broken links not marking a page as broken
+  page3:
+    Title: 'Page 3'
+    Content: >
+      <h1>Links</h1>
+      <a href="home">Home page</a>
+      <a href="broken-internal" class="ss-broken">Broken internal page</a>
+      <a href="http://www.working.com">This is a working site</a>
+    ExpectedContent: >
+      <h1>Links</h1>
+      <a href="home">Home page</a>
+      <a href="broken-internal" class="ss-broken">Broken internal page</a>
+      <a href="http://www.working.com">This is a working site</a>
+  # Tests httpcode = 0
+  page4:
+    Title: 'Page 4'
+    Content: >
+      <a href="http://www.nodomain.com">This shouldn't even have a HTTP response</a>
+      <a href="[sitetree_link,id=9999]" class="ss-broken">Another Link</a>
+      <p><a href="http://www.broken.com/url/thing">Copied from another page</a></p>
+    ExpectedContent: >
+      <a href="http://www.nodomain.com" class="ss-broken">This shouldn't even have a HTTP response</a>
+      <a href="[sitetree_link,id=9999]" class="ss-broken">Another Link</a>
+      <p><a href="http://www.broken.com/url/thing" class="ss-broken">Copied from another page</a></p>
+  # Test page with no broken links
+  page5:
+    Title: 'Page 5'
+    Content: >
+      <a href="/internal/link">Internal Link</a>
+      <a href="[sitetree_link,id=1]">Another Link</a>
+      <a href="http://www.working.com">This is a working site</a>
+    ExpectedContent: >
+      <a href="/internal/link">Internal Link</a>
+      <a href="[sitetree_link,id=1]">Another Link</a>
+      <a href="http://www.working.com">This is a working site</a>

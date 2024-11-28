@@ -1,0 +1,6 @@
+---
+Name: reports-securityreportconfig
+---
+SilverStripe\Security\Member:
+  extensions:
+    - SilverStripe\Reports\SecurityReport\Extensions\MemberReportExtension

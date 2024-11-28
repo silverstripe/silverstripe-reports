@@ -1,0 +1,9 @@
+---
+Name: reports-externallinksdependencies
+---
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Reports\ExternalLinks\Tasks\LinkChecker: SilverStripe\Reports\ExternalLinks\Tasks\CurlLinkChecker
+  Psr\SimpleCache\CacheInterface.CurlLinkChecker:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: 'curllinkchecker'

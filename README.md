@@ -14,6 +14,11 @@ composer require silverstripe/reports
 This module contains the API's for building Reports that are displayed in the
 Silverstripe backend.
 
+There are also a few CMS reports that comes out of the box:
+- A "Users, Groups and Permissions" report allowing administrators to get a quick overview of who has access to the CMS.
+- A "Site-wide content report" report allowing CMS users to get a quick overview of content across the site.
+- An "External broken links report" allowing users with permissions to track broken external links.
+
 ## Troubleshooting
 
 The reports section will not show up in the CMS if:
@@ -30,6 +35,10 @@ SilverStripe\Reports\Report:
   limit_count_in_overview: 500
 ```
 Note that some reports may have overridden the `getCount` method, and for those reports this may not apply.
+
+## Included reports
+
+This module comes with a few customisable reports out of the box. Details on how to customise these reports can be found in the [documentation] section(./docs/en/index.md).
 
 ## Links ##
 
