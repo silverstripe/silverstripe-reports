@@ -12,7 +12,7 @@ Feature: Site wide content report
     When I am logged in as a member of "EDITOR" group
     And I go to "/admin/reports"
     And I follow "Site-wide content report"
-    
+
     # Show all Pages
     Then I should see "My page"
     And I should see "my-page"
@@ -25,7 +25,7 @@ Feature: Site wide content report
     When I go to "/admin/reports"
     And I follow "Site-wide content report"
     When I follow "My page"
-    Then I should see a ".tox-tinymce" element
+    Then I should see "My page" in the ".breadcrumbs-wrapper" element
 
     # Click on a file to open it
     When I go to "/admin/reports"
