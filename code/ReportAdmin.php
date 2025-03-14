@@ -68,10 +68,6 @@ class ReportAdmin extends LeftAndMain implements PermissionProvider
     public function init()
     {
         parent::init();
-
-        // Set custom options for TinyMCE specific to ReportAdmin
-        HTMLEditorConfig::get('cms')->setOption('content_css', project() . '/css/editor.css');
-
         Requirements::javascript('silverstripe/reports: client/dist/js/ReportAdmin.js');
     }
 
