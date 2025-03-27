@@ -14,6 +14,8 @@ use SilverStripe\PolyExecution\PolyOutput;
 use SilverStripe\i18n\i18n;
 use SilverStripe\Reports\Report;
 use PHPUnit\Framework\Attributes\DataProvider;
+use SilverStripe\Reports\ExternalLinks\Model\BrokenExternalPageTrack;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class ExternalLinksTest extends FunctionalTest
 {
@@ -123,6 +125,35 @@ class ExternalLinksTest extends FunctionalTest
 
         // Ensure report does not list the link associated with an archived page
         $this->assertEquals(3, BrokenExternalLinksReport::create()->sourceRecords()->count());
+    }
+
+    public function testMissingPageGracefullyHandled(): void
+    {
+        // Create an output buffer to capture the output
+        $bufferedOutput = new BufferedOutput();
+        $polyOutput = new PolyOutput(PolyOutput::FORMAT_ANSI, PolyOutput::VERBOSITY_NORMAL, false, $bufferedOutput);
+        // Run link checker to generate BrokenExternalPageTrackStatus
+        // This needs to be created with ::create() so that its private static $dependencies are injected
+        $task = CheckExternalLinksTask::create();
+        $task->runLinksCheck($polyOutput);
+        // Assert the task did not generated an 'Unable to find page' message
+        $output = $bufferedOutput->fetch();
+        $this->assertStringNotContainsString('Unable to find page', $output);
+        // Simulate an old status that didn't complete, though was later reused
+        // also simluate a page it was tracking was deleted
+        $status = BrokenExternalPageTrackStatus::get_latest();
+        $status->Status = 'Running';
+        $status->write();
+        $pageID = BrokenExternalPageTrack::get()->max('ID') + 1;
+        $pageTrack = new BrokenExternalPageTrack();
+        $pageTrack->PageID = $pageID;
+        $pageTrack->StatusID = $status->ID;
+        $pageTrack->write();
+        // Re-run link checker to generate BrokenExternalPageTrackStatus
+        $task->runLinksCheck($polyOutput);
+        // Assert the task generated a message
+        $output = $bufferedOutput->fetch();
+        $this->assertStringContainsString("Unable to find page with ID $pageID. Continuing.", $output);
     }
 
     public static function provideGetJobStatus(): array
