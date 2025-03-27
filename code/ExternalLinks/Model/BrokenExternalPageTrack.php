@@ -32,7 +32,7 @@ class BrokenExternalPageTrack extends DataObject
     );
 
     /**
-     * @return SiteTree
+     * @return SiteTree|null
      */
     public function Page()
     {
