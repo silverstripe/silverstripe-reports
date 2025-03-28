@@ -156,6 +156,11 @@ class CheckExternalLinksTask extends BuildTask
 
             // Check value of html area
             $page = $pageTrack->Page();
+            if ($page === null) {
+                $output->writeln("Unable to find page with ID {$pageTrack->PageID}. Continuing.");
+                continue;
+            }
+
             $output->writeln("Checking {$page->Title}");
             $htmlValue = Injector::inst()->create(HTMLValue::class, $page->Content);
             if (!$htmlValue->isValid()) {
