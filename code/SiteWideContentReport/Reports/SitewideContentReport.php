@@ -56,10 +56,12 @@ class SitewideContentReport extends Report
      */
     public function sourceRecords($params = [])
     {
-        return [
+        $records = [
             'Pages' => Versioned::get_by_stage(SiteTree::class, 'Stage'),
             'Files' => File::get(),
         ];
+        $this->extend('updateSourceRecords', $records, $params);
+        return $records;
     }
 
     public function getCount($params = [], $limit = null)
