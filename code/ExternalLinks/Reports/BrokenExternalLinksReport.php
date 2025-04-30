@@ -3,6 +3,7 @@
 namespace SilverStripe\Reports\ExternalLinks\Reports;
 
 use SilverStripe\Core\Convert;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Reports\ExternalLinks\Model\BrokenExternalPageTrackStatus;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\FormAction;
@@ -25,6 +26,14 @@ class BrokenExternalLinksReport extends Report
     public function title()
     {
         return _t(__CLASS__ . '.EXTERNALBROKENLINKS', "External broken links report");
+    }
+
+    public function canView($member = null)
+    {
+        if (!ModuleLoader::inst()->getManifest()->moduleExists('symbiote/silverstripe-queuedjobs')) {
+            return false;
+        }
+        return parent::canView($member);
     }
 
     public function columns()
