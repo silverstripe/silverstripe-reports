@@ -10,3 +10,7 @@ it:
   SilverStripe\Reports\SideReport:
     OtherGroupTitle: Altro
     REPEMPTY: 'Il rapporto {title} è vuoto.'
+  SilverStripe\Reports\SiteWideContentReport\Reports\SitewideContentReport:
+    MetaDescription: Descrizione
+  SilverStripe\Reports\SiteWideContentReport\SitewideContentReport:
+    MetaDescription: Descrizione
