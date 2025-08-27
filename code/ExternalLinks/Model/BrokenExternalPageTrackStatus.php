@@ -68,6 +68,7 @@ class BrokenExternalPageTrackStatus extends DataObject implements i18nEntityProv
     {
         $pageIDs = $this
             ->getIncompleteTracks()
+            ->sort(null)
             ->column('PageID');
         if ($pageIDs) {
             return Versioned::get_by_stage(SiteTree::class, 'Stage')
@@ -140,6 +141,7 @@ class BrokenExternalPageTrackStatus extends DataObject implements i18nEntityProv
 
         // Setup all pages to test
         $pageIDs = Versioned::get_by_stage(SiteTree::class, 'Stage')
+            ->sort(null)
             ->column('ID');
         foreach ($pageIDs as $pageID) {
             $trackPage = BrokenExternalPageTrack::create();
