@@ -83,11 +83,9 @@ class ReportAdminTest extends FunctionalTest
         $reflector = new ReflectionClass($controller = ReportAdmin::create());
 
         $reportClass = $reflector->getProperty('reportClass');
-        $reportClass->setAccessible(true);
         $reportClass->setValue($controller, get_class($report));
 
         $reportObject = $reflector->getProperty('reportObject');
-        $reportObject->setAccessible(true);
         $reportObject->setValue($controller, $report);
 
         $controller->setRequest(Controller::curr()->getRequest());
