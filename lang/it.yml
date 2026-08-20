@@ -3,14 +3,99 @@ it:
     PREVIEW: 'Anteprima sito'
   SilverStripe\Forms\GridField\GridField:
     Filter: Filtro
+  SilverStripe\Reports\ExternalLinks\Jobs\CheckExternalLinksJob:
+    TITLE: 'Ricerca link esterni interrotti'
+  SilverStripe\Reports\ExternalLinks\Model\BrokenExternalLink:
+    NOTAVAILABLE: 'Server Non Disponibile'
+    PLURALNAME: 'Link Esterni Interrotti'
+    PLURALS:
+      many: '{count} Link Esterni Interrotti'
+      one: 'Un Link Esterno Interrotto'
+      other: '{count} Link Esterni Interrotti'
+    SINGULARNAME: 'Link Esterno Interrotto'
+    UNKNOWNRESPONSE: 'Codice Risposta Sconosciuto'
+    db_HTTPCode: 'Codice HTTP'
+    has_one_Status: Stato
+    has_one_Track: Traccia
+  SilverStripe\Reports\ExternalLinks\Model\BrokenExternalPageTrack:
+    PLURALNAME: 'Tracce Pagine Esterne Interrotte'
+    PLURALS:
+      many: '{count} Tracce Pagine Esterne Interrotte'
+      one: 'Una Traccia Pagina Esterna Interrotta'
+      other: '{count} Tracce Pagine Esterne Interrotte'
+    SINGULARNAME: 'Traccia Pagina Esterna Interrotta'
+    db_Processed: Processato
+    has_many_BrokenLinks: 'Link interrotti'
+    has_one_Page: Pagina
+    has_one_Status: Stato
+  SilverStripe\Reports\ExternalLinks\Model\BrokenExternalPageTrackStatus:
+    PLURALNAME: 'Stato Tracce Pagine Esterne Interrotte'
+    PLURALS:
+      many: '{count} Stato Tracce Pagine Esterne Interrotte'
+      one: 'Stato Traccia Pagina Esterna Interrotta'
+      other: '{count} Stato Tracce Pagine Esterne Interrotte'
+    SINGULARNAME: 'Stato Traccia Pagina Esterna Interrotta'
+    db_JobInfo: 'Info lavoro'
+    db_Status: Stato
+    has_many_BrokenLinks: 'Link Interrotti'
+    has_many_TrackedPages: 'Pagine tracciate'
+  SilverStripe\Reports\ExternalLinks\Reports\BrokenExternalLinksReport:
+    EXTERNALBROKENLINKS: 'Rapporto link esterni interrotti'
+    RUNREPORT: 'Crea nuovo rapporto'
   SilverStripe\Reports\ReportAdmin:
     MENUTITLE: Rapporti
     ReportDescription: Descrizione
     ReportTitle: Titolo
+  SilverStripe\Reports\SecurityReport\Extensions\MemberReportExtension:
+    NEVER: Mai
+    NOGROUPS: 'Non nel Gruppo Sicurezza'
+    NOPERMISSIONS: 'Nessun Permesso'
+    UNKNOWN: Sconosciuto
+  SilverStripe\Reports\SecurityReport\MemberReportExtension:
+    NEVER: Mai
+    NOGROUPS: 'Non nel Gruppo Sicurezza'
+    NOPERMISSIONS: 'Nessun Permesso'
+    UNKNOWN: Sconosciuto
+  SilverStripe\Reports\SecurityReport\Reports\UserSecurityReport:
+    REPORTTITLE: 'Utenti, Gruppi e Permessi'
+  SilverStripe\Reports\SecurityReport\UserSecurityReport:
+    REPORTTITLE: 'Utenti, Gruppi e Permessi'
   SilverStripe\Reports\SideReport:
     OtherGroupTitle: Altro
     REPEMPTY: 'Il rapporto {title} è vuoto.'
   SilverStripe\Reports\SiteWideContentReport\Reports\SitewideContentReport:
+    Created: 'Data creazione'
+    Description: 'Tutte le pagine e i file del sistema'
+    Draft: Bozza
+    FileType: 'Tipo file'
+    Files: File
+    LastEdited: 'Data ultima modifica'
     MetaDescription: Descrizione
+    Name: Nome
+    PageType: 'Tipo pagina'
+    Published: Pubblicato
+    PublishedWithChanges: 'Pubblicato (con modifiche)'
+    Size: Dimensione
+    Title: "Rapporto del contenuto sull'intero sito"
   SilverStripe\Reports\SiteWideContentReport\SitewideContentReport:
+    Created: 'Data creazione'
+    Description: 'Tutte le pagine e i file del sistema'
+    Draft: Bozza
+    FileType: 'Tipo file'
+    Files: File
+    FilterBy: 'Filtra per:'
+    LastEdited: 'Data ultima modifica'
+    MainSite: 'Sito principale'
     MetaDescription: Descrizione
+    Name: Nome
+    PageType: 'Tipo pagina'
+    Pages: Pagine
+    Published: Pubblicato
+    PublishedWithChanges: 'Pubblicato (con modifiche)'
+    ReviewDate: 'Data Revisione'
+    Reviewer: Revisore
+    Size: Dimensione
+    Tags: Tag
+    Title: "Rapporto del contenuto sull'intero sito"
+  SilverStripe\SiteWideContentReport\SitewideContentReport:
+    Tags: Tag
