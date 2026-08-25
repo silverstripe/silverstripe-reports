@@ -5,3 +5,5 @@
 /.travis.yml export-ignore
 /.scrutinizer.yml export-ignore
 /*.dist export-ignore
+/.yarnrc.yml export-ignore
+/yarn.lock export-ignore
