@@ -1,5 +1,8 @@
 /* global jQuery */
 (function ($) {
+  // The admin URL from the CMS client config, so requests don't rely on a <base> tag
+  const getAdminUrl = () => ((window.ss && window.ss.config && window.ss.config.adminUrl) || 'admin/').replace(/\/$/, '');
+
   // eslint-disable-next-line no-shadow
   $.entwine('ss', ($) => {
     $('.external-links-report__create-report').entwine({
@@ -27,7 +30,7 @@
           .text('Running report 0%');
 
         $.ajax({
-          url: 'admin/externallinks/start',
+          url: `${getAdminUrl()}/externallinks/start`,
           async: true,
           timeout: 3000,
           success() {
@@ -95,7 +98,7 @@
         this.buttonLoading();
 
         $.ajax({
-          url: 'admin/externallinks/getJobStatus',
+          url: `${getAdminUrl()}/externallinks/getJobStatus`,
           async: true,
           success(data) {
             // No report, so let user create one
