@@ -6,6 +6,7 @@ use DOMNode;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\Reports\ExternalLinks\Model\BrokenExternalLink;
 use SilverStripe\Reports\ExternalLinks\Model\BrokenExternalPageTrack;
@@ -44,6 +45,15 @@ class CheckExternalLinksTask extends BuildTask
     protected string $title = 'Checking broken External links in the SiteTree';
 
     protected static string $description = 'A task that records external broken links in the SiteTree';
+
+    public function isEnabled(): bool
+    {
+        // The links checked are the ones in pages, which only exist when silverstripe/cms is installed
+        if (!ModuleLoader::inst()->getManifest()->moduleExists('silverstripe/cms')) {
+            return false;
+        }
+        return parent::isEnabled();
+    }
 
     protected function execute(InputInterface $input, PolyOutput $output): int
     {
