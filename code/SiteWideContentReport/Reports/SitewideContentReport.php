@@ -9,6 +9,7 @@ use SilverStripe\Assets\Folder;
 use SilverStripe\CMS\Controllers\CMSPageEditController;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
@@ -38,6 +39,15 @@ class SitewideContentReport extends Report
     public function title()
     {
         return _t(__CLASS__ . '.Title', 'Site-wide content report');
+    }
+
+    public function canView($member = null)
+    {
+        // This report lists pages, which only exist when silverstripe/cms is installed
+        if (!ModuleLoader::inst()->getManifest()->moduleExists('silverstripe/cms')) {
+            return false;
+        }
+        return parent::canView($member);
     }
 
     /**

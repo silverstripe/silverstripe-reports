@@ -22,6 +22,8 @@ There are also a few CMS reports that comes out of the box:
 
 > [!NOTE]
 > Note that for the "External broken links report" to show up you must install [`symbiote/silverstripe-queuedjobs`](https://github.com/symbiote/silverstripe-queuedjobs).
+>
+> The "Site-wide content report" and the "External broken links report" report on pages, so they only show up if [`silverstripe/cms`](https://github.com/silverstripe/silverstripe-cms) is installed.
 
 ## Troubleshooting
 

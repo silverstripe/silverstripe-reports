@@ -4,6 +4,7 @@ namespace SilverStripe\Reports\ExternalLinks\Controllers;
 
 use SilverStripe\Admin\AdminController;
 use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Reports\ExternalLinks\Model\BrokenExternalPageTrackStatus;
 use SilverStripe\Reports\ExternalLinks\Jobs\CheckExternalLinksJob;
 use SilverStripe\Reports\ExternalLinks\Tasks\CheckExternalLinksTask;
@@ -22,6 +23,15 @@ class CMSExternalLinksController extends AdminController
         'getJobStatus',
         'start'
     ];
+
+    public function canView($member = null)
+    {
+        // The links checked are the ones in pages, which only exist when silverstripe/cms is installed
+        if (!ModuleLoader::inst()->getManifest()->moduleExists('silverstripe/cms')) {
+            return false;
+        }
+        return parent::canView($member);
+    }
 
     /**
      * Respond to Ajax requests for info on a running job

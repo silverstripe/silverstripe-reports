@@ -33,6 +33,10 @@ class BrokenExternalLinksReport extends Report
         if (!ModuleLoader::inst()->getManifest()->moduleExists('symbiote/silverstripe-queuedjobs')) {
             return false;
         }
+        // The links checked are the ones in pages, which only exist when silverstripe/cms is installed
+        if (!ModuleLoader::inst()->getManifest()->moduleExists('silverstripe/cms')) {
+            return false;
+        }
         return parent::canView($member);
     }
 
